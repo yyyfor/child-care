@@ -423,6 +423,9 @@ document.addEventListener('DOMContentLoaded', () => {
         fadeInObserver.observe(card);
     });
 
+    // Initialize language manager
+    const languageManager = new LanguageManager();
+
     console.log('Maternal & Infant Care Guide initialized successfully');
 });
 

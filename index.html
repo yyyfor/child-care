@@ -14,13 +14,17 @@
 
     <header class="hero">
         <div class="container">
+            <div class="language-switcher">
+                <button class="lang-btn active" data-lang="en" aria-label="Switch to English">EN</button>
+                <button class="lang-btn" data-lang="zh" aria-label="切换到中文">中文</button>
+            </div>
             <div class="hero-content">
-                <h1 class="hero-title">Maternal & Infant Care Guide</h1>
-                <p class="hero-subtitle">A comprehensive handbook for parents from late pregnancy through baby's first 6 months</p>
+                <h1 class="hero-title" data-i18n="hero.title">Maternal & Infant Care Guide</h1>
+                <p class="hero-subtitle" data-i18n="hero.subtitle">A comprehensive handbook for parents from late pregnancy through baby's first 6 months</p>
                 <div class="hero-meta">
-                    <span class="meta-badge">Professional Care Planning</span>
-                    <span class="meta-badge">Evidence-Based Guidance</span>
-                    <span class="meta-badge">First-Time Parents</span>
+                    <span class="meta-badge" data-i18n="hero.badge1">Professional Care Planning</span>
+                    <span class="meta-badge" data-i18n="hero.badge2">Evidence-Based Guidance</span>
+                    <span class="meta-badge" data-i18n="hero.badge3">First-Time Parents</span>
                 </div>
             </div>
         </div>
@@ -34,23 +38,23 @@
             <div class="timeline-phases">
                 <button class="phase-button active" data-phase="0">
                     <span class="phase-number">1</span>
-                    <span class="phase-label">Before Labor</span>
+                    <span class="phase-label" data-i18n="nav.phase1">Before Labor</span>
                 </button>
                 <button class="phase-button" data-phase="1">
                     <span class="phase-number">2</span>
-                    <span class="phase-label">During Labor</span>
+                    <span class="phase-label" data-i18n="nav.phase2">During Labor</span>
                 </button>
                 <button class="phase-button" data-phase="2">
                     <span class="phase-number">3</span>
-                    <span class="phase-label">0-1 Month</span>
+                    <span class="phase-label" data-i18n="nav.phase3">0-1 Month</span>
                 </button>
                 <button class="phase-button" data-phase="3">
                     <span class="phase-number">4</span>
-                    <span class="phase-label">1-3 Months</span>
+                    <span class="phase-label" data-i18n="nav.phase4">1-3 Months</span>
                 </button>
                 <button class="phase-button" data-phase="4">
                     <span class="phase-number">5</span>
-                    <span class="phase-label">3-6 Months</span>
+                    <span class="phase-label" data-i18n="nav.phase5">3-6 Months</span>
                 </button>
             </div>
         </div>
@@ -59,12 +63,12 @@
     <main class="main-content">
         <div class="container">
             <div class="content-intro">
-                <p class="intro-text">This guide provides structured, actionable guidance for both mother and father through five critical stages of early parenthood. Each phase includes specific responsibilities, safety protocols, required preparations, and professional recommendations often overlooked by first-time parents.</p>
+                <p class="intro-text" data-i18n="intro.text">This guide provides structured, actionable guidance for both mother and father through five critical stages of early parenthood. Each phase includes specific responsibilities, safety protocols, required preparations, and professional recommendations often overlooked by first-time parents.</p>
                 <button class="print-button" onclick="window.print()">
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <path d="M6 9V2h12v7M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2M6 14h12v8H6z"/>
                     </svg>
-                    Print Guide
+                    <span data-i18n="intro.printBtn">Print Guide</span>
                 </button>
             </div>
 
@@ -73,8 +77,8 @@
                 <div class="phase-header">
                     <div class="phase-icon">1</div>
                     <div class="phase-title-group">
-                        <h2 class="phase-title">Before Labor</h2>
-                        <p class="phase-description">Late pregnancy & pre-delivery preparation (Weeks 32-40)</p>
+                        <h2 class="phase-title" data-i18n="phases.phase1.title">Before Labor</h2>
+                        <p class="phase-description" data-i18n="phases.phase1.description">Late pregnancy & pre-delivery preparation (Weeks 32-40)</p>
                     </div>
                 </div>
 
@@ -84,7 +88,7 @@
                             <svg class="card-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                 <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
                             </svg>
-                            <h3>Mother's Responsibilities</h3>
+                            <h3 data-i18n="sections.motherResp">Mother's Responsibilities</h3>
                         </div>
                         <div class="card-content">
                             <ul class="responsibility-list">
@@ -232,8 +236,8 @@
                 <div class="phase-header">
                     <div class="phase-icon">2</div>
                     <div class="phase-title-group">
-                        <h2 class="phase-title">During Labor and Delivery</h2>
-                        <p class="phase-description">Active labor through immediate postpartum (0-48 hours)</p>
+                        <h2 class="phase-title" data-i18n="phases.phase2.title">During Labor and Delivery</h2>
+                        <p class="phase-description" data-i18n="phases.phase2.description">Active labor through immediate postpartum (0-48 hours)</p>
                     </div>
                 </div>
 
@@ -243,7 +247,7 @@
                             <svg class="card-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                 <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
                             </svg>
-                            <h3>Mother's Responsibilities</h3>
+                            <h3 data-i18n="sections.motherResp">Mother's Responsibilities</h3>
                         </div>
                         <div class="card-content">
                             <ul class="responsibility-list">
@@ -265,7 +269,7 @@
                             <svg class="card-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                 <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/>
                             </svg>
-                            <h3>Father's Responsibilities</h3>
+                            <h3 data-i18n="sections.fatherResp">Father's Responsibilities</h3>
                         </div>
                         <div class="card-content">
                             <ul class="responsibility-list">
@@ -290,7 +294,7 @@
                             <svg class="card-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                 <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0zM12 9v4M12 17h.01"/>
                             </svg>
-                            <h3>Safety Considerations</h3>
+                            <h3 data-i18n="sections.safety">Safety Considerations</h3>
                         </div>
                         <div class="card-content">
                             <div class="safety-critical">
@@ -329,7 +333,7 @@
                                 <polyline points="3.27 6.96 12 12.01 20.73 6.96"/>
                                 <line x1="12" y1="22.08" x2="12" y2="12"/>
                             </svg>
-                            <h3>Items & Materials to Prepare</h3>
+                            <h3 data-i18n="sections.items">Items & Materials to Prepare</h3>
                         </div>
                         <div class="card-content">
                             <div class="items-category">
@@ -372,7 +376,7 @@
                                 <path d="M12 2L2 7l10 5 10-5-10-5z"/>
                                 <path d="M2 17l10 5 10-5M2 12l10 5 10-5"/>
                             </svg>
-                            <h3>Additional Professional Recommendations</h3>
+                            <h3 data-i18n="sections.recommendations">Additional Professional Recommendations</h3>
                         </div>
                         <div class="card-content">
                             <ul class="responsibility-list">
@@ -400,8 +404,8 @@
                 <div class="phase-header">
                     <div class="phase-icon">3</div>
                     <div class="phase-title-group">
-                        <h2 class="phase-title">Birth to 1 Month</h2>
-                        <p class="phase-description">Newborn period - Fourth trimester survival</p>
+                        <h2 class="phase-title" data-i18n="phases.phase3.title">Birth to 1 Month</h2>
+                        <p class="phase-description" data-i18n="phases.phase3.description">Newborn period - Fourth trimester survival</p>
                     </div>
                 </div>
 
@@ -411,7 +415,7 @@
                             <svg class="card-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                 <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
                             </svg>
-                            <h3>Mother's Responsibilities</h3>
+                            <h3 data-i18n="sections.motherResp">Mother's Responsibilities</h3>
                         </div>
                         <div class="card-content">
                             <ul class="responsibility-list">
@@ -436,7 +440,7 @@
                             <svg class="card-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                 <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/>
                             </svg>
-                            <h3>Father's Responsibilities</h3>
+                            <h3 data-i18n="sections.fatherResp">Father's Responsibilities</h3>
                         </div>
                         <div class="card-content">
                             <ul class="responsibility-list">
@@ -462,7 +466,7 @@
                             <svg class="card-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                 <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0zM12 9v4M12 17h.01"/>
                             </svg>
-                            <h3>Safety Considerations</h3>
+                            <h3 data-i18n="sections.safety">Safety Considerations</h3>
                         </div>
                         <div class="card-content">
                             <div class="safety-critical">
@@ -515,7 +519,7 @@
                                 <polyline points="3.27 6.96 12 12.01 20.73 6.96"/>
                                 <line x1="12" y1="22.08" x2="12" y2="12"/>
                             </svg>
-                            <h3>Items & Materials to Prepare</h3>
+                            <h3 data-i18n="sections.items">Items & Materials to Prepare</h3>
                         </div>
                         <div class="card-content">
                             <div class="items-category">
@@ -555,7 +559,7 @@
                                 <path d="M12 2L2 7l10 5 10-5-10-5z"/>
                                 <path d="M2 17l10 5 10-5M2 12l10 5 10-5"/>
                             </svg>
-                            <h3>Additional Professional Recommendations</h3>
+                            <h3 data-i18n="sections.recommendations">Additional Professional Recommendations</h3>
                         </div>
                         <div class="card-content">
                             <ul class="responsibility-list">
@@ -587,8 +591,8 @@
                 <div class="phase-header">
                     <div class="phase-icon">4</div>
                     <div class="phase-title-group">
-                        <h2 class="phase-title">1 to 3 Months</h2>
-                        <p class="phase-description">Emerging patterns and early development</p>
+                        <h2 class="phase-title" data-i18n="phases.phase4.title">1 to 3 Months</h2>
+                        <p class="phase-description" data-i18n="phases.phase4.description">Emerging patterns and early development</p>
                     </div>
                 </div>
 
@@ -598,7 +602,7 @@
                             <svg class="card-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                 <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
                             </svg>
-                            <h3>Mother's Responsibilities</h3>
+                            <h3 data-i18n="sections.motherResp">Mother's Responsibilities</h3>
                         </div>
                         <div class="card-content">
                             <ul class="responsibility-list">
@@ -620,7 +624,7 @@
                             <svg class="card-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                 <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/>
                             </svg>
-                            <h3>Father's Responsibilities</h3>
+                            <h3 data-i18n="sections.fatherResp">Father's Responsibilities</h3>
                         </div>
                         <div class="card-content">
                             <ul class="responsibility-list">
@@ -643,7 +647,7 @@
                             <svg class="card-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                 <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0zM12 9v4M12 17h.01"/>
                             </svg>
-                            <h3>Safety Considerations</h3>
+                            <h3 data-i18n="sections.safety">Safety Considerations</h3>
                         </div>
                         <div class="card-content">
                             <div class="safety-critical">
@@ -687,7 +691,7 @@
                                 <polyline points="3.27 6.96 12 12.01 20.73 6.96"/>
                                 <line x1="12" y1="22.08" x2="12" y2="12"/>
                             </svg>
-                            <h3>Items & Materials to Prepare</h3>
+                            <h3 data-i18n="sections.items">Items & Materials to Prepare</h3>
                         </div>
                         <div class="card-content">
                             <div class="items-category">
@@ -726,7 +730,7 @@
                                 <path d="M12 2L2 7l10 5 10-5-10-5z"/>
                                 <path d="M2 17l10 5 10-5M2 12l10 5 10-5"/>
                             </svg>
-                            <h3>Additional Professional Recommendations</h3>
+                            <h3 data-i18n="sections.recommendations">Additional Professional Recommendations</h3>
                         </div>
                         <div class="card-content">
                             <ul class="responsibility-list">
@@ -757,8 +761,8 @@
                 <div class="phase-header">
                     <div class="phase-icon">5</div>
                     <div class="phase-title-group">
-                        <h2 class="phase-title">3 to 6 Months</h2>
-                        <p class="phase-description">Established routines and major milestones</p>
+                        <h2 class="phase-title" data-i18n="phases.phase5.title">3 to 6 Months</h2>
+                        <p class="phase-description" data-i18n="phases.phase5.description">Established routines and major milestones</p>
                     </div>
                 </div>
 
@@ -768,7 +772,7 @@
                             <svg class="card-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                 <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
                             </svg>
-                            <h3>Mother's Responsibilities</h3>
+                            <h3 data-i18n="sections.motherResp">Mother's Responsibilities</h3>
                         </div>
                         <div class="card-content">
                             <ul class="responsibility-list">
@@ -789,7 +793,7 @@
                             <svg class="card-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                 <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/>
                             </svg>
-                            <h3>Father's Responsibilities</h3>
+                            <h3 data-i18n="sections.fatherResp">Father's Responsibilities</h3>
                         </div>
                         <div class="card-content">
                             <ul class="responsibility-list">
@@ -811,7 +815,7 @@
                             <svg class="card-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                 <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0zM12 9v4M12 17h.01"/>
                             </svg>
-                            <h3>Safety Considerations</h3>
+                            <h3 data-i18n="sections.safety">Safety Considerations</h3>
                         </div>
                         <div class="card-content">
                             <div class="safety-critical">
@@ -850,7 +854,7 @@
                                 <polyline points="3.27 6.96 12 12.01 20.73 6.96"/>
                                 <line x1="12" y1="22.08" x2="12" y2="12"/>
                             </svg>
-                            <h3>Items & Materials to Prepare</h3>
+                            <h3 data-i18n="sections.items">Items & Materials to Prepare</h3>
                         </div>
                         <div class="card-content">
                             <div class="items-category">
@@ -899,7 +903,7 @@
                                 <path d="M12 2L2 7l10 5 10-5-10-5z"/>
                                 <path d="M2 17l10 5 10-5M2 12l10 5 10-5"/>
                             </svg>
-                            <h3>Additional Professional Recommendations</h3>
+                            <h3 data-i18n="sections.recommendations">Additional Professional Recommendations</h3>
                         </div>
                         <div class="card-content">
                             <ul class="responsibility-list">
@@ -931,11 +935,12 @@
 
     <footer class="footer">
         <div class="container">
-            <p class="footer-note">This guide provides general information based on professional medical knowledge. Always consult your healthcare provider for advice specific to your situation. In case of emergency, call 911 or your local emergency services.</p>
-            <p class="footer-attribution">Maternal & Infant Care Planning Guide | Professional Healthcare Resource for First-Time Parents</p>
+            <p class="footer-note" data-i18n="footer.note">This guide provides general information based on professional medical knowledge. Always consult your healthcare provider for advice specific to your situation. In case of emergency, call 911 or your local emergency services.</p>
+            <p class="footer-attribution" data-i18n="footer.attribution">Maternal & Infant Care Planning Guide | Professional Healthcare Resource for First-Time Parents</p>
         </div>
     </footer>
 
+    <script src="translations.js"></script>
     <script src="script.js"></script>
 </body>
 </html>

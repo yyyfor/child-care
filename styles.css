@@ -61,6 +61,47 @@ body {
     padding: 0 var(--spacing-lg);
 }
 
+/* Language Switcher */
+.language-switcher {
+    position: absolute;
+    top: var(--spacing-lg);
+    right: var(--spacing-lg);
+    display: flex;
+    gap: var(--spacing-xs);
+    z-index: 10;
+}
+
+.lang-btn {
+    background: rgba(255, 255, 255, 0.2);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    color: var(--color-white);
+    padding: 0.5rem 1rem;
+    border-radius: var(--radius);
+    font-family: var(--font-body);
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition);
+    backdrop-filter: blur(10px);
+}
+
+.lang-btn:hover {
+    background: rgba(255, 255, 255, 0.3);
+    border-color: rgba(255, 255, 255, 0.5);
+    transform: translateY(-2px);
+}
+
+.lang-btn.active {
+    background: var(--color-white);
+    color: var(--color-primary);
+    border-color: var(--color-white);
+}
+
+.lang-btn:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.3);
+}
+
 /* Hero Section */
 .hero {
     background: linear-gradient(135deg, var(--color-primary) 0%, #C07B63 100%);
@@ -68,6 +109,10 @@ body {
     padding: var(--spacing-xxl) 0 var(--spacing-xl);
     position: relative;
     overflow: hidden;
+}
+
+.hero .container {
+    position: relative;
 }
 
 .hero::before {
@@ -571,6 +616,16 @@ body {
 
 /* Responsive Design */
 @media (max-width: 768px) {
+    .language-switcher {
+        top: var(--spacing-md);
+        right: var(--spacing-md);
+    }
+
+    .lang-btn {
+        padding: 0.4rem 0.8rem;
+        font-size: 0.85rem;
+    }
+
     .timeline-phases {
         grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
     }

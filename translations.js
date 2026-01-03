@@ -46,6 +46,7 @@ const translations = {
             fatherResp: "Father's Responsibilities",
             safety: "Safety Considerations",
             items: "Items & Materials to Prepare",
+            teaching: "Developmental Activities & Teaching",
             recommendations: "Additional Professional Recommendations"
         },
         footer: {
@@ -99,6 +100,7 @@ const translations = {
             fatherResp: "父亲的职责",
             safety: "安全注意事项",
             items: "需要准备的物品和材料",
+            teaching: "发育活动与早教",
             recommendations: "额外的专业建议"
         },
         footer: {

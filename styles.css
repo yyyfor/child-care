@@ -402,6 +402,10 @@ body {
     border-left-color: var(--color-items);
 }
 
+.care-card.teaching {
+    border-left-color: #7B9FB8;
+}
+
 .care-card.recommendations {
     border-left-color: var(--color-recommendations);
 }
@@ -423,6 +427,7 @@ body {
 .care-card.father .card-icon { color: var(--color-father); }
 .care-card.safety .card-icon { color: var(--color-safety); }
 .care-card.items .card-icon { color: var(--color-items); }
+.care-card.teaching .card-icon { color: #7B9FB8; }
 .care-card.recommendations .card-icon { color: var(--color-recommendations); }
 
 .card-header h3 {

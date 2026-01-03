@@ -1,0 +1,941 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maternal & Infant Care Guide | Pregnancy to 6 Months</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,500;9..144,700&family=Work+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="grain-overlay"></div>
+
+    <header class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="hero-title">Maternal & Infant Care Guide</h1>
+                <p class="hero-subtitle">A comprehensive handbook for parents from late pregnancy through baby's first 6 months</p>
+                <div class="hero-meta">
+                    <span class="meta-badge">Professional Care Planning</span>
+                    <span class="meta-badge">Evidence-Based Guidance</span>
+                    <span class="meta-badge">First-Time Parents</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <nav class="timeline-nav">
+        <div class="container">
+            <div class="timeline-track">
+                <div class="timeline-progress" id="timelineProgress"></div>
+            </div>
+            <div class="timeline-phases">
+                <button class="phase-button active" data-phase="0">
+                    <span class="phase-number">1</span>
+                    <span class="phase-label">Before Labor</span>
+                </button>
+                <button class="phase-button" data-phase="1">
+                    <span class="phase-number">2</span>
+                    <span class="phase-label">During Labor</span>
+                </button>
+                <button class="phase-button" data-phase="2">
+                    <span class="phase-number">3</span>
+                    <span class="phase-label">0-1 Month</span>
+                </button>
+                <button class="phase-button" data-phase="3">
+                    <span class="phase-number">4</span>
+                    <span class="phase-label">1-3 Months</span>
+                </button>
+                <button class="phase-button" data-phase="4">
+                    <span class="phase-number">5</span>
+                    <span class="phase-label">3-6 Months</span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <main class="main-content">
+        <div class="container">
+            <div class="content-intro">
+                <p class="intro-text">This guide provides structured, actionable guidance for both mother and father through five critical stages of early parenthood. Each phase includes specific responsibilities, safety protocols, required preparations, and professional recommendations often overlooked by first-time parents.</p>
+                <button class="print-button" onclick="window.print()">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M6 9V2h12v7M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2M6 14h12v8H6z"/>
+                    </svg>
+                    Print Guide
+                </button>
+            </div>
+
+            <!-- Phase 1: Before Labor -->
+            <section class="phase-section active" data-phase="0">
+                <div class="phase-header">
+                    <div class="phase-icon">1</div>
+                    <div class="phase-title-group">
+                        <h2 class="phase-title">Before Labor</h2>
+                        <p class="phase-description">Late pregnancy & pre-delivery preparation (Weeks 32-40)</p>
+                    </div>
+                </div>
+
+                <div class="section-group">
+                    <div class="care-card mother">
+                        <div class="card-header">
+                            <svg class="card-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+                            </svg>
+                            <h3>Mother's Responsibilities</h3>
+                        </div>
+                        <div class="card-content">
+                            <ul class="responsibility-list">
+                                <li><strong>Attend all prenatal appointments</strong> - Complete final ultrasounds, Group B strep test (35-37 weeks), and discuss birth plan with healthcare provider</li>
+                                <li><strong>Monitor fetal movement daily</strong> - Track kick counts; contact provider immediately if patterns change or decrease</li>
+                                <li><strong>Prepare physically for labor</strong> - Practice breathing techniques, perineal massage (from week 34), maintain gentle exercise (walking, prenatal yoga)</li>
+                                <li><strong>Learn labor signs</strong> - Understand difference between Braxton Hicks and real contractions, know when to go to hospital (5-1-1 rule: contractions 5 min apart, lasting 1 min, for 1 hour)</li>
+                                <li><strong>Rest and conserve energy</strong> - Prioritize sleep, nap when possible, avoid overexertion</li>
+                                <li><strong>Finalize feeding decision</strong> - If breastfeeding: attend lactation class, purchase nursing bras and pads; if formula: research brands and sterilize bottles</li>
+                                <li><strong>Pack hospital bag by week 36</strong> - Include comfortable clothes, toiletries, nursing supplies, important documents</li>
+                                <li><strong>Mental preparation</strong> - Process fears about labor, discuss pain management preferences, consider prenatal mental health screening</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="care-card father">
+                        <div class="card-header">
+                            <svg class="card-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/>
+                            </svg>
+                            <h3>Father's Responsibilities</h3>
+                        </div>
+                        <div class="card-content">
+                            <ul class="responsibility-list">
+                                <li><strong>Attend prenatal classes together</strong> - Learn labor support techniques, newborn care basics, CPR certification</li>
+                                <li><strong>Prepare the home environment</strong> - Install car seat (have it inspected by certified technician), assemble nursery furniture, baby-proof essential areas</li>
+                                <li><strong>Plan logistics for labor day</strong> - Know multiple routes to hospital, have car fueled, arrange backup transportation, program important numbers in phone</li>
+                                <li><strong>Arrange work leave</strong> - Secure paternity leave approval, brief colleagues on absence, prepare auto-responses and handover documents</li>
+                                <li><strong>Manage financial preparations</strong> - Verify insurance coverage for birth and newborn, understand hospital billing, set up emergency fund if possible</li>
+                                <li><strong>Support partner emotionally</strong> - Listen to concerns about labor, reassure and validate feelings, maintain calm presence</li>
+                                <li><strong>Learn comfort measures</strong> - Practice massage techniques, understand labor positions, prepare music/comfort items for labor room</li>
+                                <li><strong>Coordinate support network</strong> - Arrange who to call when labor starts, plan for pet care, manage visitor expectations</li>
+                                <li><strong>Stock household essentials</strong> - Prepare freezer meals, stock pantry, ensure cleaning supplies and household items are ready</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="care-card safety">
+                        <div class="card-header">
+                            <svg class="card-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0zM12 9v4M12 17h.01"/>
+                            </svg>
+                            <h3>Safety Considerations</h3>
+                        </div>
+                        <div class="card-content">
+                            <div class="safety-critical">
+                                <h4>Medical Warning Signs - Seek Immediate Care:</h4>
+                                <ul class="warning-list">
+                                    <li><strong>Severe headache with visual changes</strong> - May indicate preeclampsia</li>
+                                    <li><strong>Sudden severe swelling</strong> (face, hands, feet) - Especially if accompanied by headache</li>
+                                    <li><strong>Vaginal bleeding</strong> - Any amount beyond light spotting</li>
+                                    <li><strong>Fluid leaking from vagina</strong> - Possible water breaking or amniotic fluid leak</li>
+                                    <li><strong>Decreased fetal movement</strong> - Less than 10 movements in 2 hours</li>
+                                    <li><strong>Severe abdominal pain</strong> - Especially if constant or with contractions</li>
+                                    <li><strong>Fever above 100.4°F (38°C)</strong> - Could indicate infection</li>
+                                    <li><strong>Persistent vomiting or inability to keep fluids down</strong></li>
+                                </ul>
+                            </div>
+                            <div class="safety-preventive">
+                                <h4>Preventive Safety Measures:</h4>
+                                <ul class="responsibility-list">
+                                    <li><strong>Car seat installation</strong> - Have certified technician inspect rear-facing infant seat; never place in front seat with airbag</li>
+                                    <li><strong>Safe sleep preparation</strong> - Firm mattress, fitted sheet only, no pillows/blankets/bumpers in crib</li>
+                                    <li><strong>Home safety audit</strong> - Install smoke/CO detectors, check water heater temperature (≤120°F), secure heavy furniture to walls</li>
+                                    <li><strong>Medication safety</strong> - Review all current medications with doctor, avoid NSAIDs after 32 weeks unless prescribed</li>
+                                    <li><strong>Food safety</strong> - Continue avoiding raw fish, unpasteurized dairy, deli meats, high-mercury fish</li>
+                                    <li><strong>Emergency preparedness</strong> - Keep phone charged, have backup charger, store hospital contact numbers</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="care-card items">
+                        <div class="card-header">
+                            <svg class="card-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>
+                                <polyline points="3.27 6.96 12 12.01 20.73 6.96"/>
+                                <line x1="12" y1="22.08" x2="12" y2="12"/>
+                            </svg>
+                            <h3>Items & Materials to Prepare</h3>
+                        </div>
+                        <div class="card-content">
+                            <div class="items-category">
+                                <h4>Hospital Bag (Pack by Week 36):</h4>
+                                <ul class="responsibility-list">
+                                    <li><strong>Documents</strong> - Insurance cards, ID, hospital pre-registration papers, birth plan copies</li>
+                                    <li><strong>For mother</strong> - Comfortable labor gown, socks with grips, nursing bras (2-3), maternity pads, nipple cream, toiletries, hair ties, lip balm, phone charger, going-home outfit (maternity size)</li>
+                                    <li><strong>For baby</strong> - 2-3 newborn outfits (NB and 0-3 month sizes), warm blanket, going-home outfit, infant car seat (already installed)</li>
+                                    <li><strong>For father/partner</strong> - Snacks, change of clothes, phone charger, pillow, entertainment (book/tablet)</li>
+                                    <li><strong>Comfort items</strong> - Massage oils, music playlist, essential oils, birthing ball (if hospital allows)</li>
+                                </ul>
+                            </div>
+                            <div class="items-category">
+                                <h4>Home Preparation - Nursery Essentials:</h4>
+                                <ul class="responsibility-list">
+                                    <li><strong>Sleep</strong> - Firm crib mattress with fitted sheets (3-4), sleep sacks, white noise machine, blackout curtains</li>
+                                    <li><strong>Feeding</strong> - Bottles and nipples (even if breastfeeding), bottle brush, sterilizer, burp cloths (8-10), nursing pillow, breast pump (if breastfeeding)</li>
+                                    <li><strong>Diapering</strong> - Diapers (newborn and size 1), wipes, diaper cream, changing pad with covers, diaper pail</li>
+                                    <li><strong>Clothing</strong> - Onesies NB/0-3M (8-10), sleepers (6-8), socks/mittens, hats, weather-appropriate outerwear</li>
+                                    <li><strong>Bathing</strong> - Infant tub, hooded towels (2-3), gentle soap/shampoo, soft washcloths, baby nail clippers</li>
+                                    <li><strong>Health & safety</strong> - Thermometer, nasal aspirator, first aid kit, baby-safe laundry detergent</li>
+                                </ul>
+                            </div>
+                            <div class="items-category">
+                                <h4>Administrative Preparations:</h4>
+                                <ul class="responsibility-list">
+                                    <li><strong>Insurance verification</strong> - Confirm mother and baby coverage, understand deductibles and out-of-pocket maximums</li>
+                                    <li><strong>Pediatrician selection</strong> - Research and select pediatrician, schedule newborn's first appointment (within 3-5 days of birth)</li>
+                                    <li><strong>Birth certificate process</strong> - Understand hospital procedures for filing, decide on baby's name</li>
+                                    <li><strong>Work notifications</strong> - Submit FMLA/leave paperwork, arrange coverage during absence</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="care-card recommendations">
+                        <div class="card-header">
+                            <svg class="card-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+                                <path d="M2 17l10 5 10-5M2 12l10 5 10-5"/>
+                            </svg>
+                            <h3>Additional Professional Recommendations</h3>
+                        </div>
+                        <div class="card-content">
+                            <ul class="responsibility-list">
+                                <li><strong>Relationship check-in</strong> - Have honest conversation about division of labor, fears, expectations, and communication strategies for postpartum period</li>
+                                <li><strong>Mental health baseline</strong> - Consider prenatal mental health screening; discuss family history of postpartum depression with healthcare provider</li>
+                                <li><strong>Set realistic expectations</strong> - Understand that birth plans may change; discuss flexibility and what "success" means beyond specific birth outcomes</li>
+                                <li><strong>Social support mapping</strong> - Identify specific people for specific help (meals, cleaning, emotional support); practice asking for help now</li>
+                                <li><strong>Sleep strategy</strong> - Discuss shift-based nighttime care plan; understand that both parents need sleep to function</li>
+                                <li><strong>Postpartum planning</strong> - Schedule mother's 6-week postpartum appointment now; discuss contraception preferences with provider</li>
+                                <li><strong>Photography/memory planning</strong> - If desired, arrange newborn photography; discuss what moments are important to capture vs. being present</li>
+                                <li><strong>Limit information overload</strong> - Choose 2-3 trusted information sources; avoid comparing your experience to social media</li>
+                                <li><strong>Older sibling preparation</strong> - If applicable: read books about new baby, arrange special time, prepare small gift "from baby"</li>
+                                <li><strong>Freezer meal prep</strong> - Prepare or purchase 10-15 easy-to-reheat meals for first two weeks postpartum</li>
+                                <li><strong>Lower household standards temporarily</strong> - Accept that cleaning/organization will not be priority; this is temporary</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Phase 2: During Labor -->
+            <section class="phase-section" data-phase="1">
+                <div class="phase-header">
+                    <div class="phase-icon">2</div>
+                    <div class="phase-title-group">
+                        <h2 class="phase-title">During Labor and Delivery</h2>
+                        <p class="phase-description">Active labor through immediate postpartum (0-48 hours)</p>
+                    </div>
+                </div>
+
+                <div class="section-group">
+                    <div class="care-card mother">
+                        <div class="card-header">
+                            <svg class="card-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+                            </svg>
+                            <h3>Mother's Responsibilities</h3>
+                        </div>
+                        <div class="card-content">
+                            <ul class="responsibility-list">
+                                <li><strong>Communicate with medical team</strong> - Report pain levels honestly, ask questions about procedures, voice concerns immediately</li>
+                                <li><strong>Stay hydrated and nourished</strong> - Drink water/ice chips as allowed, eat light foods if permitted during early labor</li>
+                                <li><strong>Use learned breathing techniques</strong> - Practice slow, deep breathing during contractions; vocalize if helpful</li>
+                                <li><strong>Move and change positions</strong> - Walk during early labor, use birthing ball, try different positions to ease discomfort</li>
+                                <li><strong>Accept support</strong> - Allow partner/support person to help; don't feel need to be polite or accommodating during intense contractions</li>
+                                <li><strong>Make informed decisions</strong> - Understand options for pain management (epidural, IV medications, natural methods); consent to procedures only when comfortable</li>
+                                <li><strong>Focus on one contraction at a time</strong> - Avoid thinking about hours ahead; rest between contractions</li>
+                                <li><strong>Immediate postpartum</strong> - Attempt skin-to-skin contact immediately after birth if possible, initiate breastfeeding within first hour if planning to nurse</li>
+                                <li><strong>Communicate postpartum pain</strong> - Report unusual pain levels after delivery, especially severe headache, chest pain, or heavy bleeding</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="care-card father">
+                        <div class="card-header">
+                            <svg class="card-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/>
+                            </svg>
+                            <h3>Father's Responsibilities</h3>
+                        </div>
+                        <div class="card-content">
+                            <ul class="responsibility-list">
+                                <li><strong>Time contractions accurately</strong> - Use app or stopwatch; note frequency, duration, and intensity; communicate patterns to medical staff</li>
+                                <li><strong>Be primary communicator with medical team</strong> - Ask questions partner may be too uncomfortable to ask, relay partner's needs and preferences</li>
+                                <li><strong>Provide physical support</strong> - Offer massage, apply counter-pressure to lower back, hold partner's hand, help with position changes</li>
+                                <li><strong>Maintain calm presence</strong> - Stay composed even if partner is distressed; reassure and encourage</li>
+                                <li><strong>Manage environment</strong> - Adjust room temperature, lighting, music; limit visitors according to partner's wishes</li>
+                                <li><strong>Document if desired</strong> - Take photos/videos only if previously agreed upon and partner is comfortable</li>
+                                <li><strong>Advocate for partner's birth plan</strong> - Remind staff of preferences, but remain flexible if medical situations change</li>
+                                <li><strong>Stay nourished and alert</strong> - Eat regularly, stay hydrated; take brief breaks if labor is prolonged (ensure someone stays with partner)</li>
+                                <li><strong>Cut umbilical cord if offered and desired</strong> - This is optional; don't feel pressured</li>
+                                <li><strong>Facilitate skin-to-skin</strong> - If mother unable immediately after birth, do skin-to-skin with baby yourself</li>
+                                <li><strong>Notify family/friends</strong> - Send updates according to pre-agreed plan; protect partner's privacy and rest time</li>
+                                <li><strong>Handle administrative tasks</strong> - Complete hospital paperwork, understand newborn procedures (vitamin K, eye ointment, hepatitis B vaccine), provide insurance information</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="care-card safety">
+                        <div class="card-header">
+                            <svg class="card-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0zM12 9v4M12 17h.01"/>
+                            </svg>
+                            <h3>Safety Considerations</h3>
+                        </div>
+                        <div class="card-content">
+                            <div class="safety-critical">
+                                <h4>Medical Warning Signs - Alert Staff Immediately:</h4>
+                                <ul class="warning-list">
+                                    <li><strong>Mother: Excessive bleeding</strong> - Soaking through pad in less than an hour, passing large clots</li>
+                                    <li><strong>Mother: Signs of infection</strong> - Fever, foul-smelling discharge, severe chills</li>
+                                    <li><strong>Mother: Severe headache or vision changes</strong> - May indicate postpartum preeclampsia</li>
+                                    <li><strong>Mother: Chest pain or shortness of breath</strong> - Could indicate blood clot or cardiac issue</li>
+                                    <li><strong>Mother: Severe abdominal pain</strong> - Beyond normal afterpains</li>
+                                    <li><strong>Baby: Breathing difficulties</strong> - Rapid breathing (>60 breaths/min), grunting, flaring nostrils, blue color</li>
+                                    <li><strong>Baby: Temperature instability</strong> - Fever >100.4°F or low temp <97.7°F</li>
+                                    <li><strong>Baby: Poor feeding</strong> - Refusal to eat, extreme lethargy, inability to wake for feeding</li>
+                                    <li><strong>Baby: Jaundice appearing in first 24 hours</strong> - Yellow skin/eyes (some jaundice at day 2-3 is normal, but first 24 hours requires evaluation)</li>
+                                </ul>
+                            </div>
+                            <div class="safety-preventive">
+                                <h4>Safety Protocols During Hospital Stay:</h4>
+                                <ul class="responsibility-list">
+                                    <li><strong>Verify all staff identity</strong> - Hospital staff should wear proper ID badges; ask for identification if unsure</li>
+                                    <li><strong>Understand baby security procedures</strong> - Note ankle monitor systems, alarm protocols; never let anyone without proper ID take baby</li>
+                                    <li><strong>Safe sleep in hospital</strong> - Keep baby in bassinet for sleep, not in adult bed; if exhausted, ask nurse to take baby to nursery</li>
+                                    <li><strong>Infection prevention</strong> - All visitors must wash hands before touching baby; limit visitors if mother or baby has compromised health</li>
+                                    <li><strong>Medication verification</strong> - Confirm all medications and dosages given to mother and baby; understand purpose of each</li>
+                                    <li><strong>Fall prevention</strong> - Mother should not walk alone immediately after delivery, especially after epidural; use call button for assistance</li>
+                                    <li><strong>Document concerns</strong> - Write down any concerns or unusual symptoms to report during rounds</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="care-card items">
+                        <div class="card-header">
+                            <svg class="card-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>
+                                <polyline points="3.27 6.96 12 12.01 20.73 6.96"/>
+                                <line x1="12" y1="22.08" x2="12" y2="12"/>
+                            </svg>
+                            <h3>Items & Materials to Prepare</h3>
+                        </div>
+                        <div class="card-content">
+                            <div class="items-category">
+                                <h4>Items to Bring/Have Ready (should already be packed):</h4>
+                                <ul class="responsibility-list">
+                                    <li><strong>Essential documents</strong> - Insurance cards, ID, hospital pre-registration confirmation</li>
+                                    <li><strong>Birth plan copies</strong> - Provide to each shift's nurse; understand it's a guide, not guarantee</li>
+                                    <li><strong>Phone/camera chargers</strong> - Long cords for beside bedside use</li>
+                                    <li><strong>Comfort items</strong> - Massage tools, music, aromatherapy (check hospital policy)</li>
+                                    <li><strong>Snacks for partner</strong> - Quiet snacks that won't disturb laboring mother</li>
+                                </ul>
+                            </div>
+                            <div class="items-category">
+                                <h4>Administrative Tasks to Complete at Hospital:</h4>
+                                <ul class="responsibility-list">
+                                    <li><strong>Birth certificate application</strong> - Confirm baby's legal name spelling, complete required paperwork before discharge</li>
+                                    <li><strong>Social Security card application</strong> - Hospital typically provides forms; complete to receive card by mail</li>
+                                    <li><strong>Newborn screening consent</strong> - Understand state-required screenings (PKU, hearing test, critical congenital heart disease screening)</li>
+                                    <li><strong>Circumcision decision</strong> - If choosing circumcision, typically done before hospital discharge; understand care instructions</li>
+                                    <li><strong>Add baby to insurance</strong> - Contact insurance within 30 days (some require notification within 24-48 hours); note deadline</li>
+                                    <li><strong>Pediatrician notification</strong> - Ensure hospital sends records to chosen pediatrician; confirm first appointment scheduled</li>
+                                    <li><strong>Understand discharge instructions</strong> - Get written copies of care instructions for mother and baby</li>
+                                </ul>
+                            </div>
+                            <div class="items-category">
+                                <h4>Items to Request/Take Home from Hospital:</h4>
+                                <ul class="responsibility-list">
+                                    <li><strong>Extra supplies</strong> - Maternity pads, mesh underwear, peri-bottles, ice packs, diapers, wipes, formula samples</li>
+                                    <li><strong>Lactation support information</strong> - Contact numbers for hospital lactation consultants, local breastfeeding support groups</li>
+                                    <li><strong>Educational materials</strong> - Newborn care instructions, safe sleep information, emergency contact numbers</li>
+                                    <li><strong>Medical records</strong> - Request copies of birth summary, baby's birth weight/length/Apgar scores for records</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="care-card recommendations">
+                        <div class="card-header">
+                            <svg class="card-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+                                <path d="M2 17l10 5 10-5M2 12l10 5 10-5"/>
+                            </svg>
+                            <h3>Additional Professional Recommendations</h3>
+                        </div>
+                        <div class="card-content">
+                            <ul class="responsibility-list">
+                                <li><strong>Abandon the "ideal birth" mindset</strong> - Every birth that results in healthy mother and baby is a success, regardless of interventions needed</li>
+                                <li><strong>Partner: Don't take labor behavior personally</strong> - Mother may say hurtful things during intense pain; this is not reflective of true feelings</li>
+                                <li><strong>Accept flexibility with birth plan</strong> - Medical situations change; prioritize safety over preferences when necessary</li>
+                                <li><strong>Delay non-essential visitors</strong> - First 24-48 hours are for immediate family bonding, establishing feeding, and rest; visitors can wait</li>
+                                <li><strong>Take advantage of hospital nursery</strong> - If offered, use it for a few hours to allow mother (and partner) to sleep; this is not "failure"</li>
+                                <li><strong>Learn from hospital staff</strong> - Ask nurses to demonstrate diapering, swaddling, bathing; take notes or videos for reference at home</li>
+                                <li><strong>Mother: Don't rush discharge</strong> - Stay full 48 hours if possible; use resources, ask all questions, rest before going home</li>
+                                <li><strong>Partner: Manage external communications</strong> - Protect mother's privacy; she doesn't owe anyone immediate photos or updates</li>
+                                <li><strong>Take photos/videos mindfully</strong> - Capture some moments, but prioritize being present; avoid posting to social media until both parents agree</li>
+                                <li><strong>Emotional release is normal</strong> - Both parents may cry from joy, relief, exhaustion, or overwhelm; this is completely normal</li>
+                                <li><strong>Trust medical staff</strong> - If intervention is recommended (vacuum, forceps, C-section), ask questions but trust expertise</li>
+                                <li><strong>Start as you mean to continue</strong> - If partner will be involved in nighttime care, start immediately; don't set precedent of mother doing all night care</li>
+                                <li><strong>Golden hour for bonding</strong> - If medically possible, prioritize skin-to-skin contact for first hour; this supports breastfeeding and bonding</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Phase 3: Birth to 1 Month -->
+            <section class="phase-section" data-phase="2">
+                <div class="phase-header">
+                    <div class="phase-icon">3</div>
+                    <div class="phase-title-group">
+                        <h2 class="phase-title">Birth to 1 Month</h2>
+                        <p class="phase-description">Newborn period - Fourth trimester survival</p>
+                    </div>
+                </div>
+
+                <div class="section-group">
+                    <div class="care-card mother">
+                        <div class="card-header">
+                            <svg class="card-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+                            </svg>
+                            <h3>Mother's Responsibilities</h3>
+                        </div>
+                        <div class="card-content">
+                            <ul class="responsibility-list">
+                                <li><strong>Physical recovery - Perineal care</strong> - Use peri-bottle after bathroom, change pads frequently, use ice packs first week, take stool softeners to avoid straining</li>
+                                <li><strong>Physical recovery - C-section care</strong> (if applicable) - Keep incision clean and dry, watch for infection signs, avoid heavy lifting, use pillow for support when sneezing/coughing</li>
+                                <li><strong>Monitor postpartum bleeding</strong> - Expect heavy bleeding (lochia) first week, gradually decreasing; call doctor if soaking through pad in <1 hour or large clots</li>
+                                <li><strong>Feeding</strong> - If breastfeeding: nurse on demand (8-12+ times/24 hours), ensure proper latch, monitor output (6+ wet diapers, 3+ stools by day 5); If formula: follow safe preparation, pace feeding, hold baby upright</li>
+                                <li><strong>Sleep when baby sleeps</strong> - Prioritize sleep over housework; nap during at least one daytime sleep</li>
+                                <li><strong>Attend 2-week postpartum check</strong> (if offered) and 6-week postpartum appointment - Discuss recovery, contraception, mental health screening</li>
+                                <li><strong>Take prescribed medications</strong> - Pain relief, stool softeners, iron supplements if needed; understand safety while breastfeeding</li>
+                                <li><strong>Gentle movement only</strong> - Short walks when ready, avoid strenuous exercise, no lifting anything heavier than baby for several weeks</li>
+                                <li><strong>Nutrition and hydration</strong> - Eat regular meals (accept help with food prep), drink water frequently especially if breastfeeding</li>
+                                <li><strong>Emotional awareness</strong> - Monitor mood changes; "baby blues" (crying, mood swings) are normal in first 2 weeks; if symptoms persist or worsen, seek help immediately</li>
+                                <li><strong>Breast/chest care</strong> - If breastfeeding: watch for engorgement, use warm compresses before feeding and cold after, apply lanolin, monitor for mastitis signs (red, hot, painful area with fever)</li>
+                                <li><strong>Limit visitors and outings</strong> - Protect rest time; say no to visitors; avoid crowds during newborn period</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="care-card father">
+                        <div class="card-header">
+                            <svg class="card-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/>
+                            </svg>
+                            <h3>Father's Responsibilities</h3>
+                        </div>
+                        <div class="card-content">
+                            <ul class="responsibility-list">
+                                <li><strong>Assume all household responsibilities</strong> - Cooking, cleaning, laundry, errands; mother's only job is recovery and feeding baby</li>
+                                <li><strong>Night shift support</strong> - Even if not feeding, handle diaper changes, burping, soothing, bringing baby to mother for nursing</li>
+                                <li><strong>Visitor management</strong> - Enforce boundaries; limit visit duration; ensure visitors help (bring food, hold baby while parents shower) or don't come</li>
+                                <li><strong>Monitor mother's physical recovery</strong> - Observe bleeding patterns, incision healing, pain levels; encourage her to report concerns to doctor</li>
+                                <li><strong>Monitor mother's emotional health</strong> - Watch for signs of postpartum depression/anxiety beyond normal "baby blues"; facilitate professional help if needed</li>
+                                <li><strong>Take on specific baby care tasks</strong> - Diaper changes, baths, holding/soothing, bottle feeding if supplementing; develop competence and confidence</li>
+                                <li><strong>Protect mother's sleep</strong> - Take baby for stretches during day so mother can nap uninterrupted; consider taking one full night shift on weekend if bottle available</li>
+                                <li><strong>Handle administrative tasks</strong> - Add baby to insurance (deadline!), submit birth certificate, apply for necessary documents, manage medical bills</li>
+                                <li><strong>Attend pediatrician appointments</strong> - Accompany mother to appointments (at 3-5 days, 2 weeks, 1 month); take notes, ask questions</li>
+                                <li><strong>Coordinate meal support</strong> - Accept food from friends/family, order takeout, prep simple meals; ensure mother is eating regularly</li>
+                                <li><strong>Learn baby's cues</strong> - Understand hunger, tired, overstimulated signals; become expert in soothing techniques</li>
+                                <li><strong>Advocate for mother's needs</strong> - She may downplay discomfort or needs; proactively offer help, insist on her resting</li>
+                                <li><strong>Bond with baby independently</strong> - Spend one-on-one time with baby; don't defer everything to mother as "expert"</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="care-card safety">
+                        <div class="card-header">
+                            <svg class="card-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0zM12 9v4M12 17h.01"/>
+                            </svg>
+                            <h3>Safety Considerations</h3>
+                        </div>
+                        <div class="card-content">
+                            <div class="safety-critical">
+                                <h4>Medical Warning Signs - Call Doctor/Seek Care:</h4>
+                                <p><strong>For Mother:</strong></p>
+                                <ul class="warning-list">
+                                    <li><strong>Postpartum hemorrhage</strong> - Soaking through pad in less than 1 hour, passing clots larger than golf ball</li>
+                                    <li><strong>Signs of infection</strong> - Fever >100.4°F, foul-smelling discharge, severe chills</li>
+                                    <li><strong>Incision concerns</strong> - Redness, warmth, swelling, drainage, separation of C-section or perineal repair</li>
+                                    <li><strong>Postpartum depression/anxiety red flags</strong> - Thoughts of harming self or baby, inability to care for baby, severe panic attacks, hallucinations</li>
+                                    <li><strong>Breast infection (mastitis)</strong> - Red, hot, hard area on breast with fever and flu-like symptoms</li>
+                                    <li><strong>Blood clot symptoms</strong> - Leg pain/swelling, chest pain, shortness of breath</li>
+                                    <li><strong>Severe headache with vision changes</strong> - May indicate postpartum preeclampsia (can occur up to 6 weeks postpartum)</li>
+                                </ul>
+                                <p><strong>For Baby:</strong></p>
+                                <ul class="warning-list">
+                                    <li><strong>Feeding concerns</strong> - Refusing to eat, extreme lethargy, inability to wake for feedings, poor weight gain</li>
+                                    <li><strong>Dehydration</strong> - Fewer than 6 wet diapers/day after day 5, dark concentrated urine, sunken fontanel (soft spot), no tears when crying</li>
+                                    <li><strong>Jaundice worsening</strong> - Increasing yellow color, especially if extending to legs/arms, extreme sleepiness</li>
+                                    <li><strong>Fever or low temperature</strong> - Rectal temp >100.4°F or <97.7°F (fever in first month ALWAYS requires immediate medical evaluation)</li>
+                                    <li><strong>Breathing difficulties</strong> - Rapid breathing (>60/min), grunting, flaring nostrils, retractions (skin pulling between ribs), blue color</li>
+                                    <li><strong>Excessive crying</strong> - Inconsolable crying for several hours, high-pitched unusual cry</li>
+                                    <li><strong>Vomiting</strong> - Forceful projectile vomiting (different from normal spit-up), green or bloody vomit</li>
+                                    <li><strong>Umbilical cord infection</strong> - Redness around base, pus, foul smell, bleeding more than few drops</li>
+                                    <li><strong>Diaper area concerns</strong> - Blood in stool (beyond small streaks), no bowel movement in 48 hours, severe diaper rash with open sores</li>
+                                </ul>
+                            </div>
+                            <div class="safety-preventive">
+                                <h4>Critical Safety Protocols:</h4>
+                                <ul class="responsibility-list">
+                                    <li><strong>Safe sleep - EVERY SLEEP</strong> - Back to sleep, alone in crib/bassinet, on firm surface, no blankets/pillows/toys, room-sharing (not bed-sharing)</li>
+                                    <li><strong>Never leave baby unattended</strong> - Not on changing table, couch, adult bed, or any elevated surface; babies can roll unexpectedly</li>
+                                    <li><strong>Car seat safety</strong> - Use for every ride, even short trips; rear-facing in back seat; straps snug (1-finger test); chest clip at armpit level; no winter coats in car seat</li>
+                                    <li><strong>Prevent shaken baby syndrome</strong> - NEVER shake baby; if overwhelmed, place baby safely in crib and step away; call for help</li>
+                                    <li><strong>Avoid sick contacts</strong> - No visitors with colds, flu, fever; anyone holding baby must wash hands; no kissing baby's hands/face</li>
+                                    <li><strong>Feeding safety</strong> - Formula: prepare fresh, discard after 1 hour at room temp; Breastmilk: proper storage/thawing; Always test temperature; Never prop bottle</li>
+                                    <li><strong>Bathing safety</strong> - Only sponge baths until umbilical cord falls off; test water temp (90-100°F); never leave alone in water; support head at all times</li>
+                                    <li><strong>Temperature regulation</strong> - Dress baby in one more layer than adult comfortable in; avoid overheating (increases SIDS risk); room temp 68-72°F</li>
+                                    <li><strong>Pet safety</strong> - Never leave baby alone with pets; supervise all interactions; create pet-free safe zones</li>
+                                    <li><strong>Hand washing</strong> - Wash hands before feeding, after diaper changes, before/after handling baby; use fragrance-free soap</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="care-card items">
+                        <div class="card-header">
+                            <svg class="card-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>
+                                <polyline points="3.27 6.96 12 12.01 20.73 6.96"/>
+                                <line x1="12" y1="22.08" x2="12" y2="12"/>
+                            </svg>
+                            <h3>Items & Materials to Prepare</h3>
+                        </div>
+                        <div class="card-content">
+                            <div class="items-category">
+                                <h4>Essential Supplies (have on hand):</h4>
+                                <ul class="responsibility-list">
+                                    <li><strong>Diapers and wipes</strong> - Minimum 2-week supply (newborns use 10-12/day); fragrance-free wipes</li>
+                                    <li><strong>Feeding supplies</strong> - Bottles/formula if supplementing, breast pump and storage bags if breastfeeding and pumping</li>
+                                    <li><strong>Mother's recovery items</strong> - Maternity pads (several packs), peri-bottle, sitz bath, stool softeners, pain medication, nursing pads</li>
+                                    <li><strong>Thermometer</strong> - Digital rectal thermometer (most accurate for newborns); know how to use properly</li>
+                                    <li><strong>First aid supplies</strong> - Nasal aspirator, saline drops, infant gas drops (if recommended by doctor), diaper cream</li>
+                                </ul>
+                            </div>
+                            <div class="items-category">
+                                <h4>Medical Appointments & Documentation:</h4>
+                                <ul class="responsibility-list">
+                                    <li><strong>Pediatrician visits</strong> - First visit at 3-5 days old, 2-week check, 1-month well-child visit; bring questions written down</li>
+                                    <li><strong>Mother's postpartum follow-up</strong> - Usually at 6 weeks, but some providers schedule 2-week check; don't skip this</li>
+                                    <li><strong>Insurance finalization</strong> - Confirm baby added to policy, understand coverage, file any outstanding claims</li>
+                                    <li><strong>Birth certificate</strong> - Follow up if not received within expected timeframe; may need for insurance, passport</li>
+                                </ul>
+                            </div>
+                            <div class="items-category">
+                                <h4>Support Resources to Identify:</h4>
+                                <ul class="responsibility-list">
+                                    <li><strong>Lactation consultant</strong> - Have contact info ready if breastfeeding challenges arise; many insurance plans cover visits</li>
+                                    <li><strong>Postpartum mental health resources</strong> - Know local/national hotlines (Postpartum Support International: 1-800-944-4773), therapists who specialize in postpartum issues</li>
+                                    <li><strong>After-hours nurse line</strong> - Save pediatrician's after-hours number and insurance nurse line for non-emergency questions</li>
+                                    <li><strong>Emergency contacts</strong> - Program pediatrician, OB, closest ER, poison control (1-800-222-1222) into both parents' phones</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="care-card recommendations">
+                        <div class="card-header">
+                            <svg class="card-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+                                <path d="M2 17l10 5 10-5M2 12l10 5 10-5"/>
+                            </svg>
+                            <h3>Additional Professional Recommendations</h3>
+                        </div>
+                        <div class="card-content">
+                            <ul class="responsibility-list">
+                                <li><strong>This is survival mode - lower all expectations</strong> - The only goals are: everyone fed, everyone gets some sleep, everyone safe; everything else can wait</li>
+                                <li><strong>Feeding is feeding</strong> - Whether breast, formula, or combination, fed is best; don't let judgment affect your method choice</li>
+                                <li><strong>Sleep deprivation is serious</strong> - Impairs judgment and emotional regulation; take it in shifts if possible; accept help for sleep</li>
+                                <li><strong>Fourth trimester concept</strong> - Baby still adjusting to outside world; needs constant contact, soothing, feeding; this intensity is temporary</li>
+                                <li><strong>Learn baby's crying patterns</strong> - Different cries for hunger, tired, discomfort, overstimulation; takes time to distinguish but you will learn</li>
+                                <li><strong>The 5 S's for soothing</strong> - Swaddle, Side/stomach position (for holding, not sleeping), Shush, Swing, Suck; often need combination</li>
+                                <li><strong>Cluster feeding is normal</strong> - Especially evenings; baby may nurse constantly for hours; doesn't mean low milk supply</li>
+                                <li><strong>Growth spurts</strong> - Often around 2-3 weeks; baby suddenly fussier, feeds more frequently, sleeps less; typically lasts 2-3 days</li>
+                                <li><strong>Postpartum depression affects 1 in 7 mothers</strong> - Symptoms beyond "baby blues": persistent sadness, anxiety, inability to bond, thoughts of harm; this is medical condition requiring treatment</li>
+                                <li><strong>Partners can have postpartum depression too</strong> - Affects approximately 10% of fathers; same need for professional help</li>
+                                <li><strong>Your relationship will be strained</strong> - Sleep deprivation, role changes, less time together; acknowledge this is temporary phase; be kind to each other</li>
+                                <li><strong>Don't compare to social media</strong> - Everyone struggles; no one posts the hard moments; your experience is valid</li>
+                                <li><strong>Accept imperfect help</strong> - Partner may not do things exactly your way; unless safety issue, let it go; competence builds through practice</li>
+                                <li><strong>Tummy time starts now</strong> - Brief periods (3-5 minutes) several times daily while awake and supervised; prevents flat head, builds strength</li>
+                                <li><strong>Umbilical cord care</strong> - Keep dry, fold diaper below it, no submersion baths until falls off (1-3 weeks); small amount of blood when falls off is normal</li>
+                                <li><strong>Create simple routines</strong> - Not strict schedules, but predictable patterns (eat, awake time, sleep); helps baby and parents</li>
+                                <li><strong>One parent should be "off duty"</strong> - Rotating who gets uninterrupted sleep/break time; prevents dual burnout</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Phase 4: 1-3 Months -->
+            <section class="phase-section" data-phase="3">
+                <div class="phase-header">
+                    <div class="phase-icon">4</div>
+                    <div class="phase-title-group">
+                        <h2 class="phase-title">1 to 3 Months</h2>
+                        <p class="phase-description">Emerging patterns and early development</p>
+                    </div>
+                </div>
+
+                <div class="section-group">
+                    <div class="care-card mother">
+                        <div class="card-header">
+                            <svg class="card-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+                            </svg>
+                            <h3>Mother's Responsibilities</h3>
+                        </div>
+                        <div class="card-content">
+                            <ul class="responsibility-list">
+                                <li><strong>Continue physical recovery</strong> - Cleared for exercise at 6-week appointment; start gently with walking, pelvic floor exercises; consider pelvic floor physical therapy if issues persist</li>
+                                <li><strong>Feeding continuation</strong> - Breastfeeding: supply should be established; may introduce pumping for flexibility; Formula: baby may increase intake, move up bottle nipple sizes as needed</li>
+                                <li><strong>Respond to baby's cues</strong> - Baby becoming more interactive; engage during alert times, provide soothing during fussy times</li>
+                                <li><strong>Prioritize self-care</strong> - Daily shower, eating regular meals, brief time for yourself (even 15 minutes); not selfish, it's necessary</li>
+                                <li><strong>Monitor mental health</strong> - If postpartum depression/anxiety developed, follow treatment plan; if new symptoms emerge, seek help immediately</li>
+                                <li><strong>Begin gentle sleep shaping</strong> - Start distinguishing day/night (bright/active days, dim/quiet nights); begin putting baby down drowsy but awake occasionally</li>
+                                <li><strong>Attend well-child visits</strong> - 2-month vaccinations; discuss development, feeding, sleep concerns</li>
+                                <li><strong>Contraception management</strong> - If sexually active, use discussed method; understand fertility can return before first period even while breastfeeding</li>
+                                <li><strong>Build support network</strong> - Consider joining parent groups, connecting with other new parents; reduces isolation</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="care-card father">
+                        <div class="card-header">
+                            <svg class="card-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/>
+                            </svg>
+                            <h3>Father's Responsibilities</h3>
+                        </div>
+                        <div class="card-content">
+                            <ul class="responsibility-list">
+                                <li><strong>Continue active caregiving</strong> - Take specific responsibilities (bath time, bedtime routine, weekend morning shift); maintain competence</li>
+                                <li><strong>Return to work transition</strong> - If returning to work, maintain involvement; don't let work become excuse to disengage from parenting</li>
+                                <li><strong>Protect family time</strong> - Set boundaries at work when possible; prioritize being present when home (limit phone/screen time)</li>
+                                <li><strong>Support mother's return to work</strong> (if applicable) - Help with pumping logistics, morning routine sharing, drop-off/pick-up coordination</li>
+                                <li><strong>Monitor partner's wellbeing</strong> - Continue watching for mental health changes; encourage self-care; facilitate breaks</li>
+                                <li><strong>Deepen bond with baby</strong> - Read, sing, play, take walks together; develop your own soothing methods baby responds to</li>
+                                <li><strong>Maintain household contributions</strong> - Don't revert to pre-baby division of labor; parenting is now both parents' primary job</li>
+                                <li><strong>Check in on relationship</strong> - Schedule brief daily check-ins about feelings, needs, appreciation; intimacy rebuilding (physical and emotional)</li>
+                                <li><strong>Plan for childcare</strong> - If needed, research options, visit facilities, make decisions together; start wait-lists early if necessary</li>
+                                <li><strong>Attend pediatrician appointments</strong> - Continue accompanying to visits; be informed about baby's development and health</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="care-card safety">
+                        <div class="card-header">
+                            <svg class="card-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0zM12 9v4M12 17h.01"/>
+                            </svg>
+                            <h3>Safety Considerations</h3>
+                        </div>
+                        <div class="card-content">
+                            <div class="safety-critical">
+                                <h4>Medical Warning Signs - Contact Pediatrician:</h4>
+                                <ul class="warning-list">
+                                    <li><strong>Fever</strong> - Temperature >100.4°F (still requires immediate evaluation at this age)</li>
+                                    <li><strong>Developmental concerns</strong> - No social smile by 2 months, not tracking objects, not responding to sounds</li>
+                                    <li><strong>Feeding problems</strong> - Refusing multiple feedings, vomiting after every feeding, significant decrease in intake</li>
+                                    <li><strong>Respiratory issues</strong> - Difficulty breathing, persistent cough, wheezing, blue tint around lips</li>
+                                    <li><strong>Unusual lethargy</strong> - Extremely difficult to wake, not interested in feeding, floppy muscle tone</li>
+                                    <li><strong>Persistent crying</strong> - Inconsolable for extended periods, high-pitched cry, crying with fever</li>
+                                    <li><strong>Dehydration signs</strong> - Fewer wet diapers, sunken soft spot, no tears, dry mouth</li>
+                                    <li><strong>Rashes with fever</strong> - Any rash accompanied by fever, or rapidly spreading rash</li>
+                                </ul>
+                                <p><strong>For Mother (ongoing monitoring):</strong></p>
+                                <ul class="warning-list">
+                                    <li><strong>Persistent mood changes</strong> - Depression/anxiety not improving, thoughts of harm, inability to function</li>
+                                    <li><strong>Physical symptoms</strong> - Continued heavy bleeding, severe pain, signs of infection</li>
+                                </ul>
+                            </div>
+                            <div class="safety-preventive">
+                                <h4>Age-Appropriate Safety Measures:</h4>
+                                <ul class="responsibility-list">
+                                    <li><strong>Safe sleep continues</strong> - Still on back, alone in crib, no loose items; most SIDS deaths occur 1-4 months</li>
+                                    <li><strong>Increased mobility awareness</strong> - Baby may start rolling; never leave on elevated surfaces; keep one hand on baby during changes</li>
+                                    <li><strong>Choking prevention</strong> - Keep small objects away; even though not eating solids, babies explore with mouths</li>
+                                    <li><strong>Car seat check</strong> - Verify straps still properly positioned as baby grows; chest clip at armpit level; straps snug</li>
+                                    <li><strong>Sun safety</strong> - Babies under 6 months should avoid direct sunlight; use shade, protective clothing; sunscreen only if unavoidable and 6+ months</li>
+                                    <li><strong>Water safety</strong> - Never leave alone near water (bath, bucket); can drown in 1 inch of water</li>
+                                    <li><strong>Pet supervision</strong> - As baby becomes more interactive, continue supervising all pet interactions</li>
+                                    <li><strong>Vaccination on schedule</strong> - Follow recommended immunization schedule; understand benefits far outweigh minimal risks</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="care-card items">
+                        <div class="card-header">
+                            <svg class="card-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>
+                                <polyline points="3.27 6.96 12 12.01 20.73 6.96"/>
+                                <line x1="12" y1="22.08" x2="12" y2="12"/>
+                            </svg>
+                            <h3>Items & Materials to Prepare</h3>
+                        </div>
+                        <div class="card-content">
+                            <div class="items-category">
+                                <h4>Size/Equipment Transitions:</h4>
+                                <ul class="responsibility-list">
+                                    <li><strong>Clothing size up</strong> - Transition to 3-6 month sizes; babies grow rapidly</li>
+                                    <li><strong>Diaper size increase</strong> - Many babies move to size 1 or 2 during this period</li>
+                                    <li><strong>Bottle nipple flow</strong> - May need faster flow nipples if baby frustrated during feeding</li>
+                                    <li><strong>Activity mat/play gym</strong> - Baby ready for more interactive play; tummy time mat with toys</li>
+                                </ul>
+                            </div>
+                            <div class="items-category">
+                                <h4>Medical & Development Tracking:</h4>
+                                <ul class="responsibility-list">
+                                    <li><strong>2-month well-visit</strong> - First round of vaccinations (DTaP, Hib, IPV, PCV, Rotavirus); expect fussiness/fever after</li>
+                                    <li><strong>Development milestones</strong> - Should be tracking objects, making cooing sounds, smiling responsively, lifting head during tummy time</li>
+                                    <li><strong>Mother's 6-week postpartum visit</strong> - Physical exam, discuss contraception, mental health screening, clearance for exercise/sex</li>
+                                    <li><strong>Vision and hearing</strong> - Baby should respond to sounds, track moving objects; report concerns to pediatrician</li>
+                                </ul>
+                            </div>
+                            <div class="items-category">
+                                <h4>Work/Childcare Transition Needs:</h4>
+                                <ul class="responsibility-list">
+                                    <li><strong>Childcare arrangements</strong> - Finalize provider, complete paperwork, practice drop-off routine</li>
+                                    <li><strong>Pumping supplies</strong> (if breastfeeding and returning to work) - Additional pump parts, storage bags, cooler, understand workplace rights</li>
+                                    <li><strong>Backup care plan</strong> - Identify backup caregiver for sick days when baby can't attend childcare</li>
+                                    <li><strong>Updated emergency contacts</strong> - Provide childcare provider with pediatrician info, emergency contacts, consent forms</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="care-card recommendations">
+                        <div class="card-header">
+                            <svg class="card-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+                                <path d="M2 17l10 5 10-5M2 12l10 5 10-5"/>
+                            </svg>
+                            <h3>Additional Professional Recommendations</h3>
+                        </div>
+                        <div class="card-content">
+                            <ul class="responsibility-list">
+                                <li><strong>Things get easier around 3 months</strong> - Most babies become more predictable; sleep consolidates; parents adapt; don't lose hope during difficult weeks</li>
+                                <li><strong>Sleep training controversy</strong> - No need to decide now; babies under 4 months too young for formal sleep training; focus on healthy sleep habits foundation</li>
+                                <li><strong>Wake windows</strong> - Babies this age typically awake 1-1.5 hours before needing sleep; watch for sleepy cues (rubbing eyes, fussiness) rather than clock</li>
+                                <li><strong>Wonder Weeks/developmental leaps</strong> - Periods of increased fussiness often precede new skills; temporary regression is normal</li>
+                                <li><strong>Vaccine hesitancy concerns</strong> - Discuss concerns with pediatrician rather than delaying; diseases prevented are serious; side effects typically minor</li>
+                                <li><strong>Comparison trap</strong> - Every baby develops differently; milestones have ranges; your pediatrician will monitor; avoid obsessive comparison</li>
+                                <li><strong>Reading to baby starts now</strong> - Even though baby doesn't understand, hearing language supports development; black/white or high-contrast board books ideal</li>
+                                <li><strong>Tummy time increases</strong> - Work up to 15-30 minutes total daily; prevents flat head, builds strength for rolling/sitting</li>
+                                <li><strong>Social interaction importance</strong> - Baby needs face-to-face interaction, not just being worn/held; get down to eye level, narrate activities</li>
+                                <li><strong>Mother's recovery plateau</strong> - By 6-8 weeks many women feel physically recovered; some symptoms (pelvic floor issues, diastasis recti) may need physical therapy</li>
+                                <li><strong>Relationship intentionality</strong> - Schedule regular check-ins about division of labor; express appreciation; physical intimacy may resume but may be complicated by exhaustion, body changes</li>
+                                <li><strong>Lower your screen time around baby</strong> - Babies learn from interaction; background TV/phones reduce quality of engagement</li>
+                                <li><strong>Trust your instincts</strong> - You know your baby better than anyone; if something feels wrong, advocate for evaluation</li>
+                                <li><strong>Self-care isn't optional</strong> - Parents operating on empty cannot care for baby effectively; prioritize basics: sleep, food, brief breaks</li>
+                                <li><strong>Accept that some days are survival days</strong> - Not every day will have enriching activities and perfect routines; sometimes just getting through is enough</li>
+                                <li><strong>Plan for 4-month sleep regression</strong> - Around 3-4 months, sleep often worsens temporarily due to developmental changes; this is normal and temporary</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Phase 5: 3-6 Months -->
+            <section class="phase-section" data-phase="4">
+                <div class="phase-header">
+                    <div class="phase-icon">5</div>
+                    <div class="phase-title-group">
+                        <h2 class="phase-title">3 to 6 Months</h2>
+                        <p class="phase-description">Established routines and major milestones</p>
+                    </div>
+                </div>
+
+                <div class="section-group">
+                    <div class="care-card mother">
+                        <div class="card-header">
+                            <svg class="card-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+                            </svg>
+                            <h3>Mother's Responsibilities</h3>
+                        </div>
+                        <div class="card-content">
+                            <ul class="responsibility-list">
+                                <li><strong>Prepare for solid food introduction</strong> - Research approach (purees vs. baby-led weaning), discuss with pediatrician, acquire supplies (high chair, bowls, spoons)</li>
+                                <li><strong>Continue breastfeeding/formula feeding</strong> - Milk remains primary nutrition through 12 months; solids are complementary initially</li>
+                                <li><strong>Establish consistent routines</strong> - Bedtime routine, nap schedule, feeding times; predictability benefits baby and parents</li>
+                                <li><strong>Encourage developmental activities</strong> - Supported sitting, reaching for toys, exploring different textures, interactive play</li>
+                                <li><strong>Support teething</strong> - May begin anytime 3-12 months; offer safe teething toys, cold washcloths, discuss pain relief options with pediatrician</li>
+                                <li><strong>Maintain self-care habits</strong> - Continue prioritizing sleep, nutrition, exercise, mental health; these remain critical</li>
+                                <li><strong>Return to work adjustment</strong> (if applicable) - Managing pumping schedule, childcare communication, work-life balance; give yourself grace during transition</li>
+                                <li><strong>Plan for sleep changes</strong> - If comfortable, may begin gentle sleep shaping; understand baby's capabilities at this age</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="care-card father">
+                        <div class="card-header">
+                            <svg class="card-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/>
+                            </svg>
+                            <h3>Father's Responsibilities</h3>
+                        </div>
+                        <div class="card-content">
+                            <ul class="responsibility-list">
+                                <li><strong>Active participation in feeding transition</strong> - Learn about solid food introduction, share feeding responsibilities, make it fun exploratory time</li>
+                                <li><strong>Engage in age-appropriate play</strong> - Peek-a-boo, reading, singing, physical play (supervised tummy time, supported sitting); baby increasingly interactive</li>
+                                <li><strong>Maintain nighttime involvement</strong> - Continue sharing night responsibilities; don't assume mother should handle all wake-ups</li>
+                                <li><strong>Support routine consistency</strong> - Follow established routines even when "your turn"; consistency between caregivers important</li>
+                                <li><strong>Coordinate childcare</strong> - Active communication with provider, handle pick-up/drop-off regularly, stay informed about baby's day</li>
+                                <li><strong>Continue household management</strong> - Maintain fair division of labor; parenting responsibilities don't decrease as baby ages</li>
+                                <li><strong>Plan family outings</strong> - Baby more portable and interactive; practice outings, build confidence with activities outside home</li>
+                                <li><strong>Monitor developmental milestones together</strong> - Attend well-child visits (4-month, 6-month), discuss observations, celebrate achievements</li>
+                                <li><strong>Relationship nurturing</strong> - Schedule date nights (even at-home after bedtime), maintain emotional connection, discuss parenting approaches</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="care-card safety">
+                        <div class="card-header">
+                            <svg class="card-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0zM12 9v4M12 17h.01"/>
+                            </svg>
+                            <h3>Safety Considerations</h3>
+                        </div>
+                        <div class="card-content">
+                            <div class="safety-critical">
+                                <h4>Medical Warning Signs - Contact Pediatrician:</h4>
+                                <ul class="warning-list">
+                                    <li><strong>Developmental delays</strong> - Not rolling by 6 months, no babbling, not reaching for objects, poor head control</li>
+                                    <li><strong>Fever</strong> - Still warrants call to doctor; follow pediatrician's guidance on when to bring in</li>
+                                    <li><strong>Feeding concerns</strong> - Refusing solids consistently, gagging excessively, signs of allergic reaction (hives, vomiting, difficulty breathing)</li>
+                                    <li><strong>Respiratory issues</strong> - Persistent cough, wheezing, rapid breathing, retractions</li>
+                                    <li><strong>Digestive problems</strong> - Persistent vomiting, diarrhea lasting >24 hours, blood in stool, signs of dehydration</li>
+                                    <li><strong>Ear infection signs</strong> - Pulling at ears with fever/fussiness, drainage from ear</li>
+                                    <li><strong>Vision/hearing concerns</strong> - Not tracking objects, not responding to name, not turning to sounds</li>
+                                </ul>
+                            </div>
+                            <div class="safety-preventive">
+                                <h4>Age-Appropriate Safety Measures:</h4>
+                                <ul class="responsibility-list">
+                                    <li><strong>Increased mobility safety</strong> - Baby rolling, potentially starting to scoot; reassess safety of play areas; never leave on elevated surface</li>
+                                    <li><strong>Choking hazards</strong> - As solids introduced, ensure appropriate texture and size; learn infant CPR and choking rescue</li>
+                                    <li><strong>Safe sleep continues</strong> - Back to sleep, alone in crib; SIDS risk decreases but doesn't eliminate until 12 months</li>
+                                    <li><strong>Babyproofing escalation</strong> - Cover outlets, secure furniture to walls, gate stairs, lock cabinets with hazardous materials; baby becoming mobile</li>
+                                    <li><strong>Toy safety</strong> - Check for small parts (choke test tube or toilet paper roll test), avoid toys with strings/cords, check for recalls</li>
+                                    <li><strong>Food allergies</strong> - Introduce top allergens one at a time, watch for reactions; early introduction may prevent allergies (discuss with pediatrician)</li>
+                                    <li><strong>Water safety</strong> - Never leave alone near water; can drown in seconds; swimming lessons not drowning-proof at this age</li>
+                                    <li><strong>Car seat safety</strong> - Still rear-facing (until minimum 2 years old); check weight/height limits; ensure proper installation</li>
+                                    <li><strong>Sun protection</strong> - At 6+ months can use sunscreen; still prioritize shade, protective clothing, avoiding peak sun hours</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="care-card items">
+                        <div class="card-header">
+                            <svg class="card-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>
+                                <polyline points="3.27 6.96 12 12.01 20.73 6.96"/>
+                                <line x1="12" y1="22.08" x2="12" y2="12"/>
+                            </svg>
+                            <h3>Items & Materials to Prepare</h3>
+                        </div>
+                        <div class="card-content">
+                            <div class="items-category">
+                                <h4>Solid Food Introduction Supplies:</h4>
+                                <ul class="responsibility-list">
+                                    <li><strong>High chair</strong> - Stable, easy-to-clean, appropriate footrest/support</li>
+                                    <li><strong>Feeding supplies</strong> - Soft-tipped spoons, small bowls, bibs (many), floor mat for mess</li>
+                                    <li><strong>First foods</strong> - Single-ingredient purees or soft foods (iron-fortified cereal, mashed avocado, banana, sweet potato); introduce one new food every 3-5 days</li>
+                                    <li><strong>Storage containers</strong> - For homemade or portioned baby food; ice cube trays for freezing</li>
+                                </ul>
+                            </div>
+                            <div class="items-category">
+                                <h4>Developmental & Play Items:</h4>
+                                <ul class="responsibility-list">
+                                    <li><strong>Age-appropriate toys</strong> - Soft blocks, rattles, teething toys, crinkle books, activity centers</li>
+                                    <li><strong>Books</strong> - Board books, high-contrast books, touch-and-feel books; read daily</li>
+                                    <li><strong>Exersaucer/activity center</strong> (optional) - Limit time (15-20 min); doesn't replace floor play/tummy time</li>
+                                    <li><strong>Baby-safe mirror</strong> - Babies enjoy looking at faces, including their own</li>
+                                </ul>
+                            </div>
+                            <div class="items-category">
+                                <h4>Medical Appointments & Milestones:</h4>
+                                <ul class="responsibility-list">
+                                    <li><strong>4-month well-visit</strong> - Second round vaccines (DTaP, Hib, IPV, PCV, Rotavirus); discuss rolling, cooing, reaching milestones</li>
+                                    <li><strong>6-month well-visit</strong> - Third vaccine round, introduce solid foods discussion, developmental screening</li>
+                                    <li><strong>Teething supplies</strong> - Safe teething toys, cold washcloths, pain relief as recommended by pediatrician</li>
+                                    <li><strong>Updated photos/documentation</strong> - Consider 6-month photos; baby changes rapidly; update emergency contacts</li>
+                                </ul>
+                            </div>
+                            <div class="items-category">
+                                <h4>Babyproofing Essentials:</h4>
+                                <ul class="responsibility-list">
+                                    <li><strong>Outlet covers</strong> - Cover all accessible outlets</li>
+                                    <li><strong>Cabinet locks</strong> - Especially for cleaning supplies, medications, sharp objects</li>
+                                    <li><strong>Furniture anchors</strong> - Secure heavy furniture, TVs to walls</li>
+                                    <li><strong>Safety gates</strong> - For stairs (top and bottom), rooms you want to block off</li>
+                                    <li><strong>Corner guards</strong> - For sharp furniture edges in main play areas</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="care-card recommendations">
+                        <div class="card-header">
+                            <svg class="card-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+                                <path d="M2 17l10 5 10-5M2 12l10 5 10-5"/>
+                            </svg>
+                            <h3>Additional Professional Recommendations</h3>
+                        </div>
+                        <div class="card-content">
+                            <ul class="responsibility-list">
+                                <li><strong>The "sweet spot" of infancy</strong> - Many parents find 3-6 months most enjoyable: baby interactive but not mobile, sleep improving, feeding easier; savor this time</li>
+                                <li><strong>Solid foods are practice, not nutrition</strong> - Until 12 months, breast milk/formula provides primary nutrition; solids introduce textures, flavors, skills</li>
+                                <li><strong>Starting solids guidelines</strong> - Begin around 6 months (or when baby shows readiness: sits with support, shows interest in food, lost tongue-thrust reflex)</li>
+                                <li><strong>Allergen introduction</strong> - Current research suggests early introduction (after 4 months, around 6 months) of common allergens may prevent allergies; discuss with pediatrician</li>
+                                <li><strong>Mess is part of learning</strong> - Self-feeding is messy; resist urge to be too controlling; exploration is how babies learn</li>
+                                <li><strong>Sleep training options</strong> - If needed and desired, babies 4-6 months old enough for gentle sleep training methods; many approaches exist; choose one aligned with your values</li>
+                                <li><strong>4-month sleep regression</strong> - Sleep often worsens around 3-4 months due to developmental changes (sleep cycle maturation); this is temporary but exhausting</li>
+                                <li><strong>Nap transitions</strong> - Babies typically transition from 4 to 3 naps around 4-5 months; watch baby's cues rather than strict schedules</li>
+                                <li><strong>Stranger anxiety emerging</strong> - Around 6 months, baby may become wary of unfamiliar people; this is normal developmental phase, not regression</li>
+                                <li><strong>Sitting milestone</strong> - Most babies sit independently 6-8 months; allow practice but don't force; prop pillows for safety during practice</li>
+                                <li><strong>Babbling and language</strong> - Should hear varied babbling (ba-ba, da-da) by 6 months; talk to baby constantly to build language foundation</li>
+                                <li><strong>Screen time recommendations</strong> - AAP recommends no screen time under 18 months (except video chatting); prioritize face-to-face interaction</li>
+                                <li><strong>Playdates and socialization</strong> - Baby benefits more from adult interaction than peer interaction at this age; playdates more for parents' benefit (which is valid!)</li>
+                                <li><strong>Parental identity crisis common</strong> - Many parents struggle with identity shift, especially around return to work or decision to stay home; both are valid; seek support if struggling</li>
+                                <li><strong>Relationship check-in</strong> - 6 months in, assess division of labor, intimacy, communication; make adjustments as needed; consider couples counseling if struggling</li>
+                                <li><strong>Future planning</strong> - If desiring more children, discuss timeline, contraception; if family complete, discuss permanent contraception options</li>
+                                <li><strong>Baby's personality emerging</strong> - Temperament becoming clearer; learn your baby's unique traits rather than forcing expectations</li>
+                                <li><strong>You've survived the hardest part</strong> - First 3 months typically the most difficult; if you've made it here, you're capable and resilient; trust yourself</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p class="footer-note">This guide provides general information based on professional medical knowledge. Always consult your healthcare provider for advice specific to your situation. In case of emergency, call 911 or your local emergency services.</p>
+            <p class="footer-attribution">Maternal & Infant Care Planning Guide | Professional Healthcare Resource for First-Time Parents</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

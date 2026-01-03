@@ -112,10 +112,18 @@ const translations = {
 class LanguageManager {
     constructor() {
         this.currentLang = localStorage.getItem('preferredLanguage') || 'en';
+        this.contentTranslations = null;
+        this.originalContent = new Map(); // Store original English content
         this.init();
     }
 
-    init() {
+    async init() {
+        // Load detailed content translations
+        await this.loadContentTranslations();
+
+        // Store original English content before any translation
+        this.storeOriginalContent();
+
         // Set initial language
         this.setLanguage(this.currentLang);
 
@@ -125,6 +133,23 @@ class LanguageManager {
                 const lang = e.target.dataset.lang;
                 this.setLanguage(lang);
             });
+        });
+    }
+
+    async loadContentTranslations() {
+        try {
+            const response = await fetch('content-translations.json');
+            this.contentTranslations = await response.json();
+        } catch (error) {
+            console.warn('Could not load content translations:', error);
+        }
+    }
+
+    storeOriginalContent() {
+        // Store all English list content for switching back
+        document.querySelectorAll('[data-content]').forEach(element => {
+            const key = element.dataset.content;
+            this.originalContent.set(key, element.innerHTML);
         });
     }
 
@@ -151,7 +176,7 @@ class LanguageManager {
     translatePage() {
         const t = translations[this.currentLang];
 
-        // Translate elements with data-i18n attributes
+        // Translate UI elements with data-i18n attributes
         document.querySelectorAll('[data-i18n]').forEach(element => {
             const key = element.dataset.i18n;
             const translation = this.getNestedTranslation(t, key);
@@ -159,6 +184,33 @@ class LanguageManager {
                 element.textContent = translation;
             }
         });
+
+        // Translate detailed content lists
+        this.translateDetailedContent();
+    }
+
+    translateDetailedContent() {
+        if (this.currentLang === 'en') {
+            // Restore original English content
+            document.querySelectorAll('[data-content]').forEach(element => {
+                const key = element.dataset.content;
+                const originalHTML = this.originalContent.get(key);
+                if (originalHTML) {
+                    element.innerHTML = originalHTML;
+                }
+            });
+        } else if (this.currentLang === 'zh' && this.contentTranslations) {
+            // Apply Chinese translations
+            document.querySelectorAll('[data-content]').forEach(element => {
+                const key = element.dataset.content;
+                const translation = this.getNestedTranslation(this.contentTranslations, key);
+
+                if (translation && Array.isArray(translation)) {
+                    // It's a list of items
+                    element.innerHTML = translation.map(item => `<li>${item}</li>`).join('\n                                ');
+                }
+            });
+        }
     }
 
     getNestedTranslation(obj, path) {

@@ -632,33 +632,38 @@ body {
     }
 
     .timeline-nav {
-        padding: var(--spacing-sm) 0;
+        padding: 0.5rem 0;
+    }
+
+    .timeline-track {
+        height: 3px;
+        margin-bottom: 0.75rem;
     }
 
     .timeline-phases {
         grid-template-columns: repeat(5, 1fr);
-        gap: var(--spacing-xs);
+        gap: 0.3rem;
     }
 
     .phase-button {
-        padding: 0.5rem 0.3rem;
-        gap: 0.25rem;
+        padding: 0.35rem 0.2rem;
+        gap: 0.15rem;
     }
 
     .phase-number {
-        width: 24px;
-        height: 24px;
-        font-size: 0.8rem;
+        width: 20px;
+        height: 20px;
+        font-size: 0.7rem;
     }
 
     .phase-label {
-        font-size: 0.7rem;
-        line-height: 1.2;
+        font-size: 0.6rem;
+        line-height: 1.1;
     }
 
     /* Smaller font for Chinese phase labels on mobile */
     html[lang="zh"] .phase-label {
-        font-size: 0.6rem;
+        font-size: 0.52rem;
     }
 
     .phase-header {
@@ -684,34 +689,39 @@ body {
 
 @media (max-width: 480px) {
     .timeline-nav {
-        padding: 0.5rem 0;
+        padding: 0.3rem 0 0.4rem;
+    }
+
+    .timeline-track {
+        height: 2px;
+        margin-bottom: 0.5rem;
     }
 
     .timeline-phases {
         grid-template-columns: repeat(5, 1fr);
-        gap: 0.25rem;
+        gap: 0.2rem;
     }
 
     .phase-button {
-        padding: 0.4rem 0.2rem;
-        gap: 0.2rem;
-        border-width: 1.5px;
+        padding: 0.25rem 0.15rem;
+        gap: 0.1rem;
+        border-width: 1px;
     }
 
     .phase-number {
-        width: 20px;
-        height: 20px;
-        font-size: 0.7rem;
+        width: 16px;
+        height: 16px;
+        font-size: 0.6rem;
     }
 
     .phase-label {
-        font-size: 0.65rem;
-        line-height: 1.1;
+        font-size: 0.55rem;
+        line-height: 1.05;
     }
 
     /* Even smaller font for Chinese on small mobile */
     html[lang="zh"] .phase-label {
-        font-size: 0.55rem;
+        font-size: 0.48rem;
     }
 
     .hero {

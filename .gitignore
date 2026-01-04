@@ -1,7 +1,4 @@
-# Firebase configuration (contains API keys)
-firebase-config.js
-
-# Environment files
+# Environment files (for backend projects)
 .env
 .env.local
 
@@ -20,3 +17,10 @@ npm-debug.log*
 
 # Dependencies
 node_modules/
+
+# Note: firebase-config.js is included in the repository for GitHub Pages deployment
+# Firebase API keys are safe to be public when properly secured with:
+# 1. Firestore Security Rules
+# 2. Firebase Authentication
+# 3. Authorized Domains
+# See DEPLOYMENT.md for security setup instructions

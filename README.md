@@ -20,30 +20,52 @@ A comprehensive bilingual (English/Chinese) web application for parents from lat
 
 ## Getting Started
 
-### 1. Firebase Configuration
+### 1. Using the Deployed App
 
-**IMPORTANT**: The Firebase configuration file is not included in this repository for security reasons.
+The app is deployed and ready to use at:
+**https://yyyfor.github.io/child-care/**
 
-1. **Create your Firebase config file**:
+Simply visit the link and:
+1. Click the **Notes** tab
+2. Create an account or sign in
+3. Start adding notes!
+
+### 2. Running Locally (For Development)
+
+If you want to run the app locally or fork the project:
+
+1. **Clone the repository**:
    ```bash
-   cp firebase-config.example.js firebase-config.js
+   git clone https://github.com/yyyfor/child-care.git
+   cd child-care
    ```
 
+2. **Open in browser**:
+   ```bash
+   open index.html
+   ```
+
+   Or simply double-click `index.html`
+
+### 3. Setting Up Your Own Firebase Project
+
+If you want to create your own version with your own Firebase project:
+
+1. **Create a Firebase project** at [Firebase Console](https://console.firebase.google.com/)
+
 2. **Get your Firebase credentials**:
-   - Go to [Firebase Console](https://console.firebase.google.com/)
-   - Select your project (or create a new one)
-   - Click the gear icon → **Project settings**
-   - Scroll down to "Your apps" section
-   - Click the web app icon `</>` (or create a new web app)
-   - Copy your Firebase configuration object
+   - Project Settings → Your apps → Web app
+   - Copy the configuration object
 
-3. **Add credentials to firebase-config.js**:
-   - Open `firebase-config.js`
-   - Replace the placeholder values with your actual Firebase credentials
-   - Save the file
-   - **Never commit this file to git** (it's in .gitignore)
+3. **Update firebase-config.js**:
+   - Replace the configuration in `firebase-config.js` with your credentials
+   - Or use `firebase-config.example.js` as a template
 
-### 2. Firestore Database Setup
+4. **Set up Firestore and Authentication**:
+   - See `FIREBASE_SETUP.md` for detailed instructions
+   - See `DEPLOYMENT.md` for deployment guide
+
+### 4. Firestore Database Setup
 
 The notes feature requires Firestore to be configured:
 
@@ -90,14 +112,13 @@ child-care/
 ├── script.js                  # Main JavaScript functionality
 ├── translations.js            # UI translations
 ├── content-translations.json  # Detailed content translations
-├── firebase-config.example.js # Firebase config template (copy to firebase-config.js)
-├── firebase-config.js         # Your Firebase credentials (git-ignored, create locally)
-├── .gitignore                 # Git ignore file (excludes firebase-config.js)
+├── firebase-config.js         # Firebase configuration (included for deployment)
+├── firebase-config.example.js # Firebase config template (for creating your own)
+├── .gitignore                 # Git ignore file
 ├── FIREBASE_SETUP.md          # Firebase setup instructions
+├── DEPLOYMENT.md              # Deployment guide
 └── README.md                  # This file
 ```
-
-**Note**: `firebase-config.js` is not in the repository. You must create it locally from the example file.
 
 ## Technologies Used
 
@@ -138,10 +159,18 @@ child-care/
 
 ## Security
 
-### Firebase Configuration
-- **firebase-config.js is NOT included in the repository** - you must create it locally
-- Never commit Firebase credentials to public repositories
-- Use the provided `firebase-config.example.js` template
+### Firebase Configuration Security Model
+
+**Important**: `firebase-config.js` **IS** included in this public repository. This is safe because:
+
+1. **Firebase API keys are not secret keys** - they're designed for client-side apps
+2. **They only identify your Firebase project**, they don't authenticate it
+3. **Real security comes from**:
+   - ✅ Firestore Security Rules (users can only access their own data)
+   - ✅ Firebase Authentication (must be logged in)
+   - ✅ Authorized Domains (only approved domains can use the project)
+
+**Google's official documentation states**: "Unlike how API keys are typically used, API keys for Firebase services are not used to control access to backend resources... They are just used to identify your Firebase project."
 
 ### Application Security
 - User authentication required for notes (Email/Password)

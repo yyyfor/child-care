@@ -56,6 +56,15 @@
                     <span class="phase-number">5</span>
                     <span class="phase-label" data-i18n="nav.phase5">3-6 Months</span>
                 </button>
+                <button class="phase-button" data-phase="5">
+                    <span class="phase-number">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/>
+                            <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>
+                        </svg>
+                    </span>
+                    <span class="phase-label" data-i18n="nav.notes">Notes</span>
+                </button>
             </div>
         </div>
     </nav>
@@ -1447,6 +1456,75 @@
                                 <li><strong>Baby's personality emerging</strong> - Temperament becoming clearer; learn your baby's unique traits rather than forcing expectations</li>
                                 <li><strong>You've survived the hardest part</strong> - First 3 months typically the most difficult; if you've made it here, you're capable and resilient; trust yourself</li>
                             </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Phase 6: Notes -->
+            <section class="phase-section notes-section" data-phase="5">
+                <div class="phase-header">
+                    <div class="phase-icon">
+                        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/>
+                            <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>
+                        </svg>
+                    </div>
+                    <div class="phase-title-group">
+                        <h2 class="phase-title" data-i18n="notes.title">My Notes</h2>
+                        <p class="phase-description" data-i18n="notes.description">Keep track of important information, milestones, and reminders</p>
+                    </div>
+                </div>
+
+                <div class="notes-container">
+                    <!-- Add Note Form -->
+                    <div class="note-form-card">
+                        <h3 data-i18n="notes.addNew">Add New Note</h3>
+                        <form id="noteForm">
+                            <div class="form-group">
+                                <label for="noteTitle" data-i18n="notes.titleLabel">Title</label>
+                                <input type="text" id="noteTitle" class="note-input" data-i18n-placeholder="notes.titlePlaceholder" placeholder="Enter note title..." required>
+                            </div>
+                            <div class="form-group">
+                                <label for="noteCategory" data-i18n="notes.categoryLabel">Category</label>
+                                <select id="noteCategory" class="note-select">
+                                    <option value="general" data-i18n="notes.catGeneral">General</option>
+                                    <option value="health" data-i18n="notes.catHealth">Health</option>
+                                    <option value="feeding" data-i18n="notes.catFeeding">Feeding</option>
+                                    <option value="sleep" data-i18n="notes.catSleep">Sleep</option>
+                                    <option value="development" data-i18n="notes.catDevelopment">Development</option>
+                                    <option value="milestone" data-i18n="notes.catMilestone">Milestone</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="noteContent" data-i18n="notes.contentLabel">Note</label>
+                                <textarea id="noteContent" class="note-textarea" rows="4" data-i18n-placeholder="notes.contentPlaceholder" placeholder="Write your note here..." required></textarea>
+                            </div>
+                            <div class="form-actions">
+                                <button type="submit" class="btn btn-primary" data-i18n="notes.btnSave">Save Note</button>
+                                <button type="button" class="btn btn-secondary" id="cancelEditBtn" style="display:none;" data-i18n="notes.btnCancel">Cancel</button>
+                            </div>
+                        </form>
+                    </div>
+
+                    <!-- Search Bar -->
+                    <div class="notes-search-bar">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="11" cy="11" r="8"/>
+                            <path d="m21 21-4.35-4.35"/>
+                        </svg>
+                        <input type="text" id="noteSearch" class="search-input" data-i18n-placeholder="notes.searchPlaceholder" placeholder="Search notes...">
+                    </div>
+
+                    <!-- Notes List -->
+                    <div class="notes-list" id="notesList">
+                        <div class="empty-state" id="emptyState">
+                            <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/>
+                                <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>
+                            </svg>
+                            <h3 data-i18n="notes.emptyTitle">No notes yet</h3>
+                            <p data-i18n="notes.emptyMessage">Start by adding your first note above</p>
                         </div>
                     </div>
                 </div>

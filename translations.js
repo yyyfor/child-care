@@ -13,7 +13,8 @@ const translations = {
             phase2: "During Labor",
             phase3: "0-1 Month",
             phase4: "1-3 Months",
-            phase5: "3-6 Months"
+            phase5: "3-6 Months",
+            notes: "Notes"
         },
         intro: {
             text: "This guide provides structured, actionable guidance for both mother and father through five critical stages of early parenthood. Each phase includes specific responsibilities, safety protocols, required preparations, and professional recommendations often overlooked by first-time parents.",
@@ -52,6 +53,30 @@ const translations = {
             brainDev: "Brain & Cognitive Development",
             recommendations: "Additional Professional Recommendations"
         },
+        notes: {
+            title: "My Notes",
+            description: "Keep track of important information, milestones, and reminders",
+            addNew: "Add New Note",
+            titleLabel: "Title",
+            titlePlaceholder: "Enter note title...",
+            categoryLabel: "Category",
+            catGeneral: "General",
+            catHealth: "Health",
+            catFeeding: "Feeding",
+            catSleep: "Sleep",
+            catDevelopment: "Development",
+            catMilestone: "Milestone",
+            contentLabel: "Note",
+            contentPlaceholder: "Write your note here...",
+            btnSave: "Save Note",
+            btnCancel: "Cancel",
+            btnEdit: "Edit",
+            btnDelete: "Delete",
+            searchPlaceholder: "Search notes...",
+            emptyTitle: "No notes yet",
+            emptyMessage: "Start by adding your first note above",
+            deleteConfirm: "Are you sure you want to delete this note?"
+        },
         navigator: {
             title: "Quick Navigation",
             caregiving: "Caregiving",
@@ -76,7 +101,8 @@ const translations = {
             phase2: "分娩期间",
             phase3: "出生-1个月",
             phase4: "1-3个月",
-            phase5: "3-6个月"
+            phase5: "3-6个月",
+            notes: "笔记"
         },
         intro: {
             text: "本指南为父母双方提供从孕晚期到宝宝出生后六个月期间五个关键阶段的结构化、可操作性指导。每个阶段都包含具体职责、安全须知、必要准备事项，以及新手父母容易忽视的专业建议。",
@@ -114,6 +140,30 @@ const translations = {
             motorDev: "运动启蒙",
             brainDev: "大脑开发启蒙",
             recommendations: "额外的专业建议"
+        },
+        notes: {
+            title: "我的笔记",
+            description: "记录重要信息、里程碑和提醒事项",
+            addNew: "添加新笔记",
+            titleLabel: "标题",
+            titlePlaceholder: "输入笔记标题...",
+            categoryLabel: "分类",
+            catGeneral: "一般",
+            catHealth: "健康",
+            catFeeding: "喂养",
+            catSleep: "睡眠",
+            catDevelopment: "发育",
+            catMilestone: "里程碑",
+            contentLabel: "内容",
+            contentPlaceholder: "在这里写下你的笔记...",
+            btnSave: "保存笔记",
+            btnCancel: "取消",
+            btnEdit: "编辑",
+            btnDelete: "删除",
+            searchPlaceholder: "搜索笔记...",
+            emptyTitle: "还没有笔记",
+            emptyMessage: "从上面添加你的第一条笔记开始",
+            deleteConfirm: "确定要删除这条笔记吗？"
         },
         navigator: {
             title: "快速导航",
@@ -202,6 +252,15 @@ class LanguageManager {
             const translation = this.getNestedTranslation(t, key);
             if (translation) {
                 element.textContent = translation;
+            }
+        });
+
+        // Translate placeholder attributes
+        document.querySelectorAll('[data-i18n-placeholder]').forEach(element => {
+            const key = element.dataset.i18nPlaceholder;
+            const translation = this.getNestedTranslation(t, key);
+            if (translation) {
+                element.placeholder = translation;
             }
         });
 

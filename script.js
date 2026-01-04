@@ -2,7 +2,7 @@
 class CareGuideNavigator {
     constructor() {
         this.currentPhase = 0;
-        this.totalPhases = 5;
+        this.totalPhases = 6;
         this.phaseButtons = document.querySelectorAll('.phase-button');
         this.phaseSections = document.querySelectorAll('.phase-section');
         this.timelineProgress = document.getElementById('timelineProgress');
@@ -378,6 +378,210 @@ class ReadingTimeEstimator {
     }
 }
 
+// Notes Manager
+class NotesManager {
+    constructor() {
+        this.notes = [];
+        this.editingNoteId = null;
+        this.storageKey = 'childCareNotes';
+        this.init();
+    }
+
+    init() {
+        // Load notes from localStorage
+        this.loadNotes();
+
+        // Get DOM elements
+        this.noteForm = document.getElementById('noteForm');
+        this.noteTitle = document.getElementById('noteTitle');
+        this.noteCategory = document.getElementById('noteCategory');
+        this.noteContent = document.getElementById('noteContent');
+        this.notesList = document.getElementById('notesList');
+        this.noteSearch = document.getElementById('noteSearch');
+        this.cancelEditBtn = document.getElementById('cancelEditBtn');
+        this.emptyState = document.getElementById('emptyState');
+
+        if (!this.noteForm) return; // Notes section not loaded yet
+
+        // Event listeners
+        this.noteForm.addEventListener('submit', (e) => this.handleSubmit(e));
+        this.noteSearch.addEventListener('input', (e) => this.handleSearch(e));
+        this.cancelEditBtn.addEventListener('click', () => this.cancelEdit());
+
+        // Initial render
+        this.renderNotes();
+    }
+
+    loadNotes() {
+        const stored = localStorage.getItem(this.storageKey);
+        this.notes = stored ? JSON.parse(stored) : [];
+    }
+
+    saveNotes() {
+        localStorage.setItem(this.storageKey, JSON.stringify(this.notes));
+    }
+
+    handleSubmit(e) {
+        e.preventDefault();
+
+        const note = {
+            id: this.editingNoteId || Date.now().toString(),
+            title: this.noteTitle.value.trim(),
+            category: this.noteCategory.value,
+            content: this.noteContent.value.trim(),
+            date: new Date().toISOString(),
+            dateDisplay: new Date().toLocaleDateString()
+        };
+
+        if (this.editingNoteId) {
+            // Update existing note
+            const index = this.notes.findIndex(n => n.id === this.editingNoteId);
+            if (index !== -1) {
+                this.notes[index] = note;
+            }
+            this.editingNoteId = null;
+            this.cancelEditBtn.style.display = 'none';
+        } else {
+            // Add new note
+            this.notes.unshift(note);
+        }
+
+        this.saveNotes();
+        this.renderNotes();
+        this.noteForm.reset();
+
+        // Update save button text
+        const submitBtn = this.noteForm.querySelector('button[type="submit"]');
+        submitBtn.textContent = submitBtn.dataset.i18n ?
+            (window.languageManager?.getCurrentLanguage() === 'zh' ? '保存笔记' : 'Save Note') :
+            'Save Note';
+    }
+
+    handleSearch(e) {
+        const searchTerm = e.target.value.toLowerCase();
+        this.renderNotes(searchTerm);
+    }
+
+    editNote(id) {
+        const note = this.notes.find(n => n.id === id);
+        if (!note) return;
+
+        this.noteTitle.value = note.title;
+        this.noteCategory.value = note.category;
+        this.noteContent.value = note.content;
+        this.editingNoteId = id;
+        this.cancelEditBtn.style.display = 'inline-block';
+
+        // Update save button text
+        const submitBtn = this.noteForm.querySelector('button[type="submit"]');
+        submitBtn.textContent = submitBtn.dataset.i18n ?
+            (window.languageManager?.getCurrentLanguage() === 'zh' ? '更新笔记' : 'Update Note') :
+            'Update Note';
+
+        // Scroll to form
+        this.noteForm.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    deleteNote(id) {
+        const lang = window.languageManager?.getCurrentLanguage() || 'en';
+        const confirmMsg = lang === 'zh' ? '确定要删除这条笔记吗？' : 'Are you sure you want to delete this note?';
+
+        if (confirm(confirmMsg)) {
+            this.notes = this.notes.filter(n => n.id !== id);
+            this.saveNotes();
+            this.renderNotes();
+        }
+    }
+
+    cancelEdit() {
+        this.editingNoteId = null;
+        this.noteForm.reset();
+        this.cancelEditBtn.style.display = 'none';
+
+        // Reset save button text
+        const submitBtn = this.noteForm.querySelector('button[type="submit"]');
+        submitBtn.textContent = submitBtn.dataset.i18n ?
+            (window.languageManager?.getCurrentLanguage() === 'zh' ? '保存笔记' : 'Save Note') :
+            'Save Note';
+    }
+
+    renderNotes(searchTerm = '') {
+        if (!this.notesList) return;
+
+        let filteredNotes = this.notes;
+
+        // Filter by search term
+        if (searchTerm) {
+            filteredNotes = this.notes.filter(note =>
+                note.title.toLowerCase().includes(searchTerm) ||
+                note.content.toLowerCase().includes(searchTerm) ||
+                note.category.toLowerCase().includes(searchTerm)
+            );
+        }
+
+        if (filteredNotes.length === 0) {
+            if (this.emptyState) {
+                this.emptyState.style.display = 'block';
+            }
+            this.notesList.innerHTML = this.emptyState ? '' : this.getEmptyStateHTML();
+            return;
+        }
+
+        if (this.emptyState) {
+            this.emptyState.style.display = 'none';
+        }
+
+        const lang = window.languageManager?.getCurrentLanguage() || 'en';
+        const editText = lang === 'zh' ? '编辑' : 'Edit';
+        const deleteText = lang === 'zh' ? '删除' : 'Delete';
+        const categoryTranslations = {
+            general: lang === 'zh' ? '一般' : 'General',
+            health: lang === 'zh' ? '健康' : 'Health',
+            feeding: lang === 'zh' ? '喂养' : 'Feeding',
+            sleep: lang === 'zh' ? '睡眠' : 'Sleep',
+            development: lang === 'zh' ? '发育' : 'Development',
+            milestone: lang === 'zh' ? '里程碑' : 'Milestone'
+        };
+
+        this.notesList.innerHTML = filteredNotes.map(note => `
+            <div class="note-card ${note.category}">
+                <div class="note-header">
+                    <h3 class="note-title">${this.escapeHtml(note.title)}</h3>
+                    <div class="note-meta">
+                        <span class="note-category">${categoryTranslations[note.category] || note.category}</span>
+                        <span class="note-date">${note.dateDisplay}</span>
+                    </div>
+                </div>
+                <div class="note-content">${this.escapeHtml(note.content)}</div>
+                <div class="note-actions">
+                    <button class="note-btn edit" onclick="notesManager.editNote('${note.id}')">${editText}</button>
+                    <button class="note-btn delete" onclick="notesManager.deleteNote('${note.id}')">${deleteText}</button>
+                </div>
+            </div>
+        `).join('');
+    }
+
+    escapeHtml(text) {
+        const div = document.createElement('div');
+        div.textContent = text;
+        return div.innerHTML;
+    }
+
+    getEmptyStateHTML() {
+        const lang = window.languageManager?.getCurrentLanguage() || 'en';
+        return `
+            <div class="empty-state">
+                <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                    <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/>
+                    <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>
+                </svg>
+                <h3>${lang === 'zh' ? '还没有笔记' : 'No notes yet'}</h3>
+                <p>${lang === 'zh' ? '从上面添加你的第一条笔记开始' : 'Start by adding your first note above'}</p>
+            </div>
+        `;
+    }
+}
+
 // Initialize all components when DOM is ready
 document.addEventListener('DOMContentLoaded', () => {
     // Core functionality
@@ -423,8 +627,8 @@ document.addEventListener('DOMContentLoaded', () => {
         fadeInObserver.observe(card);
     });
 
-    // Initialize language manager
-    const languageManager = new LanguageManager();
+    // Initialize language manager (make it global so notes can access it)
+    window.languageManager = new LanguageManager();
 
     // Page Navigator functionality
     const navToggle = document.getElementById('navToggle');
@@ -486,6 +690,9 @@ document.addEventListener('DOMContentLoaded', () => {
             closeNavigator();
         }
     });
+
+    // Notes Manager (make it global so onclick handlers can access it)
+    window.notesManager = new NotesManager();
 
     console.log('Maternal & Infant Care Guide initialized successfully');
 });

@@ -378,19 +378,179 @@ class ReadingTimeEstimator {
     }
 }
 
-// Notes Manager
+// Firebase Authentication Manager
+class AuthManager {
+    constructor() {
+        this.currentUser = null;
+        this.init();
+    }
+
+    async init() {
+        // Import Firebase functions
+        const { auth, onAuthStateChanged } = await import('./firebase-config.js');
+        this.auth = auth;
+
+        // Get DOM elements
+        this.authSection = document.getElementById('authSection');
+        this.userSection = document.getElementById('userSection');
+        this.notesContent = document.getElementById('notesContent');
+        this.loginForm = document.getElementById('loginForm');
+        this.signupForm = document.getElementById('signupForm');
+        this.userEmail = document.getElementById('userEmail');
+        this.authError = document.getElementById('authError');
+
+        if (!this.authSection) return;
+
+        // Set up event listeners
+        this.setupEventListeners();
+
+        // Listen for auth state changes
+        onAuthStateChanged(this.auth, (user) => {
+            this.currentUser = user;
+            this.updateUI();
+            if (user && window.notesManager) {
+                window.notesManager.setUser(user);
+            }
+        });
+    }
+
+    setupEventListeners() {
+        // Login form
+        this.loginForm?.addEventListener('submit', (e) => this.handleLogin(e));
+
+        // Signup form
+        this.signupForm?.addEventListener('submit', (e) => this.handleSignup(e));
+
+        // Toggle between login and signup
+        document.getElementById('showSignup')?.addEventListener('click', (e) => {
+            e.preventDefault();
+            this.loginForm.style.display = 'none';
+            this.signupForm.style.display = 'block';
+            this.authError.style.display = 'none';
+        });
+
+        document.getElementById('showLogin')?.addEventListener('click', (e) => {
+            e.preventDefault();
+            this.signupForm.style.display = 'none';
+            this.loginForm.style.display = 'block';
+            this.authError.style.display = 'none';
+        });
+
+        // Sign out button
+        document.getElementById('signOutBtn')?.addEventListener('click', () => this.handleSignOut());
+    }
+
+    async handleLogin(e) {
+        e.preventDefault();
+        const email = document.getElementById('loginEmail').value;
+        const password = document.getElementById('loginPassword').value;
+
+        try {
+            const { signInWithEmailAndPassword } = await import('./firebase-config.js');
+            await signInWithEmailAndPassword(this.auth, email, password);
+            this.loginForm.reset();
+            this.hideError();
+        } catch (error) {
+            this.showError(error);
+        }
+    }
+
+    async handleSignup(e) {
+        e.preventDefault();
+        const email = document.getElementById('signupEmail').value;
+        const password = document.getElementById('signupPassword').value;
+        const confirmPassword = document.getElementById('signupPasswordConfirm').value;
+
+        if (password !== confirmPassword) {
+            this.showError({ code: 'auth/password-mismatch' });
+            return;
+        }
+
+        try {
+            const { createUserWithEmailAndPassword } = await import('./firebase-config.js');
+            await createUserWithEmailAndPassword(this.auth, email, password);
+            this.signupForm.reset();
+            this.hideError();
+        } catch (error) {
+            this.showError(error);
+        }
+    }
+
+    async handleSignOut() {
+        try {
+            const { signOut } = await import('./firebase-config.js');
+            await signOut(this.auth);
+        } catch (error) {
+            console.error('Sign out error:', error);
+        }
+    }
+
+    updateUI() {
+        if (this.currentUser) {
+            // User is logged in
+            this.authSection.style.display = 'none';
+            this.userSection.style.display = 'block';
+            this.notesContent.style.display = 'block';
+            this.userEmail.textContent = this.currentUser.email;
+        } else {
+            // User is logged out
+            this.authSection.style.display = 'block';
+            this.userSection.style.display = 'none';
+            this.notesContent.style.display = 'none';
+        }
+    }
+
+    showError(error) {
+        const lang = window.languageManager?.getCurrentLanguage() || 'en';
+        const t = translations[lang].auth;
+
+        let message = t.errorGeneric;
+
+        switch (error.code) {
+            case 'auth/email-already-in-use':
+                message = t.errorEmailInUse;
+                break;
+            case 'auth/invalid-email':
+                message = t.errorInvalidEmail;
+                break;
+            case 'auth/weak-password':
+                message = t.errorWeakPassword;
+                break;
+            case 'auth/wrong-password':
+                message = t.errorWrongPassword;
+                break;
+            case 'auth/user-not-found':
+                message = t.errorUserNotFound;
+                break;
+            case 'auth/password-mismatch':
+                message = t.errorPasswordMismatch;
+                break;
+        }
+
+        this.authError.textContent = message;
+        this.authError.style.display = 'block';
+    }
+
+    hideError() {
+        this.authError.style.display = 'none';
+    }
+
+    getCurrentUser() {
+        return this.currentUser;
+    }
+}
+
+// Notes Manager with Firestore
 class NotesManager {
     constructor() {
         this.notes = [];
         this.editingNoteId = null;
-        this.storageKey = 'childCareNotes';
+        this.currentUser = null;
+        this.unsubscribe = null;
         this.init();
     }
 
-    init() {
-        // Load notes from localStorage
-        this.loadNotes();
-
+    async init() {
         // Get DOM elements
         this.noteForm = document.getElementById('noteForm');
         this.noteTitle = document.getElementById('noteTitle');
@@ -401,60 +561,86 @@ class NotesManager {
         this.cancelEditBtn = document.getElementById('cancelEditBtn');
         this.emptyState = document.getElementById('emptyState');
 
-        if (!this.noteForm) return; // Notes section not loaded yet
+        if (!this.noteForm) return;
 
         // Event listeners
         this.noteForm.addEventListener('submit', (e) => this.handleSubmit(e));
-        this.noteSearch.addEventListener('input', (e) => this.handleSearch(e));
-        this.cancelEditBtn.addEventListener('click', () => this.cancelEdit());
-
-        // Initial render
-        this.renderNotes();
+        this.noteSearch?.addEventListener('input', (e) => this.handleSearch(e));
+        this.cancelEditBtn?.addEventListener('click', () => this.cancelEdit());
     }
 
-    loadNotes() {
-        const stored = localStorage.getItem(this.storageKey);
-        this.notes = stored ? JSON.parse(stored) : [];
+    setUser(user) {
+        this.currentUser = user;
+        if (user) {
+            this.loadNotesFromFirestore();
+        } else {
+            this.notes = [];
+            if (this.unsubscribe) {
+                this.unsubscribe();
+                this.unsubscribe = null;
+            }
+            this.renderNotes();
+        }
     }
 
-    saveNotes() {
-        localStorage.setItem(this.storageKey, JSON.stringify(this.notes));
+    async loadNotesFromFirestore() {
+        try {
+            const { db, collection, query, orderBy, onSnapshot } = await import('./firebase-config.js');
+            const notesRef = collection(db, 'users', this.currentUser.uid, 'notes');
+            const q = query(notesRef, orderBy('timestamp', 'desc'));
+
+            // Real-time listener
+            this.unsubscribe = onSnapshot(q, (snapshot) => {
+                this.notes = snapshot.docs.map(doc => ({
+                    id: doc.id,
+                    ...doc.data(),
+                    dateDisplay: doc.data().timestamp?.toDate().toLocaleDateString() || 'N/A'
+                }));
+                this.renderNotes();
+            });
+        } catch (error) {
+            console.error('Error loading notes:', error);
+        }
     }
 
-    handleSubmit(e) {
+    async handleSubmit(e) {
         e.preventDefault();
 
-        const note = {
-            id: this.editingNoteId || Date.now().toString(),
+        if (!this.currentUser) return;
+
+        const noteData = {
             title: this.noteTitle.value.trim(),
             category: this.noteCategory.value,
             content: this.noteContent.value.trim(),
-            date: new Date().toISOString(),
-            dateDisplay: new Date().toLocaleDateString()
+            timestamp: null // Will be set by serverTimestamp
         };
 
-        if (this.editingNoteId) {
-            // Update existing note
-            const index = this.notes.findIndex(n => n.id === this.editingNoteId);
-            if (index !== -1) {
-                this.notes[index] = note;
+        try {
+            if (this.editingNoteId) {
+                // Update existing note
+                const { db, doc, updateDoc, serverTimestamp } = await import('./firebase-config.js');
+                const noteRef = doc(db, 'users', this.currentUser.uid, 'notes', this.editingNoteId);
+                await updateDoc(noteRef, { ...noteData, timestamp: serverTimestamp() });
+                this.editingNoteId = null;
+                this.cancelEditBtn.style.display = 'none';
+            } else {
+                // Add new note
+                const { db, collection, addDoc, serverTimestamp } = await import('./firebase-config.js');
+                const notesRef = collection(db, 'users', this.currentUser.uid, 'notes');
+                await addDoc(notesRef, { ...noteData, timestamp: serverTimestamp() });
             }
-            this.editingNoteId = null;
-            this.cancelEditBtn.style.display = 'none';
-        } else {
-            // Add new note
-            this.notes.unshift(note);
+
+            this.noteForm.reset();
+
+            // Update save button text
+            const submitBtn = this.noteForm.querySelector('button[type="submit"]');
+            submitBtn.textContent = submitBtn.dataset.i18n ?
+                (window.languageManager?.getCurrentLanguage() === 'zh' ? '保存笔记' : 'Save Note') :
+                'Save Note';
+        } catch (error) {
+            console.error('Error saving note:', error);
+            alert('Failed to save note. Please try again.');
         }
-
-        this.saveNotes();
-        this.renderNotes();
-        this.noteForm.reset();
-
-        // Update save button text
-        const submitBtn = this.noteForm.querySelector('button[type="submit"]');
-        submitBtn.textContent = submitBtn.dataset.i18n ?
-            (window.languageManager?.getCurrentLanguage() === 'zh' ? '保存笔记' : 'Save Note') :
-            'Save Note';
     }
 
     handleSearch(e) {
@@ -482,14 +668,19 @@ class NotesManager {
         this.noteForm.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
 
-    deleteNote(id) {
+    async deleteNote(id) {
         const lang = window.languageManager?.getCurrentLanguage() || 'en';
         const confirmMsg = lang === 'zh' ? '确定要删除这条笔记吗？' : 'Are you sure you want to delete this note?';
 
         if (confirm(confirmMsg)) {
-            this.notes = this.notes.filter(n => n.id !== id);
-            this.saveNotes();
-            this.renderNotes();
+            try {
+                const { db, doc, deleteDoc } = await import('./firebase-config.js');
+                const noteRef = doc(db, 'users', this.currentUser.uid, 'notes', id);
+                await deleteDoc(noteRef);
+            } catch (error) {
+                console.error('Error deleting note:', error);
+                alert('Failed to delete note. Please try again.');
+            }
         }
     }
 
@@ -690,6 +881,9 @@ document.addEventListener('DOMContentLoaded', () => {
             closeNavigator();
         }
     });
+
+    // Auth Manager (initialize first)
+    window.authManager = new AuthManager();
 
     // Notes Manager (make it global so onclick handlers can access it)
     window.notesManager = new NotesManager();

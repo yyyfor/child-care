@@ -993,6 +993,92 @@ body {
     display: inline-block;
 }
 
+/* Authentication Styles */
+.auth-section {
+    max-width: 500px;
+    margin: 0 auto var(--spacing-xl);
+}
+
+.auth-card {
+    background: var(--color-white);
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-xxl);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    text-align: center;
+}
+
+.auth-card h3 {
+    font-family: var(--font-display);
+    font-size: 1.8rem;
+    color: var(--color-primary);
+    margin-bottom: var(--spacing-sm);
+}
+
+.auth-card > p {
+    color: var(--color-text-light);
+    margin-bottom: var(--spacing-xl);
+}
+
+.auth-form {
+    text-align: left;
+}
+
+.auth-toggle {
+    text-align: center;
+    margin-top: var(--spacing-lg);
+    color: var(--color-text-light);
+}
+
+.auth-toggle a {
+    color: var(--color-primary);
+    text-decoration: none;
+    font-weight: 600;
+    margin-left: 0.5rem;
+}
+
+.auth-toggle a:hover {
+    text-decoration: underline;
+}
+
+.auth-error {
+    background: #FEE;
+    border: 1px solid #C85C5C;
+    color: #C85C5C;
+    padding: var(--spacing-md);
+    border-radius: var(--radius);
+    margin-top: var(--spacing-lg);
+    font-size: 0.9rem;
+}
+
+.user-section {
+    max-width: 900px;
+    margin: 0 auto var(--spacing-lg);
+}
+
+.user-info {
+    background: linear-gradient(135deg, rgba(212, 137, 108, 0.1) 0%, rgba(212, 137, 108, 0.05) 100%);
+    border: 1px solid rgba(212, 137, 108, 0.2);
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-lg);
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md);
+    flex-wrap: wrap;
+}
+
+.user-info span {
+    color: var(--color-text-light);
+}
+
+.user-info strong {
+    color: var(--color-primary);
+    flex: 1;
+}
+
+#signOutBtn {
+    margin-left: auto;
+}
+
 /* Print Styles */
 @media print {
     body {

@@ -386,9 +386,15 @@ class AuthManager {
     }
 
     async init() {
-        // Import Firebase functions
-        const { auth, onAuthStateChanged } = await import('./firebase-config.js');
-        this.auth = auth;
+        try {
+            // Import Firebase functions
+            const { auth, onAuthStateChanged } = await import('./firebase-config.js');
+            this.auth = auth;
+        } catch (error) {
+            console.error('Failed to load Firebase:', error);
+            this.showFirebaseBlockedError();
+            return;
+        }
 
         // Get DOM elements
         this.authSection = document.getElementById('authSection');
@@ -450,6 +456,9 @@ class AuthManager {
             this.loginForm.reset();
             this.hideError();
         } catch (error) {
+            console.error('Login error:', error);
+            console.error('Error code:', error.code);
+            console.error('Error message:', error.message);
             this.showError(error);
         }
     }
@@ -471,6 +480,9 @@ class AuthManager {
             this.signupForm.reset();
             this.hideError();
         } catch (error) {
+            console.error('Signup error:', error);
+            console.error('Error code:', error.code);
+            console.error('Error message:', error.message);
             this.showError(error);
         }
     }
@@ -530,6 +542,39 @@ class AuthManager {
 
     hideError() {
         this.authError.style.display = 'none';
+    }
+
+    showFirebaseBlockedError() {
+        const authSection = document.getElementById('authSection');
+        if (authSection) {
+            const lang = window.languageManager?.getCurrentLanguage() || 'en';
+            const message = lang === 'zh'
+                ? '无法连接到 Firebase 服务。如果您在某些地区，可能需要使用 VPN 才能访问笔记功能。'
+                : 'Unable to connect to Firebase services. If you\'re in a region with restricted access, you may need to use a VPN to access the notes feature.';
+
+            authSection.innerHTML = `
+                <div class="auth-card">
+                    <h3 style="color: #C85C5C;">⚠️ ${lang === 'zh' ? '连接问题' : 'Connection Issue'}</h3>
+                    <p style="margin: 1rem 0; color: #666;">${message}</p>
+                    <p style="font-size: 0.9rem; color: #888;">
+                        ${lang === 'zh'
+                            ? '笔记功能需要连接到 Firebase。如果您无法连接，请尝试：'
+                            : 'The notes feature requires Firebase connectivity. If you cannot connect, try:'}
+                    </p>
+                    <ul style="text-align: left; margin: 1rem 0; color: #666;">
+                        <li>${lang === 'zh' ? '使用 VPN' : 'Using a VPN'}</li>
+                        <li>${lang === 'zh' ? '检查您的网络连接' : 'Checking your internet connection'}</li>
+                        <li>${lang === 'zh' ? '稍后重试' : 'Trying again later'}</li>
+                    </ul>
+                    <p style="font-size: 0.85rem; color: #888; margin-top: 1.5rem;">
+                        ${lang === 'zh'
+                            ? '您仍然可以查看所有育儿指南内容，只是无法保存个人笔记。'
+                            : 'You can still view all the parenting guide content, but personal notes will not be available.'}
+                    </p>
+                </div>
+            `;
+            authSection.style.display = 'block';
+        }
     }
 
     getCurrentUser() {

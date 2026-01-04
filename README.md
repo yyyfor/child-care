@@ -20,20 +20,49 @@ A comprehensive bilingual (English/Chinese) web application for parents from lat
 
 ## Getting Started
 
-### 1. Firebase Setup
+### 1. Firebase Configuration
 
-The notes feature requires Firebase to be configured. Follow these steps:
+**IMPORTANT**: The Firebase configuration file is not included in this repository for security reasons.
 
-1. **Set up Firestore Security Rules**:
+1. **Create your Firebase config file**:
+   ```bash
+   cp firebase-config.example.js firebase-config.js
+   ```
+
+2. **Get your Firebase credentials**:
+   - Go to [Firebase Console](https://console.firebase.google.com/)
+   - Select your project (or create a new one)
+   - Click the gear icon → **Project settings**
+   - Scroll down to "Your apps" section
+   - Click the web app icon `</>` (or create a new web app)
+   - Copy your Firebase configuration object
+
+3. **Add credentials to firebase-config.js**:
+   - Open `firebase-config.js`
+   - Replace the placeholder values with your actual Firebase credentials
+   - Save the file
+   - **Never commit this file to git** (it's in .gitignore)
+
+### 2. Firestore Database Setup
+
+The notes feature requires Firestore to be configured:
+
+1. **Create Firestore Database**:
+   - Go to Firebase Console → **Firestore Database**
+   - Click **Create database**
+   - Choose **Start in test mode** → **Next**
+   - Select a location → **Enable**
+
+2. **Set up Security Rules**:
    - Open `FIREBASE_SETUP.md` in this repository
    - Follow the instructions to add security rules to your Firebase Console
    - This ensures users can only access their own notes
 
-2. **Enable Authentication**:
-   - Email/Password authentication should already be enabled in your Firebase project
-   - Verify in Firebase Console → Authentication → Sign-in method
+3. **Enable Authentication**:
+   - Go to Firebase Console → **Authentication** → **Sign-in method**
+   - Enable **Email/Password** authentication
 
-### 2. Local Development
+### 3. Local Development
 
 Simply open `index.html` in a modern web browser. The app works entirely client-side.
 
@@ -56,15 +85,19 @@ For best results, use:
 
 ```
 child-care/
-├── index.html              # Main HTML file
-├── styles.css              # All styling
-├── script.js               # Main JavaScript functionality
-├── translations.js         # UI translations
-├── content-translations.json # Detailed content translations
-├── firebase-config.js      # Firebase initialization
-├── FIREBASE_SETUP.md       # Firebase setup instructions
-└── README.md              # This file
+├── index.html                 # Main HTML file
+├── styles.css                 # All styling
+├── script.js                  # Main JavaScript functionality
+├── translations.js            # UI translations
+├── content-translations.json  # Detailed content translations
+├── firebase-config.example.js # Firebase config template (copy to firebase-config.js)
+├── firebase-config.js         # Your Firebase credentials (git-ignored, create locally)
+├── .gitignore                 # Git ignore file (excludes firebase-config.js)
+├── FIREBASE_SETUP.md          # Firebase setup instructions
+└── README.md                  # This file
 ```
+
+**Note**: `firebase-config.js` is not in the repository. You must create it locally from the example file.
 
 ## Technologies Used
 
@@ -105,10 +138,30 @@ child-care/
 
 ## Security
 
-- User authentication required for notes
+### Firebase Configuration
+- **firebase-config.js is NOT included in the repository** - you must create it locally
+- Never commit Firebase credentials to public repositories
+- Use the provided `firebase-config.example.js` template
+
+### Application Security
+- User authentication required for notes (Email/Password)
 - Firestore security rules prevent unauthorized access
 - Each user can only read/write their own data
-- No API keys exposed in client code (Firebase SDK handles this securely)
+- Server-side validation ensures data integrity
+
+### Firebase API Keys
+**Note**: Firebase API keys in client-side code are not secret keys. They identify your Firebase project to Google servers. Real security comes from:
+1. **Firestore Security Rules** (user can only access their own data)
+2. **Firebase Authentication** (users must be logged in)
+3. **Authorized Domains** (restrict your app to specific domains)
+
+### Additional Security Measures
+To further secure your Firebase project:
+1. Go to Firebase Console → Project Settings → General
+2. Scroll to "Your apps" → "Public-facing name"
+3. Under your web app, configure **Authorized domains**
+4. Add only your production domain (e.g., `yyyfor.github.io`)
+5. Remove `localhost` in production if desired
 
 ## Browser Compatibility
 

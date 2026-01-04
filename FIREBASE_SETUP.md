@@ -2,6 +2,16 @@
 
 This document contains the security rules and setup instructions for your Firebase project.
 
+## Important: Firebase Configuration File
+
+**Before proceeding**, ensure you have created your `firebase-config.js` file:
+
+1. Copy the example file: `cp firebase-config.example.js firebase-config.js`
+2. Add your Firebase credentials from Firebase Console
+3. **Never commit `firebase-config.js` to git** - it's already in `.gitignore`
+
+The configuration file contains your Firebase project credentials. While Firebase API keys are designed to be used in client-side code, it's best practice to keep the full configuration file private.
+
 ## Firestore Security Rules
 
 Copy and paste these rules into your Firebase Console:

@@ -2,7 +2,7 @@
 class CareGuideNavigator {
     constructor() {
         this.currentPhase = 0;
-        this.totalPhases = 6;
+        this.totalPhases = 5;
         this.phaseButtons = document.querySelectorAll('.phase-button');
         this.phaseSections = document.querySelectorAll('.phase-section');
         this.timelineProgress = document.getElementById('timelineProgress');
@@ -393,7 +393,6 @@ class AuthManager {
         // Get DOM elements
         this.authSection = document.getElementById('authSection');
         this.userSection = document.getElementById('userSection');
-        this.notesContent = document.getElementById('notesContent');
         this.loginForm = document.getElementById('loginForm');
         this.signupForm = document.getElementById('signupForm');
         this.userEmail = document.getElementById('userEmail');
@@ -490,13 +489,11 @@ class AuthManager {
             // User is logged in
             this.authSection.style.display = 'none';
             this.userSection.style.display = 'block';
-            this.notesContent.style.display = 'block';
             this.userEmail.textContent = this.currentUser.email;
         } else {
             // User is logged out
             this.authSection.style.display = 'block';
             this.userSection.style.display = 'none';
-            this.notesContent.style.display = 'none';
         }
     }
 
@@ -540,46 +537,58 @@ class AuthManager {
     }
 }
 
-// Notes Manager with Firestore
+// Notes Manager with Firestore - Phase-Aware Version
 class NotesManager {
     constructor() {
         this.notes = [];
         this.editingNoteId = null;
+        this.editingPhase = null;
         this.currentUser = null;
         this.unsubscribe = null;
         this.init();
     }
 
     async init() {
-        // Get DOM elements
-        this.noteForm = document.getElementById('noteForm');
-        this.noteTitle = document.getElementById('noteTitle');
-        this.noteCategory = document.getElementById('noteCategory');
-        this.noteContent = document.getElementById('noteContent');
-        this.notesList = document.getElementById('notesList');
-        this.noteSearch = document.getElementById('noteSearch');
-        this.cancelEditBtn = document.getElementById('cancelEditBtn');
-        this.emptyState = document.getElementById('emptyState');
+        // Get all note forms (one per phase)
+        this.noteForms = document.querySelectorAll('.note-form');
 
-        if (!this.noteForm) return;
+        if (this.noteForms.length === 0) return;
 
-        // Event listeners
-        this.noteForm.addEventListener('submit', (e) => this.handleSubmit(e));
-        this.noteSearch?.addEventListener('input', (e) => this.handleSearch(e));
-        this.cancelEditBtn?.addEventListener('click', () => this.cancelEdit());
+        // Set up event listeners for all forms
+        this.noteForms.forEach(form => {
+            form.addEventListener('submit', (e) => this.handleSubmit(e));
+        });
+
+        // Set up event listeners for all search inputs
+        document.querySelectorAll('.note-search').forEach(search => {
+            search.addEventListener('input', (e) => this.handleSearch(e));
+        });
+
+        // Set up event listeners for all cancel buttons
+        document.querySelectorAll('.cancel-edit-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => this.cancelEdit(e));
+        });
     }
 
     setUser(user) {
         this.currentUser = user;
         if (user) {
+            // Show notes sections in all phases
+            document.querySelectorAll('[data-phase-notes]').forEach(section => {
+                section.style.display = 'block';
+            });
             this.loadNotesFromFirestore();
         } else {
+            // Hide notes sections
+            document.querySelectorAll('[data-phase-notes]').forEach(section => {
+                section.style.display = 'none';
+            });
             this.notes = [];
             if (this.unsubscribe) {
                 this.unsubscribe();
                 this.unsubscribe = null;
             }
-            this.renderNotes();
+            this.renderAllPhases();
         }
     }
 
@@ -596,7 +605,7 @@ class NotesManager {
                     ...doc.data(),
                     dateDisplay: doc.data().timestamp?.toDate().toLocaleDateString() || 'N/A'
                 }));
-                this.renderNotes();
+                this.renderAllPhases();
             });
         } catch (error) {
             console.error('Error loading notes:', error);
@@ -608,21 +617,30 @@ class NotesManager {
 
         if (!this.currentUser) return;
 
+        const form = e.target;
+        const phase = parseInt(form.dataset.phase);
+
+        const titleInput = form.querySelector('.note-title');
+        const categorySelect = form.querySelector('.note-category');
+        const contentTextarea = form.querySelector('.note-content');
+
         const noteData = {
-            title: this.noteTitle.value.trim(),
-            category: this.noteCategory.value,
-            content: this.noteContent.value.trim(),
+            title: titleInput.value.trim(),
+            category: categorySelect.value,
+            content: contentTextarea.value.trim(),
+            phase: phase,
             timestamp: null // Will be set by serverTimestamp
         };
 
         try {
-            if (this.editingNoteId) {
+            if (this.editingNoteId && this.editingPhase === phase) {
                 // Update existing note
                 const { db, doc, updateDoc, serverTimestamp } = await import('./firebase-config.js');
                 const noteRef = doc(db, 'users', this.currentUser.uid, 'notes', this.editingNoteId);
                 await updateDoc(noteRef, { ...noteData, timestamp: serverTimestamp() });
                 this.editingNoteId = null;
-                this.cancelEditBtn.style.display = 'none';
+                this.editingPhase = null;
+                form.querySelector('.cancel-edit-btn').style.display = 'none';
             } else {
                 // Add new note
                 const { db, collection, addDoc, serverTimestamp } = await import('./firebase-config.js');
@@ -630,13 +648,12 @@ class NotesManager {
                 await addDoc(notesRef, { ...noteData, timestamp: serverTimestamp() });
             }
 
-            this.noteForm.reset();
+            form.reset();
 
             // Update save button text
-            const submitBtn = this.noteForm.querySelector('button[type="submit"]');
-            submitBtn.textContent = submitBtn.dataset.i18n ?
-                (window.languageManager?.getCurrentLanguage() === 'zh' ? '保存笔记' : 'Save Note') :
-                'Save Note';
+            const submitBtn = form.querySelector('button[type="submit"]');
+            const lang = window.languageManager?.getCurrentLanguage() || 'en';
+            submitBtn.textContent = lang === 'zh' ? '保存笔记' : 'Save Note';
         } catch (error) {
             console.error('Error saving note:', error);
             alert('Failed to save note. Please try again.');
@@ -644,28 +661,39 @@ class NotesManager {
     }
 
     handleSearch(e) {
-        const searchTerm = e.target.value.toLowerCase();
-        this.renderNotes(searchTerm);
+        const searchInput = e.target;
+        const phase = parseInt(searchInput.dataset.phase);
+        const searchTerm = searchInput.value.toLowerCase();
+        this.renderPhase(phase, searchTerm);
     }
 
-    editNote(id) {
+    editNote(id, phase) {
         const note = this.notes.find(n => n.id === id);
         if (!note) return;
 
-        this.noteTitle.value = note.title;
-        this.noteCategory.value = note.category;
-        this.noteContent.value = note.content;
+        // Find the form for this phase
+        const form = document.querySelector(`.note-form[data-phase="${phase}"]`);
+        if (!form) return;
+
+        const titleInput = form.querySelector('.note-title');
+        const categorySelect = form.querySelector('.note-category');
+        const contentTextarea = form.querySelector('.note-content');
+        const cancelBtn = form.querySelector('.cancel-edit-btn');
+
+        titleInput.value = note.title;
+        categorySelect.value = note.category;
+        contentTextarea.value = note.content;
         this.editingNoteId = id;
-        this.cancelEditBtn.style.display = 'inline-block';
+        this.editingPhase = phase;
+        cancelBtn.style.display = 'inline-block';
 
         // Update save button text
-        const submitBtn = this.noteForm.querySelector('button[type="submit"]');
-        submitBtn.textContent = submitBtn.dataset.i18n ?
-            (window.languageManager?.getCurrentLanguage() === 'zh' ? '更新笔记' : 'Update Note') :
-            'Update Note';
+        const submitBtn = form.querySelector('button[type="submit"]');
+        const lang = window.languageManager?.getCurrentLanguage() || 'en';
+        submitBtn.textContent = lang === 'zh' ? '更新笔记' : 'Update Note';
 
         // Scroll to form
-        this.noteForm.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        form.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
 
     async deleteNote(id) {
@@ -684,42 +712,46 @@ class NotesManager {
         }
     }
 
-    cancelEdit() {
+    cancelEdit(e) {
+        const btn = e.target;
+        const form = btn.closest('.note-form');
+
         this.editingNoteId = null;
-        this.noteForm.reset();
-        this.cancelEditBtn.style.display = 'none';
+        this.editingPhase = null;
+        form.reset();
+        btn.style.display = 'none';
 
         // Reset save button text
-        const submitBtn = this.noteForm.querySelector('button[type="submit"]');
-        submitBtn.textContent = submitBtn.dataset.i18n ?
-            (window.languageManager?.getCurrentLanguage() === 'zh' ? '保存笔记' : 'Save Note') :
-            'Save Note';
+        const submitBtn = form.querySelector('button[type="submit"]');
+        const lang = window.languageManager?.getCurrentLanguage() || 'en';
+        submitBtn.textContent = lang === 'zh' ? '保存笔记' : 'Save Note';
     }
 
-    renderNotes(searchTerm = '') {
-        if (!this.notesList) return;
+    renderAllPhases() {
+        for (let phase = 0; phase < 5; phase++) {
+            this.renderPhase(phase);
+        }
+    }
 
-        let filteredNotes = this.notes;
+    renderPhase(phase, searchTerm = '') {
+        const notesList = document.querySelector(`.notes-list[data-phase="${phase}"]`);
+        if (!notesList) return;
+
+        // Filter notes for this phase
+        let phaseNotes = this.notes.filter(note => note.phase === phase);
 
         // Filter by search term
         if (searchTerm) {
-            filteredNotes = this.notes.filter(note =>
+            phaseNotes = phaseNotes.filter(note =>
                 note.title.toLowerCase().includes(searchTerm) ||
                 note.content.toLowerCase().includes(searchTerm) ||
                 note.category.toLowerCase().includes(searchTerm)
             );
         }
 
-        if (filteredNotes.length === 0) {
-            if (this.emptyState) {
-                this.emptyState.style.display = 'block';
-            }
-            this.notesList.innerHTML = this.emptyState ? '' : this.getEmptyStateHTML();
+        if (phaseNotes.length === 0) {
+            notesList.innerHTML = this.getEmptyStateHTML();
             return;
-        }
-
-        if (this.emptyState) {
-            this.emptyState.style.display = 'none';
         }
 
         const lang = window.languageManager?.getCurrentLanguage() || 'en';
@@ -734,7 +766,7 @@ class NotesManager {
             milestone: lang === 'zh' ? '里程碑' : 'Milestone'
         };
 
-        this.notesList.innerHTML = filteredNotes.map(note => `
+        notesList.innerHTML = phaseNotes.map(note => `
             <div class="note-card ${note.category}">
                 <div class="note-header">
                     <h3 class="note-title">${this.escapeHtml(note.title)}</h3>
@@ -745,7 +777,7 @@ class NotesManager {
                 </div>
                 <div class="note-content">${this.escapeHtml(note.content)}</div>
                 <div class="note-actions">
-                    <button class="note-btn edit" onclick="notesManager.editNote('${note.id}')">${editText}</button>
+                    <button class="note-btn edit" onclick="notesManager.editNote('${note.id}', ${phase})">${editText}</button>
                     <button class="note-btn delete" onclick="notesManager.deleteNote('${note.id}')">${deleteText}</button>
                 </div>
             </div>
@@ -772,7 +804,6 @@ class NotesManager {
         `;
     }
 }
-
 // Initialize all components when DOM is ready
 document.addEventListener('DOMContentLoaded', () => {
     // Core functionality

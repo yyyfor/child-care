@@ -56,15 +56,6 @@
                     <span class="phase-number">5</span>
                     <span class="phase-label" data-i18n="nav.phase5">3-6 Months</span>
                 </button>
-                <button class="phase-button" data-phase="5">
-                    <span class="phase-number">
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/>
-                            <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>
-                        </svg>
-                    </span>
-                    <span class="phase-label" data-i18n="nav.notes">Notes</span>
-                </button>
             </div>
         </div>
     </nav>
@@ -148,6 +139,63 @@
                     </svg>
                     <span data-i18n="intro.printBtn">Print Guide</span>
                 </button>
+            </div>
+
+            <!-- Global Authentication Section -->
+            <div id="authSection" class="auth-section" style="display: none;">
+                <div class="auth-card">
+                    <h3 data-i18n="auth.signInTitle">Sign In to Your Account</h3>
+                    <p data-i18n="auth.signInDesc">Access your notes from any device</p>
+                    <form id="loginForm" class="auth-form">
+                        <div class="form-group">
+                            <label for="loginEmail" data-i18n="auth.email">Email</label>
+                            <input type="email" id="loginEmail" class="note-input" data-i18n-placeholder="auth.emailPlaceholder" placeholder="your@email.com" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="loginPassword" data-i18n="auth.password">Password</label>
+                            <input type="password" id="loginPassword" class="note-input" data-i18n-placeholder="auth.passwordPlaceholder" placeholder="Your password" required>
+                        </div>
+                        <div class="form-actions">
+                            <button type="submit" class="btn btn-primary" data-i18n="auth.signInBtn">Sign In</button>
+                        </div>
+                        <p class="auth-toggle">
+                            <span data-i18n="auth.noAccount">Don't have an account?</span>
+                            <a href="#" id="showSignup" data-i18n="auth.signUpLink">Sign Up</a>
+                        </p>
+                    </form>
+
+                    <form id="signupForm" class="auth-form" style="display: none;">
+                        <div class="form-group">
+                            <label for="signupEmail" data-i18n="auth.email">Email</label>
+                            <input type="email" id="signupEmail" class="note-input" data-i18n-placeholder="auth.emailPlaceholder" placeholder="your@email.com" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="signupPassword" data-i18n="auth.password">Password</label>
+                            <input type="password" id="signupPassword" class="note-input" data-i18n-placeholder="auth.passwordPlaceholder" placeholder="At least 6 characters" minlength="6" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="signupPasswordConfirm" data-i18n="auth.confirmPassword">Confirm Password</label>
+                            <input type="password" id="signupPasswordConfirm" class="note-input" data-i18n-placeholder="auth.confirmPasswordPlaceholder" placeholder="Re-enter password" required>
+                        </div>
+                        <div class="form-actions">
+                            <button type="submit" class="btn btn-primary" data-i18n="auth.signUpBtn">Create Account</button>
+                        </div>
+                        <p class="auth-toggle">
+                            <span data-i18n="auth.haveAccount">Already have an account?</span>
+                            <a href="#" id="showLogin" data-i18n="auth.signInLink">Sign In</a>
+                        </p>
+                    </form>
+                    <div id="authError" class="auth-error" style="display: none;"></div>
+                </div>
+            </div>
+
+            <!-- User Info Section -->
+            <div id="userSection" class="user-section" style="display: none;">
+                <div class="user-info">
+                    <span data-i18n="auth.signedInAs">Signed in as:</span>
+                    <strong id="userEmail"></strong>
+                    <button id="signOutBtn" class="btn btn-secondary" data-i18n="auth.signOut">Sign Out</button>
+                </div>
             </div>
 
             <!-- Phase 1: Before Labor -->
@@ -386,6 +434,59 @@
                                 <li><strong>Freezer meal prep</strong> - Prepare or purchase 10-15 easy-to-reheat meals for first two weeks postpartum</li>
                                 <li><strong>Lower household standards temporarily</strong> - Accept that cleaning/organization will not be priority; this is temporary</li>
                             </ul>
+                        </div>
+                    </div>
+
+                    <!-- Phase 1 Notes Section -->
+                    <div class="care-card notes-card" id="section-notes" data-phase-notes="0" style="display: none;">
+                        <div class="card-header">
+                            <svg class="card-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/>
+                                <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>
+                            </svg>
+                            <h3 data-i18n="notes.title">My Notes</h3>
+                        </div>
+                        <div class="card-content">
+                            <div class="note-form-card">
+                                <h4 data-i18n="notes.addNew">Add New Note</h4>
+                                <form class="note-form" data-phase="0">
+                                    <div class="form-group">
+                                        <label data-i18n="notes.titleLabel">Title</label>
+                                        <input type="text" class="note-input note-title" data-i18n-placeholder="notes.titlePlaceholder" placeholder="Enter note title..." required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label data-i18n="notes.categoryLabel">Category</label>
+                                        <select class="note-select note-category">
+                                            <option value="general" data-i18n="notes.catGeneral">General</option>
+                                            <option value="health" data-i18n="notes.catHealth">Health</option>
+                                            <option value="feeding" data-i18n="notes.catFeeding">Feeding</option>
+                                            <option value="sleep" data-i18n="notes.catSleep">Sleep</option>
+                                            <option value="development" data-i18n="notes.catDevelopment">Development</option>
+                                            <option value="milestone" data-i18n="notes.catMilestone">Milestone</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label data-i18n="notes.contentLabel">Note</label>
+                                        <textarea class="note-textarea note-content" rows="4" data-i18n-placeholder="notes.contentPlaceholder" placeholder="Write your note here..." required></textarea>
+                                    </div>
+                                    <div class="form-actions">
+                                        <button type="submit" class="btn btn-primary" data-i18n="notes.btnSave">Save Note</button>
+                                        <button type="button" class="btn btn-secondary cancel-edit-btn" style="display:none;" data-i18n="notes.btnCancel">Cancel</button>
+                                    </div>
+                                </form>
+
+                                <!-- Search Bar -->
+                                <div class="notes-search-bar">
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <circle cx="11" cy="11" r="8"/>
+                                        <path d="m21 21-4.35-4.35"/>
+                                    </svg>
+                                    <input type="text" class="search-input note-search" data-phase="0" data-i18n-placeholder="notes.searchPlaceholder" placeholder="Search notes...">
+                                </div>
+
+                                <!-- Notes List -->
+                                <div class="notes-list" data-phase="0"></div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -633,6 +734,55 @@
                                 <li><strong>Start as you mean to continue</strong> - If partner will be involved in nighttime care, start immediately; don't set precedent of mother doing all night care</li>
                                 <li><strong>Golden hour for bonding</strong> - If medically possible, prioritize skin-to-skin contact for first hour; this supports breastfeeding and bonding</li>
                             </ul>
+                        </div>
+                    </div>
+
+                    <!-- Phase 2 Notes Section -->
+                    <div class="care-card notes-card" data-phase-notes="1" style="display: none;">
+                        <div class="card-header">
+                            <svg class="card-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/>
+                                <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>
+                            </svg>
+                            <h3 data-i18n="notes.title">My Notes</h3>
+                        </div>
+                        <div class="card-content">
+                            <div class="note-form-card">
+                                <h4 data-i18n="notes.addNew">Add New Note</h4>
+                                <form class="note-form" data-phase="1">
+                                    <div class="form-group">
+                                        <label data-i18n="notes.titleLabel">Title</label>
+                                        <input type="text" class="note-input note-title" data-i18n-placeholder="notes.titlePlaceholder" placeholder="Enter note title..." required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label data-i18n="notes.categoryLabel">Category</label>
+                                        <select class="note-select note-category">
+                                            <option value="general" data-i18n="notes.catGeneral">General</option>
+                                            <option value="health" data-i18n="notes.catHealth">Health</option>
+                                            <option value="feeding" data-i18n="notes.catFeeding">Feeding</option>
+                                            <option value="sleep" data-i18n="notes.catSleep">Sleep</option>
+                                            <option value="development" data-i18n="notes.catDevelopment">Development</option>
+                                            <option value="milestone" data-i18n="notes.catMilestone">Milestone</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label data-i18n="notes.contentLabel">Note</label>
+                                        <textarea class="note-textarea note-content" rows="4" data-i18n-placeholder="notes.contentPlaceholder" placeholder="Write your note here..." required></textarea>
+                                    </div>
+                                    <div class="form-actions">
+                                        <button type="submit" class="btn btn-primary" data-i18n="notes.btnSave">Save Note</button>
+                                        <button type="button" class="btn btn-secondary cancel-edit-btn" style="display:none;" data-i18n="notes.btnCancel">Cancel</button>
+                                    </div>
+                                </form>
+                                <div class="notes-search-bar">
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <circle cx="11" cy="11" r="8"/>
+                                        <path d="m21 21-4.35-4.35"/>
+                                    </svg>
+                                    <input type="text" class="search-input note-search" data-phase="1" data-i18n-placeholder="notes.searchPlaceholder" placeholder="Search notes...">
+                                </div>
+                                <div class="notes-list" data-phase="1"></div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -913,7 +1063,55 @@
                             </ul>
                         </div>
                     </div>
-                </div>
+                
+                    <!-- Phase 3 Notes Section -->
+                    <div class="care-card notes-card" data-phase-notes="2" style="display: none;">
+                        <div class="card-header">
+                            <svg class="card-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/>
+                                <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>
+                            </svg>
+                            <h3 data-i18n="notes.title">My Notes</h3>
+                        </div>
+                        <div class="card-content">
+                            <div class="note-form-card">
+                                <h4 data-i18n="notes.addNew">Add New Note</h4>
+                                <form class="note-form" data-phase="2">
+                                    <div class="form-group">
+                                        <label data-i18n="notes.titleLabel">Title</label>
+                                        <input type="text" class="note-input note-title" data-i18n-placeholder="notes.titlePlaceholder" placeholder="Enter note title..." required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label data-i18n="notes.categoryLabel">Category</label>
+                                        <select class="note-select note-category">
+                                            <option value="general" data-i18n="notes.catGeneral">General</option>
+                                            <option value="health" data-i18n="notes.catHealth">Health</option>
+                                            <option value="feeding" data-i18n="notes.catFeeding">Feeding</option>
+                                            <option value="sleep" data-i18n="notes.catSleep">Sleep</option>
+                                            <option value="development" data-i18n="notes.catDevelopment">Development</option>
+                                            <option value="milestone" data-i18n="notes.catMilestone">Milestone</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label data-i18n="notes.contentLabel">Note</label>
+                                        <textarea class="note-textarea note-content" rows="4" data-i18n-placeholder="notes.contentPlaceholder" placeholder="Write your note here..." required></textarea>
+                                    </div>
+                                    <div class="form-actions">
+                                        <button type="submit" class="btn btn-primary" data-i18n="notes.btnSave">Save Note</button>
+                                        <button type="button" class="btn btn-secondary cancel-edit-btn" style="display:none;" data-i18n="notes.btnCancel">Cancel</button>
+                                    </div>
+                                </form>
+                                <div class="notes-search-bar">
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <circle cx="11" cy="11" r="8"/>
+                                        <path d="m21 21-4.35-4.35"/>
+                                    </svg>
+                                    <input type="text" class="search-input note-search" data-phase="2" data-i18n-placeholder="notes.searchPlaceholder" placeholder="Search notes...">
+                                </div>
+                                <div class="notes-list" data-phase="2"></div>
+                            </div>
+                        </div>
+                    </div></div>
             </section>
 
             <!-- Phase 4: 1-3 Months -->
@@ -1179,7 +1377,55 @@
                             </ul>
                         </div>
                     </div>
-                </div>
+                
+                    <!-- Phase 4 Notes Section -->
+                    <div class="care-card notes-card" data-phase-notes="3" style="display: none;">
+                        <div class="card-header">
+                            <svg class="card-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/>
+                                <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>
+                            </svg>
+                            <h3 data-i18n="notes.title">My Notes</h3>
+                        </div>
+                        <div class="card-content">
+                            <div class="note-form-card">
+                                <h4 data-i18n="notes.addNew">Add New Note</h4>
+                                <form class="note-form" data-phase="3">
+                                    <div class="form-group">
+                                        <label data-i18n="notes.titleLabel">Title</label>
+                                        <input type="text" class="note-input note-title" data-i18n-placeholder="notes.titlePlaceholder" placeholder="Enter note title..." required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label data-i18n="notes.categoryLabel">Category</label>
+                                        <select class="note-select note-category">
+                                            <option value="general" data-i18n="notes.catGeneral">General</option>
+                                            <option value="health" data-i18n="notes.catHealth">Health</option>
+                                            <option value="feeding" data-i18n="notes.catFeeding">Feeding</option>
+                                            <option value="sleep" data-i18n="notes.catSleep">Sleep</option>
+                                            <option value="development" data-i18n="notes.catDevelopment">Development</option>
+                                            <option value="milestone" data-i18n="notes.catMilestone">Milestone</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label data-i18n="notes.contentLabel">Note</label>
+                                        <textarea class="note-textarea note-content" rows="4" data-i18n-placeholder="notes.contentPlaceholder" placeholder="Write your note here..." required></textarea>
+                                    </div>
+                                    <div class="form-actions">
+                                        <button type="submit" class="btn btn-primary" data-i18n="notes.btnSave">Save Note</button>
+                                        <button type="button" class="btn btn-secondary cancel-edit-btn" style="display:none;" data-i18n="notes.btnCancel">Cancel</button>
+                                    </div>
+                                </form>
+                                <div class="notes-search-bar">
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <circle cx="11" cy="11" r="8"/>
+                                        <path d="m21 21-4.35-4.35"/>
+                                    </svg>
+                                    <input type="text" class="search-input note-search" data-phase="3" data-i18n-placeholder="notes.searchPlaceholder" placeholder="Search notes...">
+                                </div>
+                                <div class="notes-list" data-phase="3"></div>
+                            </div>
+                        </div>
+                    </div></div>
             </section>
 
             <!-- Phase 5: 3-6 Months -->
@@ -1458,135 +1704,56 @@
                             </ul>
                         </div>
                     </div>
-                </div>
-            </section>
-
-            <!-- Phase 6: Notes -->
-            <section class="phase-section notes-section" data-phase="5">
-                <div class="phase-header">
-                    <div class="phase-icon">
-                        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/>
-                            <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>
-                        </svg>
-                    </div>
-                    <div class="phase-title-group">
-                        <h2 class="phase-title" data-i18n="notes.title">My Notes</h2>
-                        <p class="phase-description" data-i18n="notes.description">Keep track of important information, milestones, and reminders</p>
-                    </div>
-                </div>
-
-                <div class="notes-container">
-                    <!-- Authentication Section -->
-                    <div id="authSection" class="auth-section" style="display: none;">
-                        <div class="auth-card">
-                            <h3 data-i18n="auth.signInTitle">Sign In to Your Account</h3>
-                            <p data-i18n="auth.signInDesc">Access your notes from any device</p>
-                            <form id="loginForm" class="auth-form">
-                                <div class="form-group">
-                                    <label for="loginEmail" data-i18n="auth.email">Email</label>
-                                    <input type="email" id="loginEmail" class="note-input" data-i18n-placeholder="auth.emailPlaceholder" placeholder="your@email.com" required>
-                                </div>
-                                <div class="form-group">
-                                    <label for="loginPassword" data-i18n="auth.password">Password</label>
-                                    <input type="password" id="loginPassword" class="note-input" data-i18n-placeholder="auth.passwordPlaceholder" placeholder="Your password" required>
-                                </div>
-                                <div class="form-actions">
-                                    <button type="submit" class="btn btn-primary" data-i18n="auth.signInBtn">Sign In</button>
-                                </div>
-                                <p class="auth-toggle">
-                                    <span data-i18n="auth.noAccount">Don't have an account?</span>
-                                    <a href="#" id="showSignup" data-i18n="auth.signUpLink">Sign Up</a>
-                                </p>
-                            </form>
-
-                            <form id="signupForm" class="auth-form" style="display: none;">
-                                <div class="form-group">
-                                    <label for="signupEmail" data-i18n="auth.email">Email</label>
-                                    <input type="email" id="signupEmail" class="note-input" data-i18n-placeholder="auth.emailPlaceholder" placeholder="your@email.com" required>
-                                </div>
-                                <div class="form-group">
-                                    <label for="signupPassword" data-i18n="auth.password">Password</label>
-                                    <input type="password" id="signupPassword" class="note-input" data-i18n-placeholder="auth.passwordPlaceholder" placeholder="At least 6 characters" minlength="6" required>
-                                </div>
-                                <div class="form-group">
-                                    <label for="signupPasswordConfirm" data-i18n="auth.confirmPassword">Confirm Password</label>
-                                    <input type="password" id="signupPasswordConfirm" class="note-input" data-i18n-placeholder="auth.confirmPasswordPlaceholder" placeholder="Re-enter password" required>
-                                </div>
-                                <div class="form-actions">
-                                    <button type="submit" class="btn btn-primary" data-i18n="auth.signUpBtn">Create Account</button>
-                                </div>
-                                <p class="auth-toggle">
-                                    <span data-i18n="auth.haveAccount">Already have an account?</span>
-                                    <a href="#" id="showLogin" data-i18n="auth.signInLink">Sign In</a>
-                                </p>
-                            </form>
-                            <div id="authError" class="auth-error" style="display: none;"></div>
-                        </div>
-                    </div>
-
-                    <!-- User Info Section -->
-                    <div id="userSection" class="user-section" style="display: none;">
-                        <div class="user-info">
-                            <span data-i18n="auth.signedInAs">Signed in as:</span>
-                            <strong id="userEmail"></strong>
-                            <button id="signOutBtn" class="btn btn-secondary" data-i18n="auth.signOut">Sign Out</button>
-                        </div>
-                    </div>
-
-                    <!-- Add Note Form -->
-                    <div id="notesContent" class="note-form-card" style="display: none;">
-                        <h3 data-i18n="notes.addNew">Add New Note</h3>
-                        <form id="noteForm">
-                            <div class="form-group">
-                                <label for="noteTitle" data-i18n="notes.titleLabel">Title</label>
-                                <input type="text" id="noteTitle" class="note-input" data-i18n-placeholder="notes.titlePlaceholder" placeholder="Enter note title..." required>
-                            </div>
-                            <div class="form-group">
-                                <label for="noteCategory" data-i18n="notes.categoryLabel">Category</label>
-                                <select id="noteCategory" class="note-select">
-                                    <option value="general" data-i18n="notes.catGeneral">General</option>
-                                    <option value="health" data-i18n="notes.catHealth">Health</option>
-                                    <option value="feeding" data-i18n="notes.catFeeding">Feeding</option>
-                                    <option value="sleep" data-i18n="notes.catSleep">Sleep</option>
-                                    <option value="development" data-i18n="notes.catDevelopment">Development</option>
-                                    <option value="milestone" data-i18n="notes.catMilestone">Milestone</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label for="noteContent" data-i18n="notes.contentLabel">Note</label>
-                                <textarea id="noteContent" class="note-textarea" rows="4" data-i18n-placeholder="notes.contentPlaceholder" placeholder="Write your note here..." required></textarea>
-                            </div>
-                            <div class="form-actions">
-                                <button type="submit" class="btn btn-primary" data-i18n="notes.btnSave">Save Note</button>
-                                <button type="button" class="btn btn-secondary" id="cancelEditBtn" style="display:none;" data-i18n="notes.btnCancel">Cancel</button>
-                            </div>
-                        </form>
-
-                        <!-- Search Bar -->
-                        <div class="notes-search-bar">
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <circle cx="11" cy="11" r="8"/>
-                                <path d="m21 21-4.35-4.35"/>
+                
+                    <!-- Phase 5 Notes Section -->
+                    <div class="care-card notes-card" data-phase-notes="4" style="display: none;">
+                        <div class="card-header">
+                            <svg class="card-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/>
+                                <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>
                             </svg>
-                            <input type="text" id="noteSearch" class="search-input" data-i18n-placeholder="notes.searchPlaceholder" placeholder="Search notes...">
+                            <h3 data-i18n="notes.title">My Notes</h3>
                         </div>
-
-                        <!-- Notes List -->
-                        <div class="notes-list" id="notesList">
-                            <div class="empty-state" id="emptyState">
-                                <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                                    <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/>
-                                    <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>
-                                </svg>
-                                <h3 data-i18n="notes.emptyTitle">No notes yet</h3>
-                                <p data-i18n="notes.emptyMessage">Start by adding your first note above</p>
+                        <div class="card-content">
+                            <div class="note-form-card">
+                                <h4 data-i18n="notes.addNew">Add New Note</h4>
+                                <form class="note-form" data-phase="4">
+                                    <div class="form-group">
+                                        <label data-i18n="notes.titleLabel">Title</label>
+                                        <input type="text" class="note-input note-title" data-i18n-placeholder="notes.titlePlaceholder" placeholder="Enter note title..." required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label data-i18n="notes.categoryLabel">Category</label>
+                                        <select class="note-select note-category">
+                                            <option value="general" data-i18n="notes.catGeneral">General</option>
+                                            <option value="health" data-i18n="notes.catHealth">Health</option>
+                                            <option value="feeding" data-i18n="notes.catFeeding">Feeding</option>
+                                            <option value="sleep" data-i18n="notes.catSleep">Sleep</option>
+                                            <option value="development" data-i18n="notes.catDevelopment">Development</option>
+                                            <option value="milestone" data-i18n="notes.catMilestone">Milestone</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label data-i18n="notes.contentLabel">Note</label>
+                                        <textarea class="note-textarea note-content" rows="4" data-i18n-placeholder="notes.contentPlaceholder" placeholder="Write your note here..." required></textarea>
+                                    </div>
+                                    <div class="form-actions">
+                                        <button type="submit" class="btn btn-primary" data-i18n="notes.btnSave">Save Note</button>
+                                        <button type="button" class="btn btn-secondary cancel-edit-btn" style="display:none;" data-i18n="notes.btnCancel">Cancel</button>
+                                    </div>
+                                </form>
+                                <div class="notes-search-bar">
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <circle cx="11" cy="11" r="8"/>
+                                        <path d="m21 21-4.35-4.35"/>
+                                    </svg>
+                                    <input type="text" class="search-input note-search" data-phase="4" data-i18n-placeholder="notes.searchPlaceholder" placeholder="Search notes...">
+                                </div>
+                                <div class="notes-list" data-phase="4"></div>
                             </div>
                         </div>
-                    </div>
-                </div>
-            </section>
-        </div>
+                    </div></div>
+            </section></div>
     </main>
 
     <footer class="footer">

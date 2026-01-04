@@ -840,6 +840,7 @@ body {
 
 .notes-search-bar {
     position: relative;
+    margin-top: var(--spacing-xl);
     margin-bottom: var(--spacing-lg);
 }
 

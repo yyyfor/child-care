@@ -426,6 +426,67 @@ document.addEventListener('DOMContentLoaded', () => {
     // Initialize language manager
     const languageManager = new LanguageManager();
 
+    // Page Navigator functionality
+    const navToggle = document.getElementById('navToggle');
+    const navClose = document.getElementById('navClose');
+    const pageNavigator = document.getElementById('pageNavigator');
+    const navigatorOverlay = document.getElementById('navigatorOverlay');
+    const navLinks = document.querySelectorAll('.nav-link');
+
+    function openNavigator() {
+        pageNavigator.classList.add('active');
+        navigatorOverlay.classList.add('active');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeNavigator() {
+        pageNavigator.classList.remove('active');
+        navigatorOverlay.classList.remove('active');
+        document.body.style.overflow = '';
+    }
+
+    if (navToggle) {
+        navToggle.addEventListener('click', openNavigator);
+    }
+
+    if (navClose) {
+        navClose.addEventListener('click', closeNavigator);
+    }
+
+    if (navigatorOverlay) {
+        navigatorOverlay.addEventListener('click', closeNavigator);
+    }
+
+    // Close navigator when clicking a link
+    navLinks.forEach(link => {
+        link.addEventListener('click', (e) => {
+            closeNavigator();
+            // Smooth scroll to section
+            const targetId = link.getAttribute('href');
+            if (targetId && targetId.startsWith('#')) {
+                e.preventDefault();
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    const offset = 100;
+                    const elementPosition = targetElement.getBoundingClientRect().top;
+                    const offsetPosition = elementPosition + window.pageYOffset - offset;
+
+                    window.scrollTo({
+                        top: offsetPosition,
+                        behavior: 'smooth'
+                    });
+                }
+            }
+        });
+    });
+
+    // Close navigator on ESC key
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && pageNavigator.classList.contains('active')) {
+            closeNavigator();
+        }
+    });
+
     console.log('Maternal & Infant Care Guide initialized successfully');
 });
 

@@ -47,7 +47,16 @@ const translations = {
             safety: "Safety Considerations",
             items: "Items & Materials to Prepare",
             teaching: "Developmental Activities & Teaching",
+            languageDev: "English Language Development",
+            motorDev: "Physical & Motor Development",
+            brainDev: "Brain & Cognitive Development",
             recommendations: "Additional Professional Recommendations"
+        },
+        navigator: {
+            title: "Quick Navigation",
+            caregiving: "Caregiving",
+            development: "Development",
+            additional: "Additional"
         },
         footer: {
             note: "This guide provides general information based on professional medical knowledge. Always consult your healthcare provider for advice specific to your situation. In case of emergency, call 911 or your local emergency services.",
@@ -101,7 +110,16 @@ const translations = {
             safety: "安全注意事项",
             items: "需要准备的物品和材料",
             teaching: "发育活动与早教",
+            languageDev: "英语启蒙",
+            motorDev: "运动启蒙",
+            brainDev: "大脑开发启蒙",
             recommendations: "额外的专业建议"
+        },
+        navigator: {
+            title: "快速导航",
+            caregiving: "护理指导",
+            development: "发育启蒙",
+            additional: "其他建议"
         },
         footer: {
             note: "本指南提供基于专业医学知识的一般性信息。请务必咨询您的医疗保健提供者，获取针对您具体情况的建议。如遇紧急情况，请拨打120或当地急救电话。",

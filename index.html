@@ -60,6 +60,75 @@
         </div>
     </nav>
 
+    <!-- Page Navigator -->
+    <button class="nav-toggle" id="navToggle" aria-label="Toggle section navigator">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="3" y1="12" x2="21" y2="12"/>
+            <line x1="3" y1="6" x2="21" y2="6"/>
+            <line x1="3" y1="18" x2="21" y2="18"/>
+        </svg>
+    </button>
+
+    <aside class="page-navigator" id="pageNavigator">
+        <div class="navigator-header">
+            <h3 data-i18n="navigator.title">Quick Navigation</h3>
+            <button class="nav-close" id="navClose" aria-label="Close navigator">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <line x1="18" y1="6" x2="6" y2="18"/>
+                    <line x1="6" y1="6" x2="18" y2="18"/>
+                </svg>
+            </button>
+        </div>
+        <nav class="navigator-content">
+            <div class="nav-section">
+                <h4 data-i18n="navigator.caregiving">Caregiving</h4>
+                <a href="#section-mother" class="nav-link" data-section="mother">
+                    <span class="nav-icon mother-icon"></span>
+                    <span data-i18n="sections.motherResp">Mother's Responsibilities</span>
+                </a>
+                <a href="#section-father" class="nav-link" data-section="father">
+                    <span class="nav-icon father-icon"></span>
+                    <span data-i18n="sections.fatherResp">Father's Responsibilities</span>
+                </a>
+                <a href="#section-safety" class="nav-link" data-section="safety">
+                    <span class="nav-icon safety-icon"></span>
+                    <span data-i18n="sections.safety">Safety Considerations</span>
+                </a>
+                <a href="#section-items" class="nav-link" data-section="items">
+                    <span class="nav-icon items-icon"></span>
+                    <span data-i18n="sections.items">Items & Materials</span>
+                </a>
+            </div>
+            <div class="nav-section">
+                <h4 data-i18n="navigator.development">Development</h4>
+                <a href="#section-teaching" class="nav-link" data-section="teaching">
+                    <span class="nav-icon teaching-icon"></span>
+                    <span data-i18n="sections.teaching">Developmental Activities</span>
+                </a>
+                <a href="#section-language" class="nav-link" data-section="language-dev">
+                    <span class="nav-icon language-icon"></span>
+                    <span data-i18n="sections.languageDev">English Language</span>
+                </a>
+                <a href="#section-motor" class="nav-link" data-section="motor-dev">
+                    <span class="nav-icon motor-icon"></span>
+                    <span data-i18n="sections.motorDev">Physical & Motor</span>
+                </a>
+                <a href="#section-brain" class="nav-link" data-section="brain-dev">
+                    <span class="nav-icon brain-icon"></span>
+                    <span data-i18n="sections.brainDev">Brain & Cognitive</span>
+                </a>
+            </div>
+            <div class="nav-section">
+                <h4 data-i18n="navigator.additional">Additional</h4>
+                <a href="#section-recommendations" class="nav-link" data-section="recommendations">
+                    <span class="nav-icon recommendations-icon"></span>
+                    <span data-i18n="sections.recommendations">Recommendations</span>
+                </a>
+            </div>
+        </nav>
+    </aside>
+    <div class="navigator-overlay" id="navigatorOverlay"></div>
+
     <main class="main-content">
         <div class="container">
             <div class="content-intro">
@@ -83,7 +152,7 @@
                 </div>
 
                 <div class="section-group">
-                    <div class="care-card mother">
+                    <div class="care-card mother" id="section-mother">
                         <div class="card-header">
                             <svg class="card-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                 <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
@@ -104,7 +173,7 @@
                         </div>
                     </div>
 
-                    <div class="care-card father">
+                    <div class="care-card father" id="section-father">
                         <div class="card-header">
                             <svg class="card-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                 <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/>
@@ -126,7 +195,7 @@
                         </div>
                     </div>
 
-                    <div class="care-card safety">
+                    <div class="care-card safety" id="section-safety">
                         <div class="card-header">
                             <svg class="card-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                 <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0zM12 9v4M12 17h.01"/>
@@ -161,7 +230,7 @@
                         </div>
                     </div>
 
-                    <div class="care-card items">
+                    <div class="care-card items" id="section-items">
                         <div class="card-header">
                             <svg class="card-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                 <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>
@@ -204,7 +273,7 @@
                         </div>
                     </div>
 
-                    <div class="care-card teaching">
+                    <div class="care-card teaching" id="section-teaching">
                         <div class="card-header">
                             <svg class="card-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                 <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/>
@@ -225,7 +294,68 @@
                         </div>
                     </div>
 
-                    <div class="care-card recommendations">
+                    <div class="care-card language-dev" id="section-language">
+                        <div class="card-header">
+                            <svg class="card-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
+                                <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
+                                <circle cx="12" cy="12" r="2"/>
+                                <path d="M12 10v8"/>
+                            </svg>
+                            <h3 data-i18n="sections.languageDev">English Language Development</h3>
+                        </div>
+                        <div class="card-content">
+                            <ul class="responsibility-list" data-content="phase1.languageDev">
+                                <li><strong>Prenatal language exposure</strong> - Talk to baby in English daily; baby can hear and begin recognizing language patterns from week 25</li>
+                                <li><strong>Read English books aloud</strong> - Choose rhythmic, rhyming books; baby becomes familiar with English sounds and intonation</li>
+                                <li><strong>Sing English nursery rhymes</strong> - Classic songs like "Twinkle Twinkle," "ABC Song"; repetition aids memory formation</li>
+                                <li><strong>Play English audiobooks/music</strong> - Gentle children's songs and stories; creates familiarity with English language rhythm</li>
+                                <li><strong>Both parents speak English</strong> - If bilingual family, establish who speaks which language; consistency is key</li>
+                                <li><strong>Create English-rich environment</strong> - Label nursery items in English, choose English children's music for daily routines</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="care-card motor-dev" id="section-motor">
+                        <div class="card-header">
+                            <svg class="card-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+                            </svg>
+                            <h3 data-i18n="sections.motorDev">Physical & Motor Development</h3>
+                        </div>
+                        <div class="card-content">
+                            <ul class="responsibility-list" data-content="phase1.motorDev">
+                                <li><strong>Prepare safe movement space</strong> - Clear floor area for future tummy time and crawling; remove sharp edges and hazards</li>
+                                <li><strong>Research baby exercise techniques</strong> - Learn about newborn reflexes, safe ways to move baby's limbs gently</li>
+                                <li><strong>Understand developmental milestones</strong> - Study what motor skills appear when (head control, rolling, sitting, crawling)</li>
+                                <li><strong>Practice gentle handling</strong> - Learn proper head and neck support; practice with doll if first-time parent</li>
+                                <li><strong>Prepare activity mat</strong> - Get play mat with different textures, attached toys at various heights</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="care-card brain-dev" id="section-brain">
+                        <div class="card-header">
+                            <svg class="card-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"/>
+                                <path d="M12 16v-4"/>
+                                <path d="M12 8h.01"/>
+                            </svg>
+                            <h3 data-i18n="sections.brainDev">Brain & Cognitive Development</h3>
+                        </div>
+                        <div class="card-content">
+                            <ul class="responsibility-list" data-content="phase1.brainDev">
+                                <li><strong>Optimize prenatal nutrition</strong> - Omega-3 fatty acids (DHA), folate, iron support fetal brain development</li>
+                                <li><strong>Reduce prenatal stress</strong> - Chronic stress affects fetal brain; practice relaxation, meditation, adequate sleep</li>
+                                <li><strong>Avoid neurotoxins</strong> - No alcohol, smoking, limit caffeine; avoid harmful chemicals</li>
+                                <li><strong>Talk about daily experiences</strong> - Describe what you're doing, seeing, feeling; baby's brain is listening and learning</li>
+                                <li><strong>Play varied music</strong> - Different genres stimulate different neural pathways; classical music shown to have positive effects</li>
+                                <li><strong>Prepare high-contrast visuals</strong> - Black and white patterns, cards, books; newborns see contrast best</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="care-card recommendations" id="section-recommendations">
                         <div class="card-header">
                             <svg class="card-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                 <path d="M12 2L2 7l10 5 10-5-10-5z"/>
@@ -408,6 +538,64 @@
                                 <li><strong>Gentle touch</strong> - Stroke baby's skin gently; touch is primary sense at birth, builds neural connections</li>
                                 <li><strong>Minimize overstimulation</strong> - Keep lights dim, sounds quiet; newborn's nervous system easily overwhelmed</li>
                                 <li><strong>Observe baby's cues</strong> - Learn to recognize alert, drowsy, and distressed states; respond appropriately</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="care-card language-dev">
+                        <div class="card-header">
+                            <svg class="card-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
+                                <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
+                                <circle cx="12" cy="12" r="2"/>
+                                <path d="M12 10v8"/>
+                            </svg>
+                            <h3 data-i18n="sections.languageDev">English Language Development</h3>
+                        </div>
+                        <div class="card-content">
+                            <ul class="responsibility-list" data-content="phase2.languageDev">
+                                <li><strong>Speak English to newborn immediately</strong> - First words baby hears should include English; begin language imprinting</li>
+                                <li><strong>Sing English lullabies</strong> - Soft, gentle songs during skin-to-skin time; combines bonding with language exposure</li>
+                                <li><strong>Narrate in English</strong> - Describe what's happening during first bath, diaper changes, feeding</li>
+                                <li><strong>Use English terms of endearment</strong> - "Hello baby," "I love you," "Welcome to the world" - simple, repeated phrases</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="care-card motor-dev">
+                        <div class="card-header">
+                            <svg class="card-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+                            </svg>
+                            <h3 data-i18n="sections.motorDev">Physical & Motor Development</h3>
+                        </div>
+                        <div class="card-content">
+                            <ul class="responsibility-list" data-content="phase2.motorDev">
+                                <li><strong>Support newborn reflexes</strong> - Observe rooting, sucking, grasping, stepping reflexes; these are foundations for later motor skills</li>
+                                <li><strong>Practice skin-to-skin contact</strong> - Helps regulate baby's muscle tone, breathing, heart rate</li>
+                                <li><strong>Gentle limb movements</strong> - Softly bicycle baby's legs, open and close arms; promotes awareness of body</li>
+                                <li><strong>Proper head support always</strong> - Newborns cannot control head; always support neck and head when holding</li>
+                                <li><strong>Observe muscle tone</strong> - Baby should have some resistance when limbs moved; report if too floppy or too stiff</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="care-card brain-dev">
+                        <div class="card-header">
+                            <svg class="card-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"/>
+                                <path d="M12 16v-4"/>
+                                <path d="M12 8h.01"/>
+                            </svg>
+                            <h3 data-i18n="sections.brainDev">Brain & Cognitive Development</h3>
+                        </div>
+                        <div class="card-content">
+                            <ul class="responsibility-list" data-content="phase2.brainDev">
+                                <li><strong>Immediate skin-to-skin contact</strong> - Releases oxytocin, promotes neural connections, regulates baby's stress response</li>
+                                <li><strong>Early eye contact</strong> - Face-to-face at 8-12 inches; activates facial recognition brain regions</li>
+                                <li><strong>Minimize sensory overload</strong> - Dim lights, quiet voices; newborn brain easily overwhelmed</li>
+                                <li><strong>Respond to cries promptly</strong> - Teaches cause-and-effect; baby learns their actions get responses</li>
+                                <li><strong>Begin breastfeeding</strong> - Contains nutrients crucial for brain development; sucking stimulates brain</li>
                             </ul>
                         </div>
                     </div>
@@ -619,6 +807,73 @@
                         </div>
                     </div>
 
+                    <div class="care-card language-dev">
+                        <div class="card-header">
+                            <svg class="card-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
+                                <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
+                                <circle cx="12" cy="12" r="2"/>
+                                <path d="M12 10v8"/>
+                            </svg>
+                            <h3 data-i18n="sections.languageDev">English Language Development</h3>
+                        </div>
+                        <div class="card-content">
+                            <ul class="responsibility-list" data-content="phase3.languageDev">
+                                <li><strong>Talk constantly in English</strong> - Narrate everything: diaper changes, feeding, walks; aim for 15,000+ words daily</li>
+                                <li><strong>Use "parentese"</strong> - Higher-pitched, exaggerated intonation; babies respond better than normal speech</li>
+                                <li><strong>Read English books daily</strong> - Board books with simple pictures; even newborns benefit from hearing language patterns</li>
+                                <li><strong>Sing repetitive English songs</strong> - Same songs for same activities; "Diaper Song," "Bath Song" - aids pattern recognition</li>
+                                <li><strong>Respond to baby's sounds</strong> - When baby coos, respond in English; "Oh, you're telling me something!" - teaches conversation</li>
+                                <li><strong>Name objects in English</strong> - "This is your bottle," "Here's your blanket"; builds vocabulary foundation</li>
+                                <li><strong>Avoid baby talk gibberish</strong> - Use real English words; it's okay to use simple language, but use actual words</li>
+                                <li><strong>English audiobooks during routines</strong> - Play children's audiobooks during diaper changes, getting dressed</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="care-card motor-dev">
+                        <div class="card-header">
+                            <svg class="card-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+                            </svg>
+                            <h3 data-i18n="sections.motorDev">Physical & Motor Development</h3>
+                        </div>
+                        <div class="card-content">
+                            <ul class="responsibility-list" data-content="phase3.motorDev">
+                                <li><strong>Daily tummy time</strong> - Start with 3-5 minutes, 2-3 times daily; builds neck, shoulder, core strength</li>
+                                <li><strong>Track head control progress</strong> - By 1 month, should briefly lift head during tummy time; wobbles are normal</li>
+                                <li><strong>Encourage reaching</strong> - Hold colorful objects 8-12 inches away; baby will start swiping (won't grasp yet)</li>
+                                <li><strong>Vary positions</strong> - Time on back, tummy, held upright, side-lying; different positions develop different muscles</li>
+                                <li><strong>Gentle baby massage</strong> - Increases body awareness, improves circulation, promotes muscle development</li>
+                                <li><strong>Practice reflexes</strong> - Let baby grasp your fingers, touch cheek to trigger rooting reflex; exercises neural pathways</li>
+                                <li><strong>Bicycle legs gently</strong> - Helps prevent gas, promotes hip flexibility, early cross-body coordination</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="care-card brain-dev">
+                        <div class="card-header">
+                            <svg class="card-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"/>
+                                <path d="M12 16v-4"/>
+                                <path d="M12 8h.01"/>
+                            </svg>
+                            <h3 data-i18n="sections.brainDev">Brain & Cognitive Development</h3>
+                        </div>
+                        <div class="card-content">
+                            <ul class="responsibility-list" data-content="phase3.brainDev">
+                                <li><strong>High-contrast visual stimulation</strong> - Black and white patterns, cards; newborn vision sees contrast best</li>
+                                <li><strong>Face-to-face interaction</strong> - Position face 8-12 inches away; baby studying your features builds neural connections</li>
+                                <li><strong>Respond immediately to cries</strong> - Builds secure attachment; teaches baby that world is predictable and safe</li>
+                                <li><strong>Limit screen time</strong> - Zero screens under 18 months recommended; real interaction builds brain better</li>
+                                <li><strong>Provide varied sounds</strong> - Music, nature sounds, household noises (not loud); auditory cortex development</li>
+                                <li><strong>Change visual environment</strong> - Move crib mobile, rotate toys; novelty stimulates brain growth</li>
+                                <li><strong>Imitate baby's sounds</strong> - When baby coos, coo back; teaches turn-taking, social communication</li>
+                                <li><strong>Establish predictable routines</strong> - Same sequence for sleep, feeding; baby's brain learns patterns, anticipation</li>
+                            </ul>
+                        </div>
+                    </div>
+
                     <div class="care-card recommendations">
                         <div class="card-header">
                             <svg class="card-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -812,6 +1067,76 @@
                                 <li><strong>Sing action songs</strong> - "Itsy Bitsy Spider" with hand motions; baby watches and begins learning connection between words and actions</li>
                                 <li><strong>Establish routines</strong> - Consistent patterns for eating, sleeping, bathing help baby learn to anticipate what comes next</li>
                                 <li><strong>Name body parts</strong> - During diaper changes, bath: "These are your toes," "Here's your belly"; early vocabulary building</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="care-card language-dev">
+                        <div class="card-header">
+                            <svg class="card-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
+                                <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
+                                <circle cx="12" cy="12" r="2"/>
+                                <path d="M12 10v8"/>
+                            </svg>
+                            <h3 data-i18n="sections.languageDev">English Language Development</h3>
+                        </div>
+                        <div class="card-content">
+                            <ul class="responsibility-list" data-content="phase4.languageDev">
+                                <li><strong>Expand vocabulary input</strong> - Aim for 20,000+ words daily; use complete sentences, not just single words</li>
+                                <li><strong>Describe everything in detail</strong> - "I'm picking up your RED rattle. It makes a LOUD sound. Can you hear it?"</li>
+                                <li><strong>Ask questions in English</strong> - Even though baby can't answer: "Are you hungry? Should we eat?" - models conversation</li>
+                                <li><strong>Read interactive English books</strong> - Touch-and-feel books, lift-the-flap; combine language with tactile experience</li>
+                                <li><strong>Sing action songs</strong> - "Itsy Bitsy Spider," "Pat-a-Cake" with hand motions; links language with movement</li>
+                                <li><strong>Respond to baby's babbling</strong> - Treat coos and gurgles as conversation; elaborate: "Goo? Yes, you're feeling good!"</li>
+                                <li><strong>Introduce word categories</strong> - Group words: colors, animals, body parts; builds semantic networks in brain</li>
+                                <li><strong>Use different tones</strong> - Excited, calm, questioning voices; teaches emotional content of language</li>
+                                <li><strong>Bilingual approach (if applicable)</strong> - One parent one language (OPOL) or time/place-based; be consistent</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="care-card motor-dev">
+                        <div class="card-header">
+                            <svg class="card-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+                            </svg>
+                            <h3 data-i18n="sections.motorDev">Physical & Motor Development</h3>
+                        </div>
+                        <div class="card-content">
+                            <ul class="responsibility-list" data-content="phase4.motorDev">
+                                <li><strong>Increase tummy time</strong> - Work up to 20-30 minutes daily total; baby should lift head 45-90 degrees by 3 months</li>
+                                <li><strong>Encourage reaching and batting</strong> - Hold toys within reach; baby learning hand-eye coordination</li>
+                                <li><strong>Practice supported sitting</strong> - Prop with pillows or sit baby on lap; helps develop core muscles</li>
+                                <li><strong>Introduce hand-to-hand transfer</strong> - Offer toys to one hand; baby may start bringing to midline</li>
+                                <li><strong>Provide grasp practice</strong> - Rattles, teething rings; baby's grasp reflex becoming voluntary</li>
+                                <li><strong>Play on different surfaces</strong> - Firm mat, soft blanket, grass (supervised); varied textures stimulate sensory development</li>
+                                <li><strong>Baby swimming intro</strong> - Parent-baby swim classes (if comfortable); water provides resistance, builds strength</li>
+                                <li><strong>Track rolling progress</strong> - Some babies begin rolling tummy-to-back; never leave on elevated surface</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="care-card brain-dev">
+                        <div class="card-header">
+                            <svg class="card-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"/>
+                                <path d="M12 16v-4"/>
+                                <path d="M12 8h.01"/>
+                            </svg>
+                            <h3 data-i18n="sections.brainDev">Brain & Cognitive Development</h3>
+                        </div>
+                        <div class="card-content">
+                            <ul class="responsibility-list" data-content="phase4.brainDev">
+                                <li><strong>Introduce cause-and-effect toys</strong> - Rattles, squeeze toys, activity gyms; baby learning actions have results</li>
+                                <li><strong>Play peek-a-boo</strong> - Begins teaching object permanence; laying groundwork for understanding things exist when not visible</li>
+                                <li><strong>Provide tracking practice</strong> - Move objects slowly for baby to follow with eyes; visual cortex development</li>
+                                <li><strong>Mirror play</strong> - Baby fascinated by faces in mirror; promotes self-awareness (won't recognize self yet)</li>
+                                <li><strong>Varied textures to touch</strong> - Soft, rough, smooth, crinkly; builds sensory neural pathways</li>
+                                <li><strong>Predictable social games</strong> - Same games (peek-a-boo, "So Big") daily; baby learns to anticipate</li>
+                                <li><strong>Respond contingently</strong> - When baby acts, respond immediately and appropriately; teaches baby they have agency</li>
+                                <li><strong>Avoid overstimulation</strong> - Watch for tired cues; overwhelmed babies can't learn effectively</li>
+                                <li><strong>Encourage problem-solving</strong> - Place toy slightly out of reach; let baby figure out how to get it (assist if frustrated)</li>
                             </ul>
                         </div>
                     </div>
@@ -1014,6 +1339,81 @@
                                 <li><strong>Respond to babbling with conversation</strong> - Treat baby's sounds as real communication; elaborate on what they might be saying</li>
                                 <li><strong>Read with interaction</strong> - Let baby hold book, turn pages (even if incorrectly); builds early literacy foundation</li>
                                 <li><strong>Music and movement</strong> - Dance with baby, vary tempo and rhythm; supports physical development and joy in movement</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="care-card language-dev">
+                        <div class="card-header">
+                            <svg class="card-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
+                                <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
+                                <circle cx="12" cy="12" r="2"/>
+                                <path d="M12 10v8"/>
+                            </svg>
+                            <h3 data-i18n="sections.languageDev">English Language Development</h3>
+                        </div>
+                        <div class="card-content">
+                            <ul class="responsibility-list" data-content="phase5.languageDev">
+                                <li><strong>Name everything repeatedly</strong> - "Ball. This is a ball. The ball is red. Roll the ball!" - repetition in varied sentences</li>
+                                <li><strong>Introduce action words</strong> - "Eat, drink, sleep, play, jump, clap" - use with corresponding actions</li>
+                                <li><strong>Read the same books repeatedly</strong> - Repetition helps language acquisition; babies love familiar stories</li>
+                                <li><strong>Use fill-in-the-blank</strong> - "The cow says...moo!" - pause for baby to anticipate (won't say words yet, but learning)</li>
+                                <li><strong>Introduce simple signs</strong> - "Milk," "More," "All done" in English; sign language can accelerate language development</li>
+                                <li><strong>Expand baby's sounds</strong> - Baby says "ba-ba"; you respond "Ba-ba! Yes, bottle! Want your bottle?"</li>
+                                <li><strong>Use parallel talk</strong> - Describe what baby is doing: "You're reaching for the toy. You grabbed it!"</li>
+                                <li><strong>Sing alphabet songs</strong> - ABC song, phonics songs; early literacy foundation</li>
+                                <li><strong>Avoid simplified speech too much</strong> - Use "banana" not "nana"; proper words build proper vocabulary</li>
+                                <li><strong>Library visits</strong> - Expose to book-rich environment; let baby see others reading</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="care-card motor-dev">
+                        <div class="card-header">
+                            <svg class="card-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+                            </svg>
+                            <h3 data-i18n="sections.motorDev">Physical & Motor Development</h3>
+                        </div>
+                        <div class="card-content">
+                            <ul class="responsibility-list" data-content="phase5.motorDev">
+                                <li><strong>Support independent sitting</strong> - Prop with pillows; most babies sit with support by 6 months, some independently</li>
+                                <li><strong>Encourage rolling both directions</strong> - Tummy to back and back to tummy; full rotation develops coordination</li>
+                                <li><strong>Provide standing practice</strong> - Hold baby in standing position; bounce gently; builds leg strength for future walking</li>
+                                <li><strong>Introduce bouncer/jumper</strong> - Limit to 15-20 minutes; strengthens legs but doesn't replace floor play</li>
+                                <li><strong>Practice reaching from different positions</strong> - Sitting, tummy, back, side; varied positions develop different muscle groups</li>
+                                <li><strong>Offer two-handed toys</strong> - Toys requiring both hands promote bilateral coordination</li>
+                                <li><strong>Crawling preparation</strong> - Place toys just out of reach during tummy time; encourages forward movement</li>
+                                <li><strong>Introduce swimming</strong> - If not already; water play promotes full-body coordination and strength</li>
+                                <li><strong>Baby yoga/stretching</strong> - Gentle stretches, "bicycle" legs; improves flexibility and body awareness</li>
+                                <li><strong>Provide climbing opportunities</strong> - Supervised climbing on parent's body, over pillows; builds spatial awareness</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="care-card brain-dev">
+                        <div class="card-header">
+                            <svg class="card-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"/>
+                                <path d="M12 16v-4"/>
+                                <path d="M12 8h.01"/>
+                            </svg>
+                            <h3 data-i18n="sections.brainDev">Brain & Cognitive Development</h3>
+                        </div>
+                        <div class="card-content">
+                            <ul class="responsibility-list" data-content="phase5.brainDev">
+                                <li><strong>Peek-a-boo advancement</strong> - Baby may start to pull cloth off own face; understanding object permanence developing</li>
+                                <li><strong>Introduce problem-solving toys</strong> - Stacking cups, shape sorters (will just mouth them now; that's learning too)</li>
+                                <li><strong>Cause-and-effect escalation</strong> - Toys with buttons to push, levers; baby learning they can make things happen</li>
+                                <li><strong>Provide choices</strong> - Hold up two toys: "Which one?" Baby choosing (by looking or reaching) is cognitive exercise</li>
+                                <li><strong>Name emotions</strong> - "You're happy! You're excited! You look tired" - emotional intelligence development</li>
+                                <li><strong>Encourage imitation</strong> - Stick out tongue, clap hands; baby may try to copy; early learning strategy</li>
+                                <li><strong>Hide-and-seek with toys</strong> - Partially hide toy under cloth; baby may reach for it; object permanence practice</li>
+                                <li><strong>Varied environments</strong> - Different rooms, outdoor spaces; new environments create new neural connections</li>
+                                <li><strong>Social observation</strong> - Let baby watch other children (safely); babies learn by observation</li>
+                                <li><strong>Predictable routines with variation</strong> - Consistent pattern (bath-book-bed) but vary books, songs; balance security and novelty</li>
+                                <li><strong>Limit distractions during interaction</strong> - Turn off TV, put away phone; quality attention builds better brains than multitasking</li>
                             </ul>
                         </div>
                     </div>

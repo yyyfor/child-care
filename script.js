@@ -382,14 +382,20 @@ class ReadingTimeEstimator {
 class AuthManager {
     constructor() {
         this.currentUser = null;
+        this.firebaseImports = null;
         this.init();
     }
 
     async init() {
         try {
-            // Import Firebase functions
-            const { auth, onAuthStateChanged } = await import('./firebase-config.js');
-            this.auth = auth;
+            // Import all Firebase functions needed for auth
+            const firebaseImports = await import('./firebase-config.js');
+            this.auth = firebaseImports.auth;
+            this.firebaseImports = firebaseImports;
+            console.log('AuthManager: Firebase loaded successfully', {
+                authAvailable: !!this.auth,
+                importsAvailable: !!this.firebaseImports
+            });
         } catch (error) {
             console.error('Failed to load Firebase:', error);
             this.showFirebaseBlockedError();
@@ -416,13 +422,22 @@ class AuthManager {
         this.setupEventListeners();
 
         // Listen for auth state changes
-        onAuthStateChanged(this.auth, (user) => {
-            this.currentUser = user;
-            this.updateUI();
-            if (user && window.notesManager) {
-                window.notesManager.setUser(user);
-            }
-        });
+        if (this.firebaseImports && this.firebaseImports.onAuthStateChanged && this.auth) {
+            this.firebaseImports.onAuthStateChanged(this.auth, (user) => {
+                console.log('AuthManager: Auth state changed, user:', user ? user.email : 'none');
+                this.currentUser = user;
+                this.updateUI();
+                if (user && window.notesManager) {
+                    window.notesManager.setUser(user);
+                }
+            });
+        } else {
+            console.error('AuthManager: onAuthStateChanged or auth not available', {
+                imports: !!this.firebaseImports,
+                onAuthStateChanged: !!this.firebaseImports?.onAuthStateChanged,
+                auth: !!this.auth
+            });
+        }
     }
 
     setupEventListeners() {
@@ -456,11 +471,17 @@ class AuthManager {
         const email = document.getElementById('loginEmail').value;
         const password = document.getElementById('loginPassword').value;
 
+        if (!this.firebaseImports || !this.firebaseImports.signInWithEmailAndPassword) {
+            console.error('Firebase imports not available');
+            this.showError({ code: 'auth/firebase-error' });
+            return;
+        }
+
         try {
-            const { signInWithEmailAndPassword } = await import('./firebase-config.js');
-            await signInWithEmailAndPassword(this.auth, email, password);
+            await this.firebaseImports.signInWithEmailAndPassword(this.auth, email, password);
             this.loginForm.reset();
             this.hideError();
+            console.log('AuthManager: Login successful');
         } catch (error) {
             console.error('Login error:', error);
             console.error('Error code:', error.code);
@@ -475,16 +496,22 @@ class AuthManager {
         const password = document.getElementById('signupPassword').value;
         const confirmPassword = document.getElementById('signupPasswordConfirm').value;
 
+        if (!this.firebaseImports || !this.firebaseImports.createUserWithEmailAndPassword) {
+            console.error('Firebase imports not available');
+            this.showError({ code: 'auth/firebase-error' });
+            return;
+        }
+
         if (password !== confirmPassword) {
             this.showError({ code: 'auth/password-mismatch' });
             return;
         }
 
         try {
-            const { createUserWithEmailAndPassword } = await import('./firebase-config.js');
-            await createUserWithEmailAndPassword(this.auth, email, password);
+            await this.firebaseImports.createUserWithEmailAndPassword(this.auth, email, password);
             this.signupForm.reset();
             this.hideError();
+            console.log('AuthManager: Signup successful');
         } catch (error) {
             console.error('Signup error:', error);
             console.error('Error code:', error.code);
@@ -494,9 +521,14 @@ class AuthManager {
     }
 
     async handleSignOut() {
+        if (!this.firebaseImports || !this.firebaseImports.signOut) {
+            console.error('Firebase imports not available');
+            return;
+        }
+
         try {
-            const { signOut } = await import('./firebase-config.js');
-            await signOut(this.auth);
+            await this.firebaseImports.signOut(this.auth);
+            console.log('AuthManager: Sign out successful');
         } catch (error) {
             console.error('Sign out error:', error);
         }

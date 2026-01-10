@@ -404,7 +404,13 @@ class AuthManager {
         this.userEmail = document.getElementById('userEmail');
         this.authError = document.getElementById('authError');
 
-        if (!this.authSection) return;
+        console.log('AuthManager: authSection found:', !!this.authSection);
+        console.log('AuthManager: userSection found:', !!this.userSection);
+
+        if (!this.authSection) {
+            console.error('AuthManager: authSection element not found!');
+            return;
+        }
 
         // Set up event listeners
         this.setupEventListeners();
@@ -502,10 +508,12 @@ class AuthManager {
             this.authSection.style.display = 'none';
             this.userSection.style.display = 'block';
             this.userEmail.textContent = this.currentUser.email;
+            console.log('AuthManager: User logged in:', this.currentUser.email);
         } else {
             // User is logged out
             this.authSection.style.display = 'block';
             this.userSection.style.display = 'none';
+            console.log('AuthManager: User not logged in, showing auth section');
         }
     }
 
@@ -959,7 +967,12 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // Auth Manager (initialize first)
-    window.authManager = new AuthManager();
+    try {
+        window.authManager = new AuthManager();
+        console.log('AuthManager initialized successfully');
+    } catch (error) {
+        console.error('Failed to initialize AuthManager:', error);
+    }
 
     // Notes Manager (make it global so onclick handlers can access it)
     window.notesManager = new NotesManager();

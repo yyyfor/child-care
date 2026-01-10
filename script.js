@@ -382,19 +382,25 @@ class ReadingTimeEstimator {
 class AuthManager {
     constructor() {
         this.currentUser = null;
-        this.firebaseImports = null;
+        this.fb = null;
         this.init();
     }
 
     async init() {
         try {
             // Import all Firebase functions needed for auth
+            console.log('AuthManager: Attempting to load Firebase...');
             const firebaseImports = await import('./firebase-config.js');
-            this.auth = firebaseImports.auth;
-            this.firebaseImports = firebaseImports;
+            this.fb = firebaseImports;
+
+            if (!this.fb.auth) {
+                throw new Error('Firebase auth not exported from firebase-config.js');
+            }
+
             console.log('AuthManager: Firebase loaded successfully', {
-                authAvailable: !!this.auth,
-                importsAvailable: !!this.firebaseImports
+                authAvailable: !!this.fb.auth,
+                onAuthStateChangedAvailable: !!this.fb.onAuthStateChanged,
+                allExports: Object.keys(this.fb)
             });
         } catch (error) {
             console.error('Failed to load Firebase:', error);
@@ -410,8 +416,12 @@ class AuthManager {
         this.userEmail = document.getElementById('userEmail');
         this.authError = document.getElementById('authError');
 
-        console.log('AuthManager: authSection found:', !!this.authSection);
-        console.log('AuthManager: userSection found:', !!this.userSection);
+        console.log('AuthManager: DOM elements found', {
+            authSection: !!this.authSection,
+            userSection: !!this.userSection,
+            loginForm: !!this.loginForm,
+            signupForm: !!this.signupForm
+        });
 
         if (!this.authSection) {
             console.error('AuthManager: authSection element not found!');
@@ -422,20 +432,25 @@ class AuthManager {
         this.setupEventListeners();
 
         // Listen for auth state changes
-        if (this.firebaseImports && this.firebaseImports.onAuthStateChanged && this.auth) {
-            this.firebaseImports.onAuthStateChanged(this.auth, (user) => {
-                console.log('AuthManager: Auth state changed, user:', user ? user.email : 'none');
-                this.currentUser = user;
-                this.updateUI();
-                if (user && window.notesManager) {
-                    window.notesManager.setUser(user);
-                }
-            });
+        if (this.fb && this.fb.onAuthStateChanged && this.fb.auth) {
+            try {
+                this.fb.onAuthStateChanged(this.fb.auth, (user) => {
+                    console.log('AuthManager: Auth state changed, user:', user ? user.email : 'none');
+                    this.currentUser = user;
+                    this.updateUI();
+                    if (user && window.notesManager) {
+                        window.notesManager.setUser(user);
+                    }
+                });
+                console.log('AuthManager: Auth state listener registered successfully');
+            } catch (error) {
+                console.error('AuthManager: Failed to set up auth state listener:', error);
+            }
         } else {
-            console.error('AuthManager: onAuthStateChanged or auth not available', {
-                imports: !!this.firebaseImports,
-                onAuthStateChanged: !!this.firebaseImports?.onAuthStateChanged,
-                auth: !!this.auth
+            console.error('AuthManager: Cannot set up auth state listener', {
+                fbAvailable: !!this.fb,
+                onAuthStateChangedAvailable: !!this.fb?.onAuthStateChanged,
+                authAvailable: !!this.fb?.auth
             });
         }
     }
@@ -471,17 +486,18 @@ class AuthManager {
         const email = document.getElementById('loginEmail').value;
         const password = document.getElementById('loginPassword').value;
 
-        if (!this.firebaseImports || !this.firebaseImports.signInWithEmailAndPassword) {
-            console.error('Firebase imports not available');
+        if (!this.fb || !this.fb.signInWithEmailAndPassword || !this.fb.auth) {
+            console.error('Firebase not available');
             this.showError({ code: 'auth/firebase-error' });
             return;
         }
 
         try {
-            await this.firebaseImports.signInWithEmailAndPassword(this.auth, email, password);
+            console.log('AuthManager: Attempting login for', email);
+            await this.fb.signInWithEmailAndPassword(this.fb.auth, email, password);
             this.loginForm.reset();
             this.hideError();
-            console.log('AuthManager: Login successful');
+            console.log('AuthManager: Login initiated');
         } catch (error) {
             console.error('Login error:', error);
             console.error('Error code:', error.code);
@@ -496,8 +512,8 @@ class AuthManager {
         const password = document.getElementById('signupPassword').value;
         const confirmPassword = document.getElementById('signupPasswordConfirm').value;
 
-        if (!this.firebaseImports || !this.firebaseImports.createUserWithEmailAndPassword) {
-            console.error('Firebase imports not available');
+        if (!this.fb || !this.fb.createUserWithEmailAndPassword || !this.fb.auth) {
+            console.error('Firebase not available');
             this.showError({ code: 'auth/firebase-error' });
             return;
         }
@@ -508,10 +524,11 @@ class AuthManager {
         }
 
         try {
-            await this.firebaseImports.createUserWithEmailAndPassword(this.auth, email, password);
+            console.log('AuthManager: Attempting signup for', email);
+            await this.fb.createUserWithEmailAndPassword(this.fb.auth, email, password);
             this.signupForm.reset();
             this.hideError();
-            console.log('AuthManager: Signup successful');
+            console.log('AuthManager: Signup initiated');
         } catch (error) {
             console.error('Signup error:', error);
             console.error('Error code:', error.code);
@@ -521,14 +538,15 @@ class AuthManager {
     }
 
     async handleSignOut() {
-        if (!this.firebaseImports || !this.firebaseImports.signOut) {
-            console.error('Firebase imports not available');
+        if (!this.fb || !this.fb.signOut || !this.fb.auth) {
+            console.error('Firebase not available');
             return;
         }
 
         try {
-            await this.firebaseImports.signOut(this.auth);
-            console.log('AuthManager: Sign out successful');
+            console.log('AuthManager: Attempting sign out');
+            await this.fb.signOut(this.fb.auth);
+            console.log('AuthManager: Sign out completed');
         } catch (error) {
             console.error('Sign out error:', error);
         }
@@ -630,10 +648,20 @@ class NotesManager {
         this.editingPhase = null;
         this.currentUser = null;
         this.unsubscribe = null;
+        this.fb = null;
         this.init();
     }
 
     async init() {
+        // Load Firebase imports
+        try {
+            console.log('NotesManager: Loading Firebase imports...');
+            this.fb = await import('./firebase-config.js');
+            console.log('NotesManager: Firebase imports loaded');
+        } catch (error) {
+            console.error('NotesManager: Failed to load Firebase:', error);
+        }
+
         // Get all note forms (one per phase)
         this.noteForms = document.querySelectorAll('.note-form');
 
@@ -678,19 +706,24 @@ class NotesManager {
     }
 
     async loadNotesFromFirestore() {
+        if (!this.fb || !this.currentUser) {
+            console.error('NotesManager: Firebase or user not available');
+            return;
+        }
+
         try {
-            const { db, collection, query, orderBy, onSnapshot } = await import('./firebase-config.js');
-            const notesRef = collection(db, 'users', this.currentUser.uid, 'notes');
-            const q = query(notesRef, orderBy('timestamp', 'desc'));
+            const notesRef = this.fb.collection(this.fb.db, 'users', this.currentUser.uid, 'notes');
+            const q = this.fb.query(notesRef, this.fb.orderBy('timestamp', 'desc'));
 
             // Real-time listener
-            this.unsubscribe = onSnapshot(q, (snapshot) => {
+            this.unsubscribe = this.fb.onSnapshot(q, (snapshot) => {
                 this.notes = snapshot.docs.map(doc => ({
                     id: doc.id,
                     ...doc.data(),
                     dateDisplay: doc.data().timestamp?.toDate().toLocaleDateString() || 'N/A'
                 }));
                 this.renderAllPhases();
+                console.log('NotesManager: Loaded', this.notes.length, 'notes');
             });
         } catch (error) {
             console.error('Error loading notes:', error);
@@ -700,7 +733,7 @@ class NotesManager {
     async handleSubmit(e) {
         e.preventDefault();
 
-        if (!this.currentUser) return;
+        if (!this.currentUser || !this.fb) return;
 
         const form = e.target;
         const phase = parseInt(form.dataset.phase);
@@ -720,17 +753,17 @@ class NotesManager {
         try {
             if (this.editingNoteId && this.editingPhase === phase) {
                 // Update existing note
-                const { db, doc, updateDoc, serverTimestamp } = await import('./firebase-config.js');
-                const noteRef = doc(db, 'users', this.currentUser.uid, 'notes', this.editingNoteId);
-                await updateDoc(noteRef, { ...noteData, timestamp: serverTimestamp() });
+                const noteRef = this.fb.doc(this.fb.db, 'users', this.currentUser.uid, 'notes', this.editingNoteId);
+                await this.fb.updateDoc(noteRef, { ...noteData, timestamp: this.fb.serverTimestamp() });
                 this.editingNoteId = null;
                 this.editingPhase = null;
                 form.querySelector('.cancel-edit-btn').style.display = 'none';
+                console.log('NotesManager: Updated note', this.editingNoteId);
             } else {
                 // Add new note
-                const { db, collection, addDoc, serverTimestamp } = await import('./firebase-config.js');
-                const notesRef = collection(db, 'users', this.currentUser.uid, 'notes');
-                await addDoc(notesRef, { ...noteData, timestamp: serverTimestamp() });
+                const notesRef = this.fb.collection(this.fb.db, 'users', this.currentUser.uid, 'notes');
+                await this.fb.addDoc(notesRef, { ...noteData, timestamp: this.fb.serverTimestamp() });
+                console.log('NotesManager: Created new note');
             }
 
             form.reset();
@@ -782,14 +815,19 @@ class NotesManager {
     }
 
     async deleteNote(id) {
+        if (!this.fb || !this.currentUser) {
+            console.error('NotesManager: Firebase or user not available');
+            return;
+        }
+
         const lang = window.languageManager?.getCurrentLanguage() || 'en';
         const confirmMsg = lang === 'zh' ? '确定要删除这条笔记吗？' : 'Are you sure you want to delete this note?';
 
         if (confirm(confirmMsg)) {
             try {
-                const { db, doc, deleteDoc } = await import('./firebase-config.js');
-                const noteRef = doc(db, 'users', this.currentUser.uid, 'notes', id);
-                await deleteDoc(noteRef);
+                const noteRef = this.fb.doc(this.fb.db, 'users', this.currentUser.uid, 'notes', id);
+                await this.fb.deleteDoc(noteRef);
+                console.log('NotesManager: Deleted note', id);
             } catch (error) {
                 console.error('Error deleting note:', error);
                 alert('Failed to delete note. Please try again.');

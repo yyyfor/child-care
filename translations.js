@@ -3,12 +3,13 @@ const translations = {
     en: {
         hero: {
             title: "Maternal & Infant Care Guide",
-            subtitle: "A comprehensive handbook for parents from late pregnancy through baby's first 6 months",
+            subtitle: "A comprehensive handbook for parents from pre-pregnancy planning through baby's first 6 months",
             badge1: "Professional Care Planning",
             badge2: "Evidence-Based Guidance",
             badge3: "First-Time Parents"
         },
         nav: {
+            phase0: "Pre-pregnancy",
             phase1: "Before Labor",
             phase2: "During Labor",
             phase3: "0-1 Month",
@@ -17,10 +18,14 @@ const translations = {
             notes: "Notes"
         },
         intro: {
-            text: "This guide provides structured, actionable guidance for both mother and father through five critical stages of early parenthood. Each phase includes specific responsibilities, safety protocols, required preparations, and professional recommendations often overlooked by first-time parents.",
+            text: "This guide provides structured, actionable guidance for both mother and father through six critical stages from pre-pregnancy through baby's first 6 months. Each phase includes specific responsibilities, safety protocols, required preparations, and professional recommendations often overlooked by first-time parents.",
             printBtn: "Print Guide"
         },
         phases: {
+            phase0: {
+                title: "Pre-pregnancy Preparation",
+                description: "Planning and preparing before conception (Months 1-6 before pregnancy)"
+            },
             phase1: {
                 title: "Before Labor",
                 description: "Late pregnancy & pre-delivery preparation (Weeks 32-40)"
@@ -116,12 +121,13 @@ const translations = {
     zh: {
         hero: {
             title: "母婴护理指南",
-            subtitle: "从孕晚期到宝宝6个月的全面育儿手册",
+            subtitle: "从备孕准备到宝宝6个月的全面育儿手册",
             badge1: "专业护理规划",
             badge2: "循证医学指导",
             badge3: "新手父母必读"
         },
         nav: {
+            phase0: "备孕准备",
             phase1: "产前准备",
             phase2: "分娩期间",
             phase3: "出生-1个月",
@@ -130,10 +136,14 @@ const translations = {
             notes: "笔记"
         },
         intro: {
-            text: "本指南为父母双方提供从孕晚期到宝宝出生后六个月期间五个关键阶段的结构化、可操作性指导。每个阶段都包含具体职责、安全须知、必要准备事项，以及新手父母容易忽视的专业建议。",
+            text: "本指南为父母双方提供从备孕准备到宝宝出生后六个月期间六个关键阶段的结构化、可操作性指导。每个阶段都包含具体职责、安全须知、必要准备事项，以及新手父母容易忽视的专业建议。",
             printBtn: "打印指南"
         },
         phases: {
+            phase0: {
+                title: "备孕准备",
+                description: "怀孕前的规划和准备（怀孕前1-6个月）"
+            },
             phase1: {
                 title: "产前准备",
                 description: "孕晚期及产前准备（孕32-40周）"

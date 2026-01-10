@@ -2,7 +2,7 @@
 class CareGuideNavigator {
     constructor() {
         this.currentPhase = 0;
-        this.totalPhases = 5;
+        this.totalPhases = 6;
         this.phaseButtons = document.querySelectorAll('.phase-button');
         this.phaseSections = document.querySelectorAll('.phase-section');
         this.timelineProgress = document.getElementById('timelineProgress');
@@ -773,7 +773,7 @@ class NotesManager {
     }
 
     renderAllPhases() {
-        for (let phase = 0; phase < 5; phase++) {
+        for (let phase = 0; phase < 6; phase++) {
             this.renderPhase(phase);
         }
     }

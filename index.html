@@ -133,7 +133,7 @@
     </aside>
     <div class="navigator-overlay" id="navigatorOverlay"></div>
 
-    <main class="main-content">
+    <main class="main-content" id="main-content">
         <div class="container">
             <div class="content-intro">
                 <p class="intro-text" data-i18n="intro.text">This guide provides structured, actionable guidance for both mother and father through five critical stages of early parenthood. Each phase includes specific responsibilities, safety protocols, required preparations, and professional recommendations often overlooked by first-time parents.</p>
@@ -144,6 +144,90 @@
                     <span data-i18n="intro.printBtn">Print Guide</span>
                 </button>
             </div>
+
+            <section class="expert-essentials" aria-labelledby="expertEssentialsTitle">
+                <div class="essentials-header">
+                    <h2 id="expertEssentialsTitle" data-i18n="expert.title">Care Essentials Snapshot</h2>
+                    <p data-i18n="expert.subtitle">A quick expert reference for urgent red flags, daily care priorities, and parent wellbeing check-ins.</p>
+                    <p class="expert-reference" data-i18n="expert.reference">Aligned to CDC urgent maternal warning signs and CDC/AAP infant warning-sign guidance (reviewed February 17, 2026).</p>
+                </div>
+
+                <div class="essentials-grid">
+                    <article class="essentials-card urgent">
+                        <h3 data-i18n="expert.urgent.title">Urgent Warning Signs (Seek Care Now)</h3>
+                        <p class="card-note" data-i18n="expert.urgent.note">If symptoms are severe, sudden, or feel unsafe, contact emergency services right away.</p>
+                        <div class="urgent-columns">
+                            <div>
+                                <h4 data-i18n="expert.urgent.motherTitle">Postpartum Mother</h4>
+                                <ul class="essentials-list warning">
+                                    <li data-i18n="expert.urgent.m1">Heavy bleeding (soaking a pad within 1 hour) or passing large clots.</li>
+                                    <li data-i18n="expert.urgent.m2">Severe headache, vision changes, chest pain, or trouble breathing.</li>
+                                    <li data-i18n="expert.urgent.m3">Fever of 100.4F/38C or higher, especially with chills or foul discharge.</li>
+                                    <li data-i18n="expert.urgent.m4">Persistent sadness, panic, or thoughts of self-harm or harming baby.</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4 data-i18n="expert.urgent.babyTitle">Baby (0-6 Months)</h4>
+                                <ul class="essentials-list warning">
+                                    <li data-i18n="expert.urgent.b1">Breathing difficulty, blue/gray skin color, or unusual limpness.</li>
+                                    <li data-i18n="expert.urgent.b2">Fever 100.4F/38C or higher in babies under 3 months.</li>
+                                    <li data-i18n="expert.urgent.b3">Poor feeding with fewer wet diapers, repeated vomiting, or no wake periods.</li>
+                                    <li data-i18n="expert.urgent.b4">Seizure-like movement, persistent high-pitched crying, or hard-to-arouse state.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="essentials-card rhythm">
+                        <h3 data-i18n="expert.rhythm.title">Daily Care Rhythm by Stage</h3>
+                        <div class="rhythm-table-wrap">
+                            <table class="rhythm-table">
+                                <thead>
+                                    <tr>
+                                        <th data-i18n="expert.rhythm.colStage">Stage</th>
+                                        <th data-i18n="expert.rhythm.colFocus">Primary Focus</th>
+                                        <th data-i18n="expert.rhythm.colAction">Daily Anchor Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td data-i18n="expert.rhythm.r0s">Before Birth</td>
+                                        <td data-i18n="expert.rhythm.r0f">Safety prep and realistic support plan</td>
+                                        <td data-i18n="expert.rhythm.r0a">10-minute evening check-in between parents</td>
+                                    </tr>
+                                    <tr>
+                                        <td data-i18n="expert.rhythm.r1s">0-1 Month</td>
+                                        <td data-i18n="expert.rhythm.r1f">Feeding, recovery, and sleep protection</td>
+                                        <td data-i18n="expert.rhythm.r1a">Track feeds, diapers, and one parent rest block</td>
+                                    </tr>
+                                    <tr>
+                                        <td data-i18n="expert.rhythm.r2s">1-3 Months</td>
+                                        <td data-i18n="expert.rhythm.r2f">Pattern building and bonding</td>
+                                        <td data-i18n="expert.rhythm.r2a">Use one repeatable bedtime routine (bath-book-song)</td>
+                                    </tr>
+                                    <tr>
+                                        <td data-i18n="expert.rhythm.r3s">3-6 Months</td>
+                                        <td data-i18n="expert.rhythm.r3f">Developmental play and caregiver consistency</td>
+                                        <td data-i18n="expert.rhythm.r3a">Schedule floor play, tummy time, and face-to-face talk daily</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </article>
+
+                    <article class="essentials-card wellbeing">
+                        <h3 data-i18n="expert.wellbeing.title">Parent Wellbeing Check-In</h3>
+                        <ul class="essentials-list check">
+                            <li data-i18n="expert.wellbeing.q1">Did each parent get at least one uninterrupted rest window today?</li>
+                            <li data-i18n="expert.wellbeing.q2">Did we ask for help early instead of waiting until burnout?</li>
+                            <li data-i18n="expert.wellbeing.q3">Did we spend 10 minutes talking about logistics and emotions?</li>
+                            <li data-i18n="expert.wellbeing.q4">Are feeding expectations matched to baby age and current growth?</li>
+                            <li data-i18n="expert.wellbeing.q5">Are we noticing signs that need pediatric or postpartum follow-up?</li>
+                        </ul>
+                        <p class="card-note" data-i18n="expert.wellbeing.note">Small daily adjustments prevent bigger stress cycles. Progress matters more than perfection.</p>
+                    </article>
+                </div>
+            </section>
 
             <!-- Global Authentication Section -->
             <div id="authSection" class="auth-section">

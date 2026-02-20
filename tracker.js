@@ -21,6 +21,7 @@ class SharedTracker {
     constructor() {
         this.selectedType = 'feeding';
         this.records = [];
+        this.isSubmitting = false;
 
         this.form = document.getElementById('logForm');
         this.startAtInput = document.getElementById('startAt');
@@ -28,6 +29,7 @@ class SharedTracker {
         this.noteInput = document.getElementById('note');
         this.statusMessage = document.getElementById('statusMessage');
         this.recordsList = document.getElementById('recordsList');
+        this.submitButton = this.form.querySelector('.submit-btn');
 
         this.feedingCount = document.getElementById('feedingCount');
         this.poopCount = document.getElementById('poopCount');
@@ -95,6 +97,7 @@ class SharedTracker {
     setupForm() {
         this.form.addEventListener('submit', async (event) => {
             event.preventDefault();
+            if (this.isSubmitting) return;
 
             const startAtRaw = this.startAtInput.value;
             const durationMinutes = parseInt(this.durationInput.value, 10);
@@ -125,13 +128,20 @@ class SharedTracker {
             };
 
             try {
+                this.setSubmitting(true);
+                this.showStatus('正在保存到云端，请稍候...', 'info');
                 const sharedRef = collection(db, COLLECTION_NAME);
                 await addDoc(sharedRef, payload);
                 this.noteInput.value = '';
-                this.showStatus('记录成功，已同步给所有用户', 'success');
+                this.showStatus('记录已保存到云端，所有用户可见', 'success');
             } catch (error) {
                 console.error('Failed to create shared record:', error);
-                this.showStatus('写入失败：请检查 Firestore 规则是否允许匿名读写', 'error');
+                const reason = error?.code === 'permission-denied'
+                    ? '权限不足（Firestore rules）'
+                    : `错误：${error?.code || 'unknown'}`;
+                this.showStatus(`写入失败：${reason}`, 'error');
+            } finally {
+                this.setSubmitting(false);
             }
         });
     }
@@ -143,12 +153,19 @@ class SharedTracker {
         onSnapshot(
             q,
             (snapshot) => {
-                this.records = snapshot.docs.slice(0, MAX_RECORDS).map((docRef) => ({ id: docRef.id, ...docRef.data() }));
+                this.records = snapshot.docs.slice(0, MAX_RECORDS).map((docRef) => ({
+                    id: docRef.id,
+                    pending: docRef.metadata.hasPendingWrites,
+                    ...docRef.data()
+                }));
                 this.render();
             },
             (error) => {
                 console.error('Failed to subscribe shared records:', error);
-                this.showStatus('读取失败：请检查 Firestore 规则是否允许匿名读写', 'error');
+                const reason = error?.code === 'permission-denied'
+                    ? '读取被 Firestore rules 拒绝'
+                    : `错误：${error?.code || 'unknown'}`;
+                this.showStatus(`读取失败：${reason}`, 'error');
                 this.recordsList.innerHTML = '<p class="empty-text">暂无可读取的数据</p>';
             }
         );
@@ -180,6 +197,11 @@ class SharedTracker {
             return;
         }
 
+        const pendingCount = this.records.filter((item) => item.pending).length;
+        if (pendingCount > 0) {
+            this.showStatus(`有 ${pendingCount} 条记录正在同步中，请勿立即刷新页面`, 'info');
+        }
+
         this.recordsList.innerHTML = this.records.map((item) => this.recordItemHTML(item)).join('');
     }
 
@@ -197,7 +219,7 @@ class SharedTracker {
             <article class="record-item">
                 <div class="record-top">
                     <span class="record-type">${cfg.icon} ${cfg.label}</span>
-                    <span class="record-time">${startText}</span>
+                    <span class="record-time">${startText}${item.pending ? ' · 同步中' : ''}</span>
                 </div>
                 <div class="record-meta">
                     <span>开始：${startText}</span>
@@ -231,6 +253,12 @@ class SharedTracker {
     showStatus(text, type) {
         this.statusMessage.textContent = text;
         this.statusMessage.className = `status-message ${type}`;
+    }
+
+    setSubmitting(flag) {
+        this.isSubmitting = flag;
+        this.submitButton.disabled = flag;
+        this.submitButton.textContent = flag ? '保存中...' : '保存共享记录';
     }
 }
 

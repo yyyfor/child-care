@@ -147,6 +147,10 @@ input {
     font-weight: 700;
 }
 
+.submit-btn:disabled {
+    opacity: 0.72;
+}
+
 .tip {
     margin: 0;
     color: var(--color-muted);
@@ -166,6 +170,10 @@ input {
 
 .status-message.success {
     color: #1e7d39;
+}
+
+.status-message.info {
+    color: #7f5a12;
 }
 
 .summary-grid {

@@ -1,5 +1,6 @@
-const API_BASE_DEFAULT = 'https://43.167.216.37:8080/api';
+const API_BASE_DEFAULT = 'https://43.167.216.37/api';
 const API_BASE = localStorage.getItem('babyTrackerApiBase') || API_BASE_DEFAULT;
+const API_BEARER_TOKEN = 'dgYXlcM5NvuRJ44WPEZ4KCYqPJrKVTZ_';
 const MAX_RECORDS = 500;
 
 const typeConfig = {
@@ -281,6 +282,7 @@ class SharedTracker {
         const response = await fetch(`${API_BASE}${path}`, {
             headers: {
                 'Content-Type': 'application/json',
+                Authorization: `Bearer ${API_BEARER_TOKEN}`,
                 ...(options.headers || {})
             },
             ...options

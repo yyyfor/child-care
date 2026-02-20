@@ -47,6 +47,18 @@ service cloud.firestore {
         && request.resource.data.category is string;
     }
 
+    // Shared baby tracker (all users can read/write without login)
+    match /sharedBabyLogs/{logId} {
+      allow read: if true;
+      allow create: if request.resource.data.keys().hasAll(['type', 'startAtMs', 'durationMinutes', 'createdAt'])
+        && request.resource.data.type in ['feeding', 'poop', 'sleep']
+        && request.resource.data.startAtMs is number
+        && request.resource.data.durationMinutes is number
+        && request.resource.data.durationMinutes > 0
+        && request.resource.data.durationMinutes <= 720
+        && (!request.resource.data.keys().hasAny(['note']) || request.resource.data.note is string);
+    }
+
     // Deny all other access
     match /{document=**} {
       allow read, write: if false;

@@ -305,6 +305,14 @@ body {
     margin-bottom: var(--spacing-lg);
 }
 
+.intro-actions {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--spacing-sm);
+    flex-wrap: wrap;
+}
+
 .print-button {
     background: var(--color-primary);
     color: var(--color-white);
@@ -325,6 +333,27 @@ body {
 .print-button:hover {
     transform: translateY(-2px);
     box-shadow: 0 6px 24px rgba(212, 137, 108, 0.4);
+}
+
+.tracker-link-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 52px;
+    padding: var(--spacing-md) var(--spacing-lg);
+    border-radius: 50px;
+    border: 2px solid rgba(212, 137, 108, 0.3);
+    background: var(--color-white);
+    color: var(--color-primary);
+    text-decoration: none;
+    font-weight: 600;
+    transition: var(--transition);
+}
+
+.tracker-link-button:hover {
+    transform: translateY(-2px);
+    border-color: var(--color-primary);
+    box-shadow: 0 6px 20px rgba(212, 137, 108, 0.2);
 }
 
 /* Expert Essentials */
@@ -1471,6 +1500,16 @@ body {
 
     .content-intro {
         margin-bottom: var(--spacing-lg);
+    }
+
+    .intro-actions {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .print-button,
+    .tracker-link-button {
+        width: 100%;
     }
 
     .essentials-card {

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>婴儿喂养/排便/睡眠共享记录</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="tracker.css">
+</head>
+<body>
+    <header class="tracker-hero">
+        <div class="container">
+            <a href="index.html" class="back-link">← 返回主页面</a>
+            <h1>婴儿共享记录</h1>
+            <p>记录喝奶、排便、睡觉的开始时间和持续时间。所有人可见，所有人可记录。</p>
+        </div>
+    </header>
+
+    <main class="container tracker-main" id="main-content">
+        <section class="quick-panel">
+            <h2>新增记录</h2>
+            <form id="logForm" class="log-form">
+                <div class="type-segment" role="radiogroup" aria-label="记录类型">
+                    <button type="button" class="type-btn active" data-type="feeding" aria-pressed="true">🍼 喝奶</button>
+                    <button type="button" class="type-btn" data-type="poop" aria-pressed="false">💩 拉便</button>
+                    <button type="button" class="type-btn" data-type="sleep" aria-pressed="false">😴 睡觉</button>
+                </div>
+
+                <label for="startAt">开始时间</label>
+                <div class="datetime-row">
+                    <input type="datetime-local" id="startAt" required>
+                    <button type="button" id="setNow" class="ghost-btn">现在</button>
+                </div>
+
+                <label for="duration">持续时间（分钟）</label>
+                <input type="number" id="duration" min="1" max="720" inputmode="numeric" placeholder="例如 30" required>
+                <div class="preset-row" aria-label="快速时长">
+                    <button type="button" class="preset-btn" data-minutes="15">15分</button>
+                    <button type="button" class="preset-btn" data-minutes="30">30分</button>
+                    <button type="button" class="preset-btn" data-minutes="45">45分</button>
+                    <button type="button" class="preset-btn" data-minutes="60">60分</button>
+                    <button type="button" class="preset-btn" data-minutes="90">90分</button>
+                </div>
+
+                <label for="note">备注（可选）</label>
+                <input type="text" id="note" maxlength="120" placeholder="例如：左侧15分+右侧15分 / 夜醒后入睡">
+
+                <button type="submit" class="submit-btn">保存共享记录</button>
+                <p class="tip">此页面不区分账号，所有用户都可以看到同一份数据。</p>
+            </form>
+            <div id="statusMessage" class="status-message" aria-live="polite"></div>
+        </section>
+
+        <section class="summary-panel">
+            <h2>今日概览</h2>
+            <div class="summary-grid">
+                <div class="summary-card">
+                    <span>喝奶</span>
+                    <strong id="feedingCount">0</strong>
+                </div>
+                <div class="summary-card">
+                    <span>拉便</span>
+                    <strong id="poopCount">0</strong>
+                </div>
+                <div class="summary-card">
+                    <span>睡觉</span>
+                    <strong id="sleepCount">0</strong>
+                </div>
+            </div>
+        </section>
+
+        <section class="timeline-panel">
+            <div class="timeline-header">
+                <h2>最近记录（共享）</h2>
+                <button type="button" id="refreshBtn" class="ghost-btn">刷新</button>
+            </div>
+            <div id="recordsList" class="records-list">
+                <p class="empty-text">正在加载记录...</p>
+            </div>
+        </section>
+    </main>
+
+    <script type="module" src="tracker.js"></script>
+</body>
+</html>

@@ -7,6 +7,7 @@ A comprehensive bilingual (English/Chinese) web application for parents from lat
 - **5 Development Phases**: From pre-delivery through 6 months postpartum
 - **Bilingual Support**: Full English and Chinese translations
 - **Cloud-Synced Notes**: Personal notes with Firebase authentication and Firestore storage
+- **Shared Baby Tracker Page**: Feeding / poop / sleep records shared across all users (no login required)
 - **Comprehensive Guidance**:
   - Mother's and Father's responsibilities
   - Safety considerations
@@ -102,6 +103,10 @@ For best results, use:
    - Create an account or sign in
    - Add, edit, search, and delete personal notes
    - Notes sync across all your devices
+4. **Shared Tracker**:
+   - Open `tracker.html` from the main page button
+   - Add feeding/poop/sleep records with start time + duration
+   - All records are shared and visible to everyone
 
 ## File Structure
 
@@ -114,6 +119,9 @@ child-care/
 ├── content-translations.json  # Detailed content translations
 ├── firebase-config.js         # Firebase configuration (included for deployment)
 ├── firebase-config.example.js # Firebase config template (for creating your own)
+├── tracker.html               # Shared baby tracker page
+├── tracker.css                # Tracker page styles
+├── tracker.js                 # Tracker page logic (shared Firestore records)
 ├── .gitignore                 # Git ignore file
 ├── FIREBASE_SETUP.md          # Firebase setup instructions
 ├── DEPLOYMENT.md              # Deployment guide

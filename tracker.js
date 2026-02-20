@@ -5,6 +5,9 @@ import {
     orderBy,
     onSnapshot,
     addDoc,
+    updateDoc,
+    deleteDoc,
+    doc,
     serverTimestamp
 } from './firebase-config.js';
 
@@ -22,6 +25,7 @@ class SharedTracker {
         this.selectedType = 'feeding';
         this.records = [];
         this.isSubmitting = false;
+        this.editingId = null;
 
         this.form = document.getElementById('logForm');
         this.startAtInput = document.getElementById('startAt');
@@ -30,6 +34,7 @@ class SharedTracker {
         this.statusMessage = document.getElementById('statusMessage');
         this.recordsList = document.getElementById('recordsList');
         this.submitButton = this.form.querySelector('.submit-btn');
+        this.cancelEditButton = document.getElementById('cancelEditBtn');
 
         this.feedingCount = document.getElementById('feedingCount');
         this.poopCount = document.getElementById('poopCount');
@@ -44,6 +49,8 @@ class SharedTracker {
         this.setupDurationPresets();
         this.setupQuickNow();
         this.setupRefresh();
+        this.setupListActions();
+        this.setupEditControls();
         this.setupForm();
         this.subscribeRecords();
     }
@@ -100,7 +107,8 @@ class SharedTracker {
             if (this.isSubmitting) return;
 
             const startAtRaw = this.startAtInput.value;
-            const durationMinutes = parseInt(this.durationInput.value, 10);
+            const durationRaw = this.durationInput.value.trim();
+            const durationMinutes = durationRaw === '' ? null : parseInt(durationRaw, 10);
             const note = this.noteInput.value.trim();
 
             if (!startAtRaw) {
@@ -108,7 +116,7 @@ class SharedTracker {
                 return;
             }
 
-            if (!durationMinutes || durationMinutes < 1 || durationMinutes > 720) {
+            if (durationMinutes !== null && (Number.isNaN(durationMinutes) || durationMinutes < 1 || durationMinutes > 720)) {
                 this.showStatus('持续时间请填写 1-720 分钟', 'error');
                 return;
             }
@@ -122,17 +130,39 @@ class SharedTracker {
             const payload = {
                 type: this.selectedType,
                 startAtMs: startAtDate.getTime(),
-                durationMinutes,
                 note,
                 createdAt: serverTimestamp()
             };
+            if (durationMinutes !== null) {
+                payload.durationMinutes = durationMinutes;
+            }
 
             try {
                 this.setSubmitting(true);
                 this.showStatus('正在保存到云端，请稍候...', 'info');
-                const sharedRef = collection(db, COLLECTION_NAME);
-                await addDoc(sharedRef, payload);
+                if (this.editingId) {
+                    const updatePayload = {
+                        type: payload.type,
+                        startAtMs: payload.startAtMs,
+                        note: payload.note,
+                        updatedAt: serverTimestamp()
+                    };
+                    if (durationMinutes !== null) {
+                        updatePayload.durationMinutes = durationMinutes;
+                    } else {
+                        updatePayload.durationMinutes = null;
+                    }
+
+                    const targetDoc = doc(db, COLLECTION_NAME, this.editingId);
+                    await updateDoc(targetDoc, updatePayload);
+                } else {
+                    const sharedRef = collection(db, COLLECTION_NAME);
+                    await addDoc(sharedRef, payload);
+                }
+
                 this.noteInput.value = '';
+                this.durationInput.value = '';
+                this.exitEditMode();
                 this.showStatus('记录已保存到云端，所有用户可见', 'success');
             } catch (error) {
                 console.error('Failed to create shared record:', error);
@@ -144,6 +174,74 @@ class SharedTracker {
                 this.setSubmitting(false);
             }
         });
+    }
+
+    setupEditControls() {
+        this.cancelEditButton.addEventListener('click', () => {
+            this.exitEditMode();
+            this.noteInput.value = '';
+            this.durationInput.value = '';
+            this.showStatus('已取消编辑', 'info');
+        });
+    }
+
+    setupListActions() {
+        this.recordsList.addEventListener('click', async (event) => {
+            const button = event.target.closest('button[data-action]');
+            if (!button) return;
+
+            const action = button.dataset.action;
+            const id = button.dataset.id;
+            if (!id) return;
+
+            if (action === 'edit') {
+                this.enterEditMode(id);
+                return;
+            }
+
+            if (action === 'delete') {
+                const confirmed = window.confirm('确认删除这条共享记录吗？');
+                if (!confirmed) return;
+                try {
+                    await deleteDoc(doc(db, COLLECTION_NAME, id));
+                    this.showStatus('记录已删除', 'success');
+                } catch (error) {
+                    console.error('Failed to delete shared record:', error);
+                    const reason = error?.code === 'permission-denied'
+                        ? '权限不足（Firestore rules）'
+                        : `错误：${error?.code || 'unknown'}`;
+                    this.showStatus(`删除失败：${reason}`, 'error');
+                }
+            }
+        });
+    }
+
+    enterEditMode(id) {
+        const target = this.records.find((item) => item.id === id);
+        if (!target) return;
+
+        this.editingId = id;
+        this.selectedType = target.type || 'feeding';
+
+        document.querySelectorAll('.type-btn').forEach((item) => {
+            const active = item.dataset.type === this.selectedType;
+            item.classList.toggle('active', active);
+            item.setAttribute('aria-pressed', active ? 'true' : 'false');
+        });
+
+        this.startAtInput.value = this.formatForDatetimeLocal(new Date(target.startAtMs));
+        this.durationInput.value = target.durationMinutes ?? '';
+        this.noteInput.value = target.note || '';
+        this.cancelEditButton.style.display = 'inline-flex';
+        this.submitButton.textContent = '保存编辑';
+        this.showStatus('正在编辑共享记录，保存后会覆盖原记录', 'info');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    exitEditMode() {
+        this.editingId = null;
+        this.cancelEditButton.style.display = 'none';
+        this.submitButton.textContent = '保存共享记录';
     }
 
     subscribeRecords() {
@@ -208,11 +306,12 @@ class SharedTracker {
     recordItemHTML(item) {
         const cfg = typeConfig[item.type] || typeConfig.feeding;
         const start = new Date(item.startAtMs);
-        const end = new Date(item.startAtMs + (item.durationMinutes || 0) * 60000);
+        const hasDuration = typeof item.durationMinutes === 'number' && item.durationMinutes > 0;
+        const end = hasDuration ? new Date(item.startAtMs + item.durationMinutes * 60000) : null;
 
         const startText = this.formatDateTime(start);
-        const endText = this.formatDateTime(end);
-        const duration = item.durationMinutes || 0;
+        const endText = end ? this.formatDateTime(end) : '未填写';
+        const duration = hasDuration ? `${item.durationMinutes} 分钟` : '未填写';
         const safeNote = this.escapeHTML(item.note || '');
 
         return `
@@ -224,9 +323,13 @@ class SharedTracker {
                 <div class="record-meta">
                     <span>开始：${startText}</span>
                     <span>结束：${endText}</span>
-                    <span>时长：${duration} 分钟</span>
+                    <span>时长：${duration}</span>
                 </div>
                 ${safeNote ? `<p class="record-note">备注：${safeNote}</p>` : ''}
+                <div class="record-actions">
+                    <button type="button" class="row-btn" data-action="edit" data-id="${item.id}">编辑</button>
+                    <button type="button" class="row-btn delete" data-action="delete" data-id="${item.id}">删除</button>
+                </div>
             </article>
         `;
     }
@@ -258,7 +361,13 @@ class SharedTracker {
     setSubmitting(flag) {
         this.isSubmitting = flag;
         this.submitButton.disabled = flag;
-        this.submitButton.textContent = flag ? '保存中...' : '保存共享记录';
+        if (flag) {
+            this.submitButton.textContent = '保存中...';
+        } else if (this.editingId) {
+            this.submitButton.textContent = '保存编辑';
+        } else {
+            this.submitButton.textContent = '保存共享记录';
+        }
     }
 }
 

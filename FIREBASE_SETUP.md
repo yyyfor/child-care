@@ -47,16 +47,29 @@ service cloud.firestore {
         && request.resource.data.category is string;
     }
 
-    // Shared baby tracker (all users can read/write without login)
+    // Shared baby tracker (all users can read/create/update/delete without login)
     match /sharedBabyLogs/{logId} {
       allow read: if true;
-      allow create: if request.resource.data.keys().hasAll(['type', 'startAtMs', 'durationMinutes', 'createdAt'])
+      allow create: if request.resource.data.keys().hasAll(['type', 'startAtMs', 'createdAt'])
         && request.resource.data.type in ['feeding', 'poop', 'sleep']
         && request.resource.data.startAtMs is number
-        && request.resource.data.durationMinutes is number
-        && request.resource.data.durationMinutes > 0
-        && request.resource.data.durationMinutes <= 720
+        && (!request.resource.data.keys().hasAny(['durationMinutes'])
+          || (request.resource.data.durationMinutes is number
+          && request.resource.data.durationMinutes > 0
+          && request.resource.data.durationMinutes <= 720))
         && (!request.resource.data.keys().hasAny(['note']) || request.resource.data.note is string);
+
+      allow update: if request.resource.data.keys().hasAll(['type', 'startAtMs'])
+        && request.resource.data.type in ['feeding', 'poop', 'sleep']
+        && request.resource.data.startAtMs is number
+        && (!request.resource.data.keys().hasAny(['durationMinutes'])
+          || request.resource.data.durationMinutes == null
+          || (request.resource.data.durationMinutes is number
+          && request.resource.data.durationMinutes > 0
+          && request.resource.data.durationMinutes <= 720))
+        && (!request.resource.data.keys().hasAny(['note']) || request.resource.data.note is string);
+
+      allow delete: if true;
     }
 
     // Deny all other access

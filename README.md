@@ -105,7 +105,8 @@ For best results, use:
    - Notes sync across all your devices
 4. **Shared Tracker**:
    - Open `tracker.html` from the main page button
-   - Add feeding/poop/sleep records with start time + duration
+   - Add feeding/poop/sleep records with start time (+ optional duration)
+   - Any user can edit/delete shared records
    - All records are shared and visible to everyone
 
 ## File Structure

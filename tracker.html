@@ -34,8 +34,8 @@
                     <button type="button" id="setNow" class="ghost-btn">现在</button>
                 </div>
 
-                <label for="duration">持续时间（分钟）</label>
-                <input type="number" id="duration" min="1" max="720" inputmode="numeric" placeholder="例如 30" required>
+                <label for="duration">持续时间（分钟，可选）</label>
+                <input type="number" id="duration" min="1" max="720" inputmode="numeric" placeholder="例如 30（可不填）">
                 <div class="preset-row" aria-label="快速时长">
                     <button type="button" class="preset-btn" data-minutes="15">15分</button>
                     <button type="button" class="preset-btn" data-minutes="30">30分</button>
@@ -48,6 +48,7 @@
                 <input type="text" id="note" maxlength="120" placeholder="例如：左侧15分+右侧15分 / 夜醒后入睡">
 
                 <button type="submit" class="submit-btn">保存共享记录</button>
+                <button type="button" id="cancelEditBtn" class="ghost-btn cancel-edit-btn" style="display:none;">取消编辑</button>
                 <p class="tip">此页面不区分账号，所有用户都可以看到同一份数据。</p>
             </form>
             <div id="statusMessage" class="status-message" aria-live="polite"></div>

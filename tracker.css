@@ -136,6 +136,10 @@ input {
     font-weight: 600;
 }
 
+.cancel-edit-btn {
+    justify-content: center;
+}
+
 .submit-btn {
     margin-top: 0.3rem;
     border: none;
@@ -255,6 +259,27 @@ input {
     margin-top: 0.45rem;
     font-size: 0.9rem;
     color: var(--color-muted);
+}
+
+.record-actions {
+    margin-top: 0.6rem;
+    display: flex;
+    gap: 0.5rem;
+}
+
+.row-btn {
+    border: 1px solid var(--color-border);
+    background: #fff;
+    color: var(--color-text);
+    border-radius: 10px;
+    min-height: 36px;
+    padding: 0 0.8rem;
+    font-weight: 600;
+}
+
+.row-btn.delete {
+    border-color: rgba(182, 31, 31, 0.25);
+    color: #b61f1f;
 }
 
 .empty-text {

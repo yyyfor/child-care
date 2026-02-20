@@ -1,6 +1,8 @@
-const API_BASE_DEFAULT = 'https://43.167.216.37/api';
-const API_BASE = localStorage.getItem('babyTrackerApiBase') || API_BASE_DEFAULT;
-const API_BEARER_TOKEN = 'dgYXlcM5NvuRJ44WPEZ4KCYqPJrKVTZ_';
+const RUNTIME_API_BASE = window.__BABY_TRACKER_API_BASE__;
+const RUNTIME_API_TOKEN = window.__BABY_TRACKER_API_TOKEN__;
+const API_BASE_DEFAULT = '/api';
+const API_BASE = RUNTIME_API_BASE || localStorage.getItem('babyTrackerApiBase') || API_BASE_DEFAULT;
+const API_BEARER_TOKEN = RUNTIME_API_TOKEN || localStorage.getItem('babyTrackerApiToken') || '';
 const MAX_RECORDS = 500;
 
 const typeConfig = {
@@ -279,12 +281,16 @@ class SharedTracker {
     }
 
     async request(path, options = {}) {
+        const headers = {
+            'Content-Type': 'application/json',
+            ...(options.headers || {})
+        };
+        if (API_BEARER_TOKEN) {
+            headers.Authorization = `Bearer ${API_BEARER_TOKEN}`;
+        }
+
         const response = await fetch(`${API_BASE}${path}`, {
-            headers: {
-                'Content-Type': 'application/json',
-                Authorization: `Bearer ${API_BEARER_TOKEN}`,
-                ...(options.headers || {})
-            },
+            headers,
             ...options
         });
 

@@ -94,6 +94,46 @@ For best results, use:
 - Firefox (latest)
 - Safari (latest)
 
+### Deploy On Tencent Cloud (Machine IP)
+
+If you deploy frontend and API on the same Tencent Cloud server, the tracker now defaults to calling `'/api'`.
+
+Recommended nginx setup (single machine, IP access):
+
+```nginx
+server {
+    listen 80;
+    server_name _;
+
+    root /var/www/child-care;
+    index index.html;
+
+    location / {
+        try_files $uri $uri/ /index.html;
+    }
+
+    location /api/ {
+        proxy_pass http://127.0.0.1:8080/api/;
+        proxy_http_version 1.1;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+    }
+}
+```
+
+Then open: `http://<your-machine-ip>/tracker.html`
+
+Optional runtime overrides:
+
+```html
+<script>
+  window.__BABY_TRACKER_API_BASE__ = 'http://<your-machine-ip>/api';
+  window.__BABY_TRACKER_API_TOKEN__ = 'your_token_if_needed';
+</script>
+```
+
 ### 3. Using the App
 
 1. **Navigation**: Click the phase buttons at the top to switch between different time periods

@@ -35,6 +35,10 @@ class SharedTracker {
         this.recordsList = document.getElementById('recordsList');
         this.submitButton = this.form.querySelector('.submit-btn');
         this.cancelEditButton = document.getElementById('cancelEditBtn');
+        this.exportStartInput = document.getElementById('exportStart');
+        this.exportEndInput = document.getElementById('exportEnd');
+        this.exportAllButton = document.getElementById('exportAllBtn');
+        this.exportRangeButton = document.getElementById('exportRangeBtn');
 
         this.feedingCount = document.getElementById('feedingCount');
         this.poopCount = document.getElementById('poopCount');
@@ -51,6 +55,7 @@ class SharedTracker {
         this.setupRefresh();
         this.setupListActions();
         this.setupEditControls();
+        this.setupExportControls();
         this.setupForm();
         this.subscribeRecords();
     }
@@ -216,6 +221,49 @@ class SharedTracker {
         });
     }
 
+    setupExportControls() {
+        this.exportAllButton.addEventListener('click', () => {
+            if (!this.records.length) {
+                this.showStatus('暂无可导出的记录', 'info');
+                return;
+            }
+            this.exportCsv(this.records, 'shared-baby-logs-all');
+            this.showStatus(`已导出 ${this.records.length} 条记录`, 'success');
+        });
+
+        this.exportRangeButton.addEventListener('click', () => {
+            const startRaw = this.exportStartInput.value;
+            const endRaw = this.exportEndInput.value;
+
+            if (!startRaw || !endRaw) {
+                this.showStatus('请先填写导出时间范围', 'error');
+                return;
+            }
+
+            const startMs = new Date(startRaw).getTime();
+            const endMs = new Date(endRaw).getTime();
+
+            if (Number.isNaN(startMs) || Number.isNaN(endMs)) {
+                this.showStatus('导出时间格式不正确', 'error');
+                return;
+            }
+
+            if (endMs < startMs) {
+                this.showStatus('结束时间不能早于开始时间', 'error');
+                return;
+            }
+
+            const filtered = this.records.filter((item) => item.startAtMs >= startMs && item.startAtMs <= endMs);
+            if (!filtered.length) {
+                this.showStatus('该时间范围内没有记录', 'info');
+                return;
+            }
+
+            this.exportCsv(filtered, 'shared-baby-logs-range');
+            this.showStatus(`已按范围导出 ${filtered.length} 条记录`, 'success');
+        });
+    }
+
     enterEditMode(id) {
         const target = this.records.find((item) => item.id === id);
         if (!target) return;
@@ -334,14 +382,18 @@ class SharedTracker {
         `;
     }
 
-    formatDateTime(date) {
-        return date.toLocaleString('zh-CN', {
+    formatDateTime(date, withYear = false) {
+        const options = {
             month: '2-digit',
             day: '2-digit',
             hour: '2-digit',
             minute: '2-digit',
             hour12: false
-        });
+        };
+        if (withYear) {
+            options.year = 'numeric';
+        }
+        return date.toLocaleString('zh-CN', options);
     }
 
     escapeHTML(value) {
@@ -351,6 +403,47 @@ class SharedTracker {
             .replace(/>/g, '&gt;')
             .replace(/"/g, '&quot;')
             .replace(/'/g, '&#39;');
+    }
+
+    csvEscape(value) {
+        const raw = value == null ? '' : String(value);
+        return `"${raw.replace(/"/g, '""')}"`;
+    }
+
+    exportCsv(rows, filePrefix) {
+        const headers = ['类型', '开始时间', '结束时间', '持续时间(分钟)', '备注'];
+        const lines = [headers.map((h) => this.csvEscape(h)).join(',')];
+
+        rows.forEach((item) => {
+            const cfg = typeConfig[item.type] || typeConfig.feeding;
+            const start = new Date(item.startAtMs);
+            const hasDuration = typeof item.durationMinutes === 'number' && item.durationMinutes > 0;
+            const end = hasDuration ? new Date(item.startAtMs + item.durationMinutes * 60000) : null;
+
+            const row = [
+                cfg.label,
+                this.formatDateTime(start, true),
+                end ? this.formatDateTime(end, true) : '',
+                hasDuration ? item.durationMinutes : '',
+                item.note || ''
+            ];
+            lines.push(row.map((value) => this.csvEscape(value)).join(','));
+        });
+
+        const bom = '\ufeff';
+        const csvContent = bom + lines.join('\n');
+        const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+        const url = URL.createObjectURL(blob);
+        const now = new Date();
+        const filename = `${filePrefix}-${now.getFullYear()}${String(now.getMonth() + 1).padStart(2, '0')}${String(now.getDate()).padStart(2, '0')}-${String(now.getHours()).padStart(2, '0')}${String(now.getMinutes()).padStart(2, '0')}.csv`;
+
+        const link = document.createElement('a');
+        link.href = url;
+        link.download = filename;
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        URL.revokeObjectURL(url);
     }
 
     showStatus(text, type) {

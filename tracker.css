@@ -74,6 +74,11 @@ h2 {
     font-size: 1.35rem;
 }
 
+h3 {
+    margin: 0;
+    font-size: 1rem;
+}
+
 .log-form {
     display: grid;
     gap: 0.7rem;
@@ -209,6 +214,39 @@ input {
     align-items: center;
     justify-content: space-between;
     gap: 0.6rem;
+    margin-bottom: 0.7rem;
+}
+
+.export-panel {
+    border: 1px dashed var(--color-border);
+    border-radius: 12px;
+    padding: 0.75rem;
+    margin-bottom: 0.75rem;
+}
+
+.export-range {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.55rem;
+    margin-top: 0.55rem;
+}
+
+.range-field label {
+    display: block;
+    margin-bottom: 0.3rem;
+    font-size: 0.88rem;
+    color: var(--color-muted);
+}
+
+.range-field input {
+    min-height: 42px;
+}
+
+.export-actions {
+    margin-top: 0.65rem;
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
 }
 
 .records-list {
@@ -303,5 +341,17 @@ input {
         position: sticky;
         bottom: 0.55rem;
         box-shadow: 0 8px 18px rgba(212, 137, 108, 0.3);
+    }
+
+    .export-range {
+        grid-template-columns: 1fr;
+    }
+
+    .export-actions {
+        flex-direction: column;
+    }
+
+    .export-actions .ghost-btn {
+        width: 100%;
     }
 }

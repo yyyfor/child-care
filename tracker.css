@@ -209,6 +209,67 @@ input {
     font-size: 1.4rem;
 }
 
+.today-insight {
+    margin-top: 0.8rem;
+    border-radius: 12px;
+    border: 1px solid var(--color-border);
+    background: #ffffff;
+    padding: 0.8rem;
+}
+
+.today-insight h3 {
+    margin: 0 0 0.5rem;
+    font-size: 1rem;
+}
+
+.today-summary-text {
+    margin: 0 0 0.7rem;
+    color: var(--color-muted);
+    font-size: 0.9rem;
+}
+
+.today-bars {
+    display: grid;
+    gap: 0.5rem;
+}
+
+.bar-row {
+    display: grid;
+    grid-template-columns: 76px 1fr 34px;
+    align-items: center;
+    gap: 0.45rem;
+}
+
+.bar-label,
+.bar-value {
+    font-size: 0.82rem;
+    color: #4b5563;
+}
+
+.bar-track {
+    background: #eef2f7;
+    border-radius: 999px;
+    height: 10px;
+    overflow: hidden;
+}
+
+.bar-fill {
+    height: 100%;
+    width: 0%;
+    border-radius: 999px;
+    transition: width 0.35s ease;
+}
+
+.bar-fill.feeding { background: #f59e0b; }
+.bar-fill.poop { background: #8b5cf6; }
+.bar-fill.sleep { background: #0ea5e9; }
+
+.today-extra {
+    margin: 0.7rem 0 0;
+    font-size: 0.82rem;
+    color: var(--color-muted);
+}
+
 .timeline-header {
     display: flex;
     align-items: center;

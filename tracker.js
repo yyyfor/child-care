@@ -361,6 +361,37 @@ class SharedTracker {
         this.feedingCount.textContent = String(feeding);
         this.poopCount.textContent = String(poop);
         this.sleepCount.textContent = String(sleep);
+
+        const summaryText = document.getElementById('todaySummaryText');
+        const sleepMinutesText = document.getElementById('todaySleepMinutes');
+        const feedingBar = document.getElementById('feedingBar');
+        const poopBar = document.getElementById('poopBar');
+        const sleepBar = document.getElementById('sleepBar');
+        const feedingBarValue = document.getElementById('feedingBarValue');
+        const poopBarValue = document.getElementById('poopBarValue');
+        const sleepBarValue = document.getElementById('sleepBarValue');
+
+        const totalSleepMinutes = todayRecords
+            .filter((item) => item.type === 'sleep' && typeof item.durationMinutes === 'number')
+            .reduce((acc, item) => acc + item.durationMinutes, 0);
+
+        const maxCount = Math.max(feeding, poop, sleep, 1);
+        feedingBar.style.width = `${(feeding / maxCount) * 100}%`;
+        poopBar.style.width = `${(poop / maxCount) * 100}%`;
+        sleepBar.style.width = `${(sleep / maxCount) * 100}%`;
+
+        feedingBarValue.textContent = String(feeding);
+        poopBarValue.textContent = String(poop);
+        sleepBarValue.textContent = String(sleep);
+
+        sleepMinutesText.textContent = `今日累计睡眠：${totalSleepMinutes} 分钟`;
+
+        const total = feeding + poop + sleep;
+        if (total === 0) {
+            summaryText.textContent = '今天还没有记录，快添加第一条吧。';
+        } else {
+            summaryText.textContent = `今天共记录 ${total} 次：喂奶 ${feeding} 次、拉便 ${poop} 次、睡觉 ${sleep} 次。`;
+        }
     }
 
     renderList() {

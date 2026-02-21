@@ -58,17 +58,40 @@
             <h2>今日概览</h2>
             <div class="summary-grid">
                 <div class="summary-card">
-                    <span>喝奶</span>
+                    <span>🍼 喝奶</span>
                     <strong id="feedingCount">0</strong>
                 </div>
                 <div class="summary-card">
-                    <span>拉便</span>
+                    <span>💩 拉便</span>
                     <strong id="poopCount">0</strong>
                 </div>
                 <div class="summary-card">
-                    <span>睡觉</span>
+                    <span>😴 睡觉</span>
                     <strong id="sleepCount">0</strong>
                 </div>
+            </div>
+
+            <div class="today-insight" aria-label="当日总结与统计图">
+                <h3>当日总结</h3>
+                <p id="todaySummaryText" class="today-summary-text">今天还没有记录，快添加第一条吧。</p>
+                <div class="today-bars" id="todayBars">
+                    <div class="bar-row">
+                        <span class="bar-label">🍼 喂奶</span>
+                        <div class="bar-track"><div id="feedingBar" class="bar-fill feeding"></div></div>
+                        <span id="feedingBarValue" class="bar-value">0</span>
+                    </div>
+                    <div class="bar-row">
+                        <span class="bar-label">💩 拉便</span>
+                        <div class="bar-track"><div id="poopBar" class="bar-fill poop"></div></div>
+                        <span id="poopBarValue" class="bar-value">0</span>
+                    </div>
+                    <div class="bar-row">
+                        <span class="bar-label">😴 睡觉</span>
+                        <div class="bar-track"><div id="sleepBar" class="bar-fill sleep"></div></div>
+                        <span id="sleepBarValue" class="bar-value">0</span>
+                    </div>
+                </div>
+                <p id="todaySleepMinutes" class="today-extra">今日累计睡眠：0 分钟</p>
             </div>
         </section>
 
@@ -101,6 +124,10 @@
         </section>
     </main>
 
+    <script>
+      window.__BABY_TRACKER_API_BASE__ = '/api';
+      window.__BABY_TRACKER_API_TOKEN__ = 'dgYXlcM5NvuRJ44WPEZ4KCYqPJrKVTZ_';
+    </script>
     <script type="module" src="tracker.js"></script>
 </body>
 </html>

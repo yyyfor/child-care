@@ -93,6 +93,26 @@
                 </div>
                 <p id="todaySleepMinutes" class="today-extra">今日累计睡眠：0 分钟</p>
             </div>
+
+            <div class="daily-timeline" aria-label="当日24小时行为时间图">
+                <h3>当日时间图（24小时）</h3>
+                <p class="today-summary-text">把今天的喂奶、拉便、睡觉都放在时间线上；没有行为的时段会自然留空。</p>
+
+                <div class="timeline-axis" id="timelineAxis"></div>
+
+                <div class="timeline-lane">
+                    <div class="lane-label">🍼 喂奶</div>
+                    <div class="lane-track" id="laneFeeding"></div>
+                </div>
+                <div class="timeline-lane">
+                    <div class="lane-label">💩 拉便</div>
+                    <div class="lane-track" id="lanePoop"></div>
+                </div>
+                <div class="timeline-lane">
+                    <div class="lane-label">😴 睡觉</div>
+                    <div class="lane-track" id="laneSleep"></div>
+                </div>
+            </div>
         </section>
 
         <section class="timeline-panel">

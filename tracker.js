@@ -392,6 +392,48 @@ class SharedTracker {
         } else {
             summaryText.textContent = `今天共记录 ${total} 次：喂奶 ${feeding} 次、拉便 ${poop} 次、睡觉 ${sleep} 次。`;
         }
+
+        this.renderDailyTimeline(todayRecords, startMs);
+    }
+
+    renderDailyTimeline(todayRecords, dayStartMs) {
+        const axis = document.getElementById('timelineAxis');
+        const laneFeeding = document.getElementById('laneFeeding');
+        const lanePoop = document.getElementById('lanePoop');
+        const laneSleep = document.getElementById('laneSleep');
+
+        if (!axis || !laneFeeding || !lanePoop || !laneSleep) return;
+
+        axis.innerHTML = '';
+        [0, 6, 12, 18, 24].forEach((h) => {
+            const tag = document.createElement('span');
+            const pct = (h / 24) * 100;
+            tag.style.left = `${pct}%`;
+            tag.textContent = `${String(h).padStart(2, '0')}:00`;
+            axis.appendChild(tag);
+        });
+
+        laneFeeding.innerHTML = '';
+        lanePoop.innerHTML = '';
+        laneSleep.innerHTML = '';
+
+        const dayMs = 24 * 60 * 60 * 1000;
+        const renderLane = (laneEl, type, icon) => {
+            const events = todayRecords.filter((item) => item.type === type);
+            events.forEach((item) => {
+                const dot = document.createElement('div');
+                dot.className = `event-dot ${type}`;
+                dot.textContent = icon;
+                const pct = ((item.startAtMs - dayStartMs) / dayMs) * 100;
+                dot.style.left = `${Math.max(0, Math.min(100, pct))}%`;
+                dot.title = `${icon} ${this.formatDateTime(new Date(item.startAtMs), true)}${item.note ? `｜${item.note}` : ''}`;
+                laneEl.appendChild(dot);
+            });
+        };
+
+        renderLane(laneFeeding, 'feeding', '🍼');
+        renderLane(lanePoop, 'poop', '💩');
+        renderLane(laneSleep, 'sleep', '😴');
     }
 
     renderList() {
